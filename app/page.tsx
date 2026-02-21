@@ -41,16 +41,15 @@ export default function Home() {
       <nav className="sticky top-0 z-50 glass border-b border-border/5">
         <div className="container mx-auto px-5 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <div className="relative w-12 h-12 md:w-14 md:h-14 mr-3 transition-transform hover:scale-105 duration-300">
+            <div className="relative w-32 h-10 md:w-48 md:h-16 transition-transform hover:scale-105 duration-300">
               <Image
                 src="/logo_cabeçalho.png"
                 alt="Vou de Van Logo"
                 fill
-                className="object-contain"
+                className="object-contain object-left"
                 priority
               />
             </div>
-            <span className="text-xl md:text-2xl font-black tracking-tighter text-foreground">Vou de Van</span>
           </div>
           <DynamicDarkModeToggle />
         </div>
@@ -112,7 +111,7 @@ export default function Home() {
 
       <footer className="mt-24 md:mt-48 container mx-auto px-6 text-center border-t border-border/5 pt-20 pb-16 opacity-80">
         <div className="flex flex-col items-center space-y-8">
-          <div className="relative w-16 h-16 transition-transform hover:scale-110 duration-500">
+          <div className="relative w-40 h-12 md:w-56 md:h-16 transition-transform hover:scale-110 duration-500">
             <Image
               src="/logo_cabeçalho.png"
               alt="Vou de Van Logo"
