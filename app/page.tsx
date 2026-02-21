@@ -40,17 +40,21 @@ export default function Home() {
 
       <nav className="sticky top-0 z-50 glass border-b border-border/5">
         <div className="container mx-auto px-5 py-6 md:py-10 flex flex-col items-center justify-center relative">
-          {/* Logo Container with Creative Backlight */}
-          <div className="relative w-56 h-16 md:w-96 md:h-32 transition-all duration-1000 hover:scale-105 group">
-            {/* Dynamic Glow Effect */}
-            <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full -z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-            <div className="absolute inset-0 bg-blue-600/10 blur-[20px] rounded-full -z-10" />
+          {/* Logo Container with Theme-Aware Gradient Background */}
+          <div className="relative w-64 h-20 md:w-96 md:h-32 transition-all duration-1000 hover:scale-105 group flex items-center justify-center">
+            {/* 
+               Creative Backdrop: 
+               - Light Mode: Subtle dark gradient to make white 'Alagoas' pop
+               - Dark Mode: Vibrant blue glow for premium feel
+            */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-900/10 to-transparent dark:via-primary/20 blur-3xl rounded-full -z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute w-3/4 h-1/2 bg-slate-900/5 dark:bg-blue-600/15 blur-2xl rounded-full -z-10" />
 
             <Image
               src="/logo_cabeçalho.png"
               alt="Vou de Van Logo"
               fill
-              className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
+              className="object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]"
               priority
             />
           </div>
