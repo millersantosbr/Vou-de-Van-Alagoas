@@ -47,8 +47,8 @@ export default function Home() {
                - Light Mode: Subtle dark gradient to make white 'Alagoas' pop
                - Dark Mode: Vibrant blue glow for premium feel
             */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-900/10 to-transparent dark:via-primary/20 blur-3xl rounded-full -z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-700" />
-            <div className="absolute w-3/4 h-1/2 bg-slate-900/5 dark:bg-blue-600/15 blur-2xl rounded-full -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-900/20 to-transparent dark:via-primary/20 blur-3xl rounded-full -z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute w-3/4 h-1/2 bg-blue-900/10 dark:bg-blue-600/15 blur-2xl rounded-full -z-10" />
 
             <Image
               src="/logo_cabeçalho.png"
