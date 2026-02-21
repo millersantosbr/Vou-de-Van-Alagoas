@@ -1,0 +1,4026 @@
+[
+    {
+        "linha": "ÁGUA BRANCA - ARAPIRACA",
+        "origem": "ÁGUA BRANCA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "07:55"
+        ],
+        "horarios_saida_destino": [
+            "13:30"
+        ]
+    },
+    {
+        "linha": "ÁGUA BRANCA - DELMIRO GOUVEIA (VIA LAGOA DAS PEDRAS)",
+        "origem": "ÁGUA BRANCA",
+        "destino": "DELMIRO GOUVEIA (VIA LAGOA DAS PEDRAS)",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:10",
+            "13:50",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "AGUA BRANCA - DELMIRO GOUVEIA",
+        "origem": "AGUA BRANCA",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:10",
+            "13:50",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "ÁGUA BRANCA - MACEIÓ",
+        "origem": "ÁGUA BRANCA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "04:00",
+            "13:30"
+        ]
+    },
+    {
+        "linha": "ANADIA - ARAPIRACA",
+        "origem": "ANADIA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30"
+        ],
+        "horarios_saida_destino": [
+            "10:45",
+            "12:00"
+        ]
+    },
+    {
+        "linha": "ANADIA - MACEIÓ",
+        "origem": "ANADIA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "06:00",
+            "07:00",
+            "08:00",
+            "13:30"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "10:30",
+            "12:00",
+            "13:30",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "ANADIA - SÃO MIGUEL DOS CAMPOS",
+        "origem": "ANADIA",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "08:30",
+            "12:00"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "11:20",
+            "13:00",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "ARAPIRACA - MACEIÓ ( VIA LITORAL)",
+        "origem": "ARAPIRACA",
+        "destino": "MACEIÓ ( VIA LITORAL)",
+        "horarios_saida_origem": [
+            "05:15",
+            "05:40",
+            "06:05",
+            "06:30",
+            "06:55",
+            "07:20",
+            "07:45",
+            "08:10",
+            "08:35",
+            "09:00",
+            "09:25",
+            "09:50",
+            "10:15",
+            "10:40",
+            "11:05",
+            "11:30",
+            "11:55",
+            "12:20",
+            "12:45",
+            "13:10",
+            "13:35",
+            "14:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "ARAPIRACA - MACEIÓ (VIA TAQUARANA)",
+        "origem": "ARAPIRACA",
+        "destino": "MACEIÓ (VIA TAQUARANA)",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:30",
+            "05:55",
+            "15:20"
+        ],
+        "horarios_saida_destino": [
+            "05:15",
+            "08:45",
+            "13:00",
+            "14:40"
+        ]
+    },
+    {
+        "linha": "ATALAIA - MACEIÓ METROPOLITANA (VIA CHÃ DO PILAR)",
+        "origem": "ATALAIA",
+        "destino": "MACEIÓ METROPOLITANA (VIA CHÃ DO PILAR)",
+        "horarios_saida_origem": [
+            "04:00",
+            "04:20",
+            "04:40",
+            "05:00",
+            "05:20",
+            "05:40",
+            "06:00",
+            "06:20",
+            "06:40",
+            "07:00",
+            "07:20",
+            "07:40",
+            "08:00",
+            "08:10",
+            "08:20",
+            "08:40",
+            "09:00",
+            "09:20",
+            "09:40",
+            "10:00",
+            "10:20",
+            "10:40"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "ATALAIA - MACEIÓ (VIA POLO)",
+        "origem": "ATALAIA",
+        "destino": "MACEIÓ (VIA POLO)",
+        "horarios_saida_origem": [
+            "04:10",
+            "04:30",
+            "04:50",
+            "05:10",
+            "05:30",
+            "05:50",
+            "06:10",
+            "06:30",
+            "06:50",
+            "07:10",
+            "07:30",
+            "07:50",
+            "08:30",
+            "08:50",
+            "09:30",
+            "09:50",
+            "10:10",
+            "10:30",
+            "10:50",
+            "11:10",
+            "11:30",
+            "11:50"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "BARRA DE SANTO ANTONIO - MACEIO",
+        "origem": "BARRA DE SANTO ANTONIO",
+        "destino": "MACEIO",
+        "horarios_saida_origem": [
+            "04:50",
+            "05:25",
+            "05:30",
+            "06:10",
+            "06:50",
+            "07:30",
+            "08:10",
+            "08:50",
+            "09:30",
+            "10:10",
+            "10:50",
+            "11:30",
+            "12:10",
+            "12:50",
+            "13:30",
+            "14:10",
+            "14:45",
+            "14:50",
+            "15:40",
+            "16:20",
+            "17:00",
+            "17:20",
+            "18:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "BARRA DE SÃO MIGUEL - MACEIÓ",
+        "origem": "BARRA DE SÃO MIGUEL",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:10",
+            "07:00",
+            "07:55",
+            "08:40",
+            "09:30",
+            "10:30",
+            "11:10",
+            "12:00",
+            "12:50",
+            "13:40",
+            "14:40",
+            "15:30",
+            "16:20",
+            "17:00",
+            "18:00"
+        ],
+        "horarios_saida_destino": [
+            "05:50",
+            "06:10",
+            "07:10",
+            "08:00",
+            "09:10"
+        ]
+    },
+    {
+        "linha": "BATALHA - ARAPIRACA",
+        "origem": "BATALHA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:25",
+            "05:50",
+            "06:15",
+            "06:40",
+            "07:05",
+            "07:30",
+            "07:55",
+            "08:20",
+            "08:45",
+            "09:10",
+            "09:35",
+            "10:00",
+            "10:25",
+            "10:50",
+            "11:15",
+            "11:40",
+            "12:05",
+            "12:30",
+            "12:55",
+            "13:20",
+            "13:45",
+            "14:10"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "BATALHA - MACEIÓ",
+        "origem": "BATALHA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "13:00"
+        ]
+    },
+    {
+        "linha": "BELÉM - PALMEIRA DOS ÍNDIOS",
+        "origem": "BELÉM",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:40",
+            "07:20",
+            "08:00",
+            "08:40",
+            "09:20"
+        ],
+        "horarios_saida_destino": [
+            "10:00",
+            "11:30",
+            "13:00",
+            "14:30",
+            "16:00",
+            "17:30"
+        ]
+    },
+    {
+        "linha": "BELO MONTE - ARAPIRACA",
+        "origem": "BELO MONTE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:35"
+        ],
+        "horarios_saida_destino": [
+            "14:15"
+        ]
+    },
+    {
+        "linha": "BELO MONTE - BATALHA",
+        "origem": "BELO MONTE",
+        "destino": "BATALHA",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "14:00"
+        ]
+    },
+    {
+        "linha": "BOCA DA MATA - ARAPIRACA",
+        "origem": "BOCA DA MATA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00"
+        ],
+        "horarios_saida_destino": [
+            "11:00",
+            "12:10",
+            "13:00"
+        ]
+    },
+    {
+        "linha": "BOCA DA MATA - MACEIÓ",
+        "origem": "BOCA DA MATA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:20",
+            "05:50",
+            "06:20",
+            "07:20",
+            "08:20"
+        ],
+        "horarios_saida_destino": [
+            "07:40",
+            "08:40",
+            "09:40",
+            "10:40",
+            "11:10"
+        ]
+    },
+    {
+        "linha": "BOCA DA MATA - SÃO MIGUEL DOS CAMPOS",
+        "origem": "BOCA DA MATA",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:45",
+            "06:30",
+            "07:15",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "06:45",
+            "07:30",
+            "08:15",
+            "09:00",
+            "10:00"
+        ]
+    },
+    {
+        "linha": "BRANQUINHA - UNIÃO DOS PALMARES",
+        "origem": "BRANQUINHA",
+        "destino": "UNIÃO DOS PALMARES",
+        "horarios_saida_origem": [
+            "05:50",
+            "06:20",
+            "06:50",
+            "07:00",
+            "07:20",
+            "07:50",
+            "08:20",
+            "08:50",
+            "09:20",
+            "09:50",
+            "10:00",
+            "10:20",
+            "10:50",
+            "11:20",
+            "11:50",
+            "12:00",
+            "12:20",
+            "12:50",
+            "13:20",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "CACIMBINHAS - ARAPIRACA",
+        "origem": "CACIMBINHAS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "10:40",
+            "16:30"
+        ]
+    },
+    {
+        "linha": "CACIMBINHAS - PALMEIRA DOS ÍNDIOS",
+        "origem": "CACIMBINHAS",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "06:10",
+            "06:50",
+            "07:30",
+            "08:10",
+            "08:50",
+            "09:30",
+            "10:10",
+            "11:00",
+            "11:50",
+            "12:40",
+            "13:30",
+            "14:20"
+        ],
+        "horarios_saida_destino": [
+            "08:45",
+            "09:30",
+            "10:15",
+            "11:00",
+            "11:45",
+            "12:30",
+            "13:10",
+            "13:50"
+        ]
+    },
+    {
+        "linha": "CAJUEIRO - MACEIÓ (VIA AL- 215)",
+        "origem": "CAJUEIRO",
+        "destino": "MACEIÓ (VIA AL",
+        "horarios_saida_origem": [
+            "06:25",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "10:40",
+            "16:55"
+        ]
+    },
+    {
+        "linha": "CAJUEIRO - MACEIÓ",
+        "origem": "CAJUEIRO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:40",
+            "05:20",
+            "06:00",
+            "06:30",
+            "09:00",
+            "12:20",
+            "12:40",
+            "14:20",
+            "15:00",
+            "15:40"
+        ],
+        "horarios_saida_destino": [
+            "05:25",
+            "07:15",
+            "08:20",
+            "08:40",
+            "10:20",
+            "12:00",
+            "15:00",
+            "15:20",
+            "17:00",
+            "17:30"
+        ]
+    },
+    {
+        "linha": "CAJUEIRO - VIÇOSA",
+        "origem": "CAJUEIRO",
+        "destino": "VIÇOSA",
+        "horarios_saida_origem": [
+            "06:20",
+            "12:35"
+        ],
+        "horarios_saida_destino": [
+            "11:45",
+            "18:10"
+        ]
+    },
+    {
+        "linha": "CAMPO ALEGRE - ARAPIRACA",
+        "origem": "CAMPO ALEGRE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:16",
+            "05:32",
+            "05:48",
+            "06:00",
+            "06:04",
+            "06:20",
+            "06:30",
+            "06:36",
+            "06:52",
+            "07:00",
+            "07:08",
+            "07:24",
+            "07:30",
+            "07:40",
+            "07:56",
+            "08:00",
+            "08:12",
+            "08:28",
+            "08:30",
+            "08:44",
+            "09:00",
+            "09:16",
+            "09:30",
+            "09:32",
+            "09:48",
+            "10:00",
+            "10:04",
+            "10:20",
+            "10:30",
+            "10:36",
+            "10:52",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "CAMPO ALEGRE - MACEIÓ",
+        "origem": "CAMPO ALEGRE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "08:30",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "CAMPO ALEGRE - SÃO MIGUEL DOS CAMPOS",
+        "origem": "CAMPO ALEGRE",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:20",
+            "06:30",
+            "06:40",
+            "07:00",
+            "07:20",
+            "07:30",
+            "07:40",
+            "08:00",
+            "08:20",
+            "08:30",
+            "08:40",
+            "09:00",
+            "09:20",
+            "09:30",
+            "09:40",
+            "10:00",
+            "10:20",
+            "10:30",
+            "10:40",
+            "11:00",
+            "11:20",
+            "11:30",
+            "11:40",
+            "12:00",
+            "12:25",
+            "12:30",
+            "12:50",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "CANAPI - ARAPIRACA",
+        "origem": "CANAPI",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:40",
+            "11:30"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "12:40"
+        ]
+    },
+    {
+        "linha": "CANAPI - DELMIRO GOUVEIA",
+        "origem": "CANAPI",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:00",
+            "07:00",
+            "08:00"
+        ],
+        "horarios_saida_destino": [
+            "09:10",
+            "12:10",
+            "13:00"
+        ]
+    },
+    {
+        "linha": "CANAPI - MACEIÓ",
+        "origem": "CANAPI",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "12:30"
+        ],
+        "horarios_saida_destino": [
+            "05:00",
+            "14:10"
+        ]
+    },
+    {
+        "linha": "CANAPI - PALMEIRA DOS ÍNDIOS",
+        "origem": "CANAPI",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "05:50"
+        ],
+        "horarios_saida_destino": [
+            "11:00"
+        ]
+    },
+    {
+        "linha": "CANAPI - SANTANA DO IPANEMA",
+        "origem": "CANAPI",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:30"
+        ],
+        "horarios_saida_destino": [
+            "08:30",
+            "09:20",
+            "10:10",
+            "11:00",
+            "12:00"
+        ]
+    },
+    {
+        "linha": "CAPELA - MACEIÓ",
+        "origem": "CAPELA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "07:40",
+            "08:00",
+            "14:00",
+            "14:40"
+        ],
+        "horarios_saida_destino": [
+            "10:40",
+            "11:00",
+            "16:20",
+            "17:15"
+        ]
+    },
+    {
+        "linha": "CARNEIROS - MACEIÓ",
+        "origem": "CARNEIROS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:30"
+        ],
+        "horarios_saida_destino": [
+            "12:30"
+        ]
+    },
+    {
+        "linha": "CARNEIROS - OLHO D'ÁGUA DAS FLORES",
+        "origem": "CARNEIROS",
+        "destino": "OLHO D'ÁGUA DAS FLORES",
+        "horarios_saida_origem": [
+            "06:00",
+            "12:00"
+        ],
+        "horarios_saida_destino": [
+            "08:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "CARNEIROS - SANTANA DO IPANEMA",
+        "origem": "CARNEIROS",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "10:15",
+            "12:10",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "09:10",
+            "10:20",
+            "11:00",
+            "11:40",
+            "12:20",
+            "14:00",
+            "15:40"
+        ]
+    },
+    {
+        "linha": "CHÃ PRETA - MACEIÓ",
+        "origem": "CHÃ PRETA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:20",
+            "07:50",
+            "09:40",
+            "13:00",
+            "14:30",
+            "15:50"
+        ],
+        "horarios_saida_destino": [
+            "06:40",
+            "09:40",
+            "11:20",
+            "13:20",
+            "16:00",
+            "17:45"
+        ]
+    },
+    {
+        "linha": "CHÃ PRETA - VIÇOSA",
+        "origem": "CHÃ PRETA",
+        "destino": "VIÇOSA",
+        "horarios_saida_origem": [
+            "06:30",
+            "10:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "08:15",
+            "11:40",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "COLÔNIA LEOPOLDINA - MACEIÓ",
+        "origem": "COLÔNIA LEOPOLDINA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:00",
+            "13:00",
+            "15:00"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "06:50",
+            "09:45"
+        ]
+    },
+    {
+        "linha": "COQUEIRO SECO - MACEIÓ ( VIA LITORAL)",
+        "origem": "COQUEIRO SECO",
+        "destino": "MACEIÓ ( VIA LITORAL)",
+        "horarios_saida_origem": [
+            "05:30",
+            "08:00",
+            "11:30",
+            "14:10",
+            "16:20"
+        ],
+        "horarios_saida_destino": [
+            "06:50",
+            "07:00",
+            "08:10",
+            "09:20",
+            "10:00",
+            "12:50",
+            "13:00",
+            "14:55",
+            "15:10",
+            "17:20"
+        ]
+    },
+    {
+        "linha": "COQUEIRO SECO - MACEIÓ (VIA SATUBA)",
+        "origem": "COQUEIRO SECO",
+        "destino": "MACEIÓ (VIA SATUBA)",
+        "horarios_saida_origem": [
+            "04:20",
+            "04:40",
+            "05:40",
+            "06:40",
+            "07:30",
+            "07:40",
+            "08:20",
+            "08:50",
+            "09:25",
+            "09:30",
+            "09:40",
+            "10:40",
+            "11:50",
+            "12:50",
+            "12:55",
+            "13:40",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:40",
+            "17:15",
+            "17:20"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "07:10",
+            "08:00",
+            "08:10",
+            "09:00",
+            "09:10",
+            "10:10",
+            "11:10",
+            "11:15",
+            "12:10",
+            "19:00"
+        ]
+    },
+    {
+        "linha": "CORURIPE - ARAPIRACA (VIA BONSUCESSO)",
+        "origem": "CORURIPE",
+        "destino": "ARAPIRACA (VIA BONSUCESSO)",
+        "horarios_saida_origem": [
+            "05:30"
+        ],
+        "horarios_saida_destino": [
+            "12:00"
+        ]
+    },
+    {
+        "linha": "CORURIPE - ARAPIRACA",
+        "origem": "CORURIPE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "07:00",
+            "08:00",
+            "09:00",
+            "10:15",
+            "11:15",
+            "13:00",
+            "15:00",
+            "16:00",
+            "17:00",
+            "18:00"
+        ],
+        "horarios_saida_destino": [
+            "05:30",
+            "06:30",
+            "07:30",
+            "08:30",
+            "09:30",
+            "11:00",
+            "13:00",
+            "14:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "CORURIPE - MACEIÓ",
+        "origem": "CORURIPE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:45",
+            "08:40",
+            "09:40",
+            "12:05",
+            "15:10",
+            "16:10"
+        ],
+        "horarios_saida_destino": [
+            "06:15",
+            "07:05",
+            "09:35",
+            "12:00",
+            "13:00",
+            "14:50"
+        ]
+    },
+    {
+        "linha": "CORURIPE - PENEDO (VIA BOLIVAR)",
+        "origem": "CORURIPE",
+        "destino": "PENEDO (VIA BOLIVAR)",
+        "horarios_saida_origem": [
+            "05:30",
+            "13:30"
+        ],
+        "horarios_saida_destino": [
+            "11:00",
+            "15:30"
+        ]
+    },
+    {
+        "linha": "CORURIPE - PENEDO",
+        "origem": "CORURIPE",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "06:50",
+            "09:40",
+            "12:05",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "10:25",
+            "13:35",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "CRAÍBAS - ARAPIRACA",
+        "origem": "CRAÍBAS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "05:50",
+            "06:00",
+            "06:10",
+            "06:30",
+            "06:35",
+            "06:50",
+            "07:10",
+            "07:30",
+            "07:45",
+            "07:50",
+            "08:10",
+            "08:30",
+            "08:35",
+            "08:50",
+            "09:10",
+            "09:25",
+            "09:30",
+            "09:49",
+            "09:50",
+            "10:08",
+            "10:15",
+            "10:27",
+            "10:30",
+            "10:46",
+            "11:05",
+            "11:10",
+            "11:24",
+            "11:43",
+            "11:50",
+            "11:55",
+            "12:02",
+            "12:21",
+            "12:30",
+            "12:45",
+            "13:10",
+            "13:35",
+            "13:50",
+            "14:25",
+            "14:30",
+            "15:10",
+            "15:15",
+            "15:50",
+            "16:05",
+            "16:40",
+            "17:15",
+            "17:50"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "CRUZEIRO DO SUL - MACEIÓ",
+        "origem": "CRUZEIRO DO SUL",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:12",
+            "05:24",
+            "05:36",
+            "05:48",
+            "06:00",
+            "06:12",
+            "06:24",
+            "06:36",
+            "06:48",
+            "07:00",
+            "07:12",
+            "07:24",
+            "07:36",
+            "07:48",
+            "08:00",
+            "08:12",
+            "08:24",
+            "08:36",
+            "08:48",
+            "09:00",
+            "09:12"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "DELMIRO GOUVEIA - ARAPIRACA",
+        "origem": "DELMIRO GOUVEIA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:20",
+            "07:15",
+            "08:40",
+            "10:30",
+            "13:00",
+            "15:00"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "07:30",
+            "09:00",
+            "11:00",
+            "12:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "DELMIRO GOUVEIA - MACEIÓ (VIA TAQUARANA)",
+        "origem": "DELMIRO GOUVEIA",
+        "destino": "MACEIÓ (VIA TAQUARANA)",
+        "horarios_saida_origem": [
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "05:00"
+        ]
+    },
+    {
+        "linha": "DELMIRO GOUVEIA - MACEIÓ",
+        "origem": "DELMIRO GOUVEIA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:00",
+            "04:30",
+            "05:30",
+            "06:15"
+        ],
+        "horarios_saida_destino": [
+            "11:45",
+            "12:20",
+            "13:00",
+            "13:50"
+        ]
+    },
+    {
+        "linha": "DELMIRO GOUVEIA - SANTANA DO IPANEMA",
+        "origem": "DELMIRO GOUVEIA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:05",
+            "06:00",
+            "08:00",
+            "09:20",
+            "10:00",
+            "11:00",
+            "11:50"
+        ],
+        "horarios_saida_destino": [
+            "05:20",
+            "06:15",
+            "06:30",
+            "07:30",
+            "09:00",
+            "14:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "DENISSON AMORIM - MACEIO",
+        "origem": "DENISSON AMORIM",
+        "destino": "MACEIO",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:40",
+            "08:20",
+            "09:00",
+            "09:40",
+            "10:20",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:40",
+            "14:20",
+            "15:00",
+            "15:40",
+            "16:20",
+            "17:00",
+            "17:30",
+            "18:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "DOIS RIACHOS - ARAPIRACA",
+        "origem": "DOIS RIACHOS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:50",
+            "06:30",
+            "12:30"
+        ],
+        "horarios_saida_destino": [
+            "10:30",
+            "13:00",
+            "16:40"
+        ]
+    },
+    {
+        "linha": "DOIS RIACHOS - SANTANA DO IPANEMA",
+        "origem": "DOIS RIACHOS",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:30",
+            "07:30",
+            "08:30",
+            "09:30",
+            "10:30",
+            "11:30",
+            "12:30",
+            "13:30",
+            "14:30",
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "ESTRELA DE ALAGOAS - PALMEIRA DOS ÍNDIOS",
+        "origem": "ESTRELA DE ALAGOAS",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "FEIRA GRANDE - ARAPIRACA",
+        "origem": "FEIRA GRANDE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:40",
+            "07:40",
+            "08:40",
+            "09:40",
+            "10:40",
+            "11:40",
+            "12:40",
+            "13:40",
+            "14:40",
+            "15:40",
+            "16:40"
+        ],
+        "horarios_saida_destino": [
+            "07:40",
+            "08:40",
+            "09:40",
+            "10:40",
+            "11:40",
+            "12:40",
+            "13:40",
+            "14:40",
+            "15:40"
+        ]
+    },
+    {
+        "linha": "FELIZ DESERTO - PENEDO",
+        "origem": "FELIZ DESERTO",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "00:00",
+            "06:00",
+            "06:15",
+            "06:45",
+            "07:30",
+            "08:00",
+            "08:15",
+            "10:00",
+            "12:00",
+            "12:15",
+            "13:00",
+            "14:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "00:00",
+            "07:00",
+            "09:00",
+            "09:30",
+            "10:00",
+            "11:00",
+            "11:30",
+            "13:30",
+            "14:30",
+            "15:30",
+            "16:15",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "FLEXEIRAS - MACEIÓ",
+        "origem": "FLEXEIRAS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "FOLHA MÍUDA - ARAPIRACA",
+        "origem": "FOLHA MÍUDA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:15",
+            "05:30",
+            "05:45",
+            "06:00",
+            "06:15",
+            "06:30",
+            "06:45",
+            "07:15",
+            "07:45",
+            "08:15",
+            "08:45",
+            "09:15",
+            "09:45",
+            "10:15",
+            "10:45",
+            "11:15",
+            "12:15",
+            "13:15",
+            "14:15",
+            "15:55"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "GIRAU DO PONCIANO - ARAPIRACA",
+        "origem": "GIRAU DO PONCIANO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:15",
+            "05:45",
+            "06:00",
+            "06:15",
+            "06:45",
+            "07:00",
+            "07:15",
+            "07:45",
+            "08:00",
+            "08:15",
+            "08:45",
+            "09:00",
+            "09:15",
+            "09:45",
+            "10:00",
+            "10:15",
+            "10:45",
+            "11:00",
+            "11:15",
+            "11:45",
+            "12:00",
+            "12:15"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "GIRAU DO PONCIANO - MACEIO",
+        "origem": "GIRAU DO PONCIANO",
+        "destino": "MACEIO",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "13:25"
+        ]
+    },
+    {
+        "linha": "IBATEGUARA - MACEIÓ",
+        "origem": "IBATEGUARA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:30",
+            "05:30",
+            "06:30",
+            "07:30",
+            "10:00",
+            "13:00",
+            "16:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "06:10",
+            "08:00",
+            "10:00",
+            "11:20",
+            "13:00",
+            "15:00",
+            "16:30"
+        ]
+    },
+    {
+        "linha": "IGACI - ARAPIRACA",
+        "origem": "IGACI",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:10",
+            "05:20",
+            "05:30",
+            "05:40",
+            "05:50",
+            "06:00",
+            "06:10",
+            "06:20",
+            "06:30",
+            "06:40",
+            "06:50",
+            "07:14",
+            "07:26",
+            "07:38",
+            "07:50",
+            "08:02",
+            "08:14",
+            "08:26",
+            "08:38",
+            "08:50",
+            "09:02"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "IGREJA NOVA - ARAPIRACA",
+        "origem": "IGREJA NOVA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:40",
+            "07:10",
+            "11:15",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "09:15",
+            "10:30",
+            "15:30",
+            "16:30"
+        ]
+    },
+    {
+        "linha": "IGREJA NOVA - MACEIÓ",
+        "origem": "IGREJA NOVA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:20"
+        ],
+        "horarios_saida_destino": [
+            "13:30"
+        ]
+    },
+    {
+        "linha": "IGREJA NOVA - PENEDO",
+        "origem": "IGREJA NOVA",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "00:00",
+            "06:00",
+            "06:15",
+            "06:45",
+            "07:30",
+            "08:00",
+            "08:15",
+            "10:00",
+            "12:00",
+            "12:15",
+            "13:00",
+            "14:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "00:00",
+            "07:00",
+            "09:00",
+            "09:30",
+            "10:00",
+            "11:00",
+            "11:30",
+            "13:30",
+            "14:30",
+            "15:30",
+            "16:15",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "INHAPI - ARAPIRACA",
+        "origem": "INHAPI",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "11:40",
+            "12:40"
+        ],
+        "horarios_saida_destino": [
+            "05:30",
+            "08:40"
+        ]
+    },
+    {
+        "linha": "INHAPI - DELMIRO GOUVEIA",
+        "origem": "INHAPI",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:15",
+            "08:20"
+        ],
+        "horarios_saida_destino": [
+            "07:15",
+            "10:10"
+        ]
+    },
+    {
+        "linha": "INHAPI - MACEIÓ",
+        "origem": "INHAPI",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00"
+        ],
+        "horarios_saida_destino": [
+            "12:50"
+        ]
+    },
+    {
+        "linha": "INHAPI - SANTANA DO IPANEMA",
+        "origem": "INHAPI",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "10:35"
+        ]
+    },
+    {
+        "linha": "JEQUIÁ DA PRAIA - SÃO MIGUEL DOS CAMPOS",
+        "origem": "JEQUIÁ DA PRAIA",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "07:15",
+            "08:00"
+        ],
+        "horarios_saida_destino": [
+            "11:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "JOAQUIM GOMES - MACEIÓ",
+        "origem": "JOAQUIM GOMES",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:30",
+            "05:00",
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "10:45",
+            "11:00",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:20",
+            "15:20",
+            "16:00",
+            "16:45",
+            "17:10"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "JUNQUEIRO - ARAPIRACA",
+        "origem": "JUNQUEIRO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:50",
+            "06:10",
+            "06:30",
+            "06:50",
+            "07:10",
+            "07:35",
+            "07:55",
+            "08:15",
+            "08:40",
+            "09:10",
+            "09:50",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "16:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "JUNQUEIRO - MACEÓ",
+        "origem": "JUNQUEIRO",
+        "destino": "MACEÓ",
+        "horarios_saida_origem": [
+            "07:00"
+        ],
+        "horarios_saida_destino": [
+            "15:00"
+        ]
+    },
+    {
+        "linha": "JUNQUEIRO - PENEDO",
+        "origem": "JUNQUEIRO",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "06:15",
+            "13:15"
+        ],
+        "horarios_saida_destino": [
+            "10:15",
+            "15:30"
+        ]
+    },
+    {
+        "linha": "LAGOA DA CANOA - ARAPIRACA",
+        "origem": "LAGOA DA CANOA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:15",
+            "05:30",
+            "06:00",
+            "06:15",
+            "06:30",
+            "06:45",
+            "07:00",
+            "07:15",
+            "07:45",
+            "08:00",
+            "08:15",
+            "08:30",
+            "08:45",
+            "09:15",
+            "09:30",
+            "09:45",
+            "10:00",
+            "10:15",
+            "10:45",
+            "11:00",
+            "11:15"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "LIMOEIRO DE ANADIA - ARAPIRACA",
+        "origem": "LIMOEIRO DE ANADIA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:10",
+            "05:25",
+            "05:40",
+            "05:50",
+            "06:05",
+            "06:15",
+            "06:30",
+            "06:40",
+            "06:55",
+            "07:00",
+            "07:15",
+            "07:20",
+            "07:35",
+            "07:40",
+            "07:55",
+            "08:00",
+            "08:15",
+            "08:20",
+            "08:35",
+            "08:40",
+            "08:55",
+            "09:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "LUZIAPOLIS - MACEIÓ",
+        "origem": "LUZIAPOLIS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:30"
+        ],
+        "horarios_saida_destino": [
+            "12:00"
+        ]
+    },
+    {
+        "linha": "LUZIAPOLIS - SÃO MIGUEL DOS CAMPOS",
+        "origem": "LUZIAPOLIS",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "06:20",
+            "07:00",
+            "08:00",
+            "08:50",
+            "09:00",
+            "09:40",
+            "10:10",
+            "10:50",
+            "11:00",
+            "11:30",
+            "12:10",
+            "13:00",
+            "13:10",
+            "14:00",
+            "14:40",
+            "15:10",
+            "15:50",
+            "16:20",
+            "16:50",
+            "17:20"
+        ],
+        "horarios_saida_destino": [
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:20",
+            "12:00",
+            "14:00"
+        ]
+    },
+    {
+        "linha": "MAJOR ISIDORO - ARAPIRACA",
+        "origem": "MAJOR ISIDORO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "09:40",
+            "10:00",
+            "11:00",
+            "12:30",
+            "15:00",
+            "15:40",
+            "16:20",
+            "17:00",
+            "17:40"
+        ]
+    },
+    {
+        "linha": "MAJOR ISIDORO - MACEIÓ",
+        "origem": "MAJOR ISIDORO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:30",
+            "13:30"
+        ],
+        "horarios_saida_destino": [
+            "05:40",
+            "13:30"
+        ]
+    },
+    {
+        "linha": "MAJOR IZIDORO - PALMEIRA DOS ÍNDIOS",
+        "origem": "MAJOR IZIDORO",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "05:10",
+            "05:40"
+        ],
+        "horarios_saida_destino": [
+            "11:00"
+        ]
+    },
+    {
+        "linha": "MARAGOGI - MACEIÓ",
+        "origem": "MARAGOGI",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:50",
+            "05:50",
+            "09:20",
+            "10:40",
+            "12:00",
+            "14:40",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "05:30",
+            "06:55",
+            "08:40",
+            "11:20",
+            "13:25",
+            "16:30",
+            "18:20"
+        ]
+    },
+    {
+        "linha": "MARAGOGI - PORTO CALVO",
+        "origem": "MARAGOGI",
+        "destino": "PORTO CALVO",
+        "horarios_saida_origem": [
+            "05:20",
+            "05:30",
+            "05:40",
+            "06:00",
+            "06:15",
+            "06:20",
+            "06:30",
+            "06:40",
+            "06:45",
+            "07:00",
+            "07:15",
+            "07:20",
+            "07:30",
+            "07:40",
+            "07:45",
+            "08:00",
+            "08:15",
+            "08:20",
+            "08:30",
+            "08:40",
+            "08:45",
+            "09:00",
+            "09:15",
+            "09:20",
+            "09:30",
+            "09:40",
+            "09:45",
+            "10:00",
+            "10:15",
+            "10:20",
+            "10:30",
+            "10:40",
+            "10:45",
+            "11:00",
+            "11:20",
+            "11:40",
+            "12:00",
+            "12:25",
+            "12:50"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MARAVILHA - DELMIRO GOUVEIA",
+        "origem": "MARAVILHA",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "04:40"
+        ],
+        "horarios_saida_destino": [
+            "09:10"
+        ]
+    },
+    {
+        "linha": "MARAVILHA - SANTANA DO IPANEMA",
+        "origem": "MARAVILHA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:40",
+            "07:20",
+            "08:00",
+            "08:40",
+            "09:20",
+            "10:00",
+            "10:40",
+            "11:20",
+            "12:00",
+            "12:40",
+            "13:20",
+            "14:00",
+            "14:40",
+            "15:20",
+            "15:50"
+        ],
+        "horarios_saida_destino": [
+            "07:30",
+            "08:30",
+            "09:10",
+            "09:50"
+        ]
+    },
+    {
+        "linha": "MARECHAL DEODORO - MACEIÓ",
+        "origem": "MARECHAL DEODORO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:30",
+            "04:40",
+            "04:45",
+            "05:00",
+            "05:10",
+            "05:30",
+            "05:35",
+            "05:40",
+            "05:45",
+            "05:50",
+            "05:55",
+            "06:10",
+            "06:20",
+            "06:25",
+            "06:30",
+            "06:35",
+            "06:40",
+            "06:50",
+            "06:55",
+            "07:05",
+            "07:10",
+            "07:15",
+            "07:20",
+            "07:25",
+            "07:35"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MARIBONDO - ARAPIRACA",
+        "origem": "MARIBONDO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MASSAGUEIRA - MACEIO (VIA BARRA NOVA)",
+        "origem": "MASSAGUEIRA",
+        "destino": "MACEIO (VIA BARRA NOVA)",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:10",
+            "06:50",
+            "07:30",
+            "08:10",
+            "08:50",
+            "09:30",
+            "10:10",
+            "10:50",
+            "11:30",
+            "12:10",
+            "12:50",
+            "13:30",
+            "14:10",
+            "14:50",
+            "15:00",
+            "15:30",
+            "16:10",
+            "16:50",
+            "17:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MATA GRANDE - ARAPIRACA",
+        "origem": "MATA GRANDE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "04:10",
+            "05:25"
+        ],
+        "horarios_saida_destino": [
+            "11:50",
+            "12:50"
+        ]
+    },
+    {
+        "linha": "MATA GRANDE - DELMIRO GOUVEIA",
+        "origem": "MATA GRANDE",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:15",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:30",
+            "10:00",
+            "11:00",
+            "11:30",
+            "12:00",
+            "13:30",
+            "14:30",
+            "15:00",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "06:10",
+            "08:00",
+            "08:20",
+            "09:00",
+            "10:00",
+            "10:30"
+        ]
+    },
+    {
+        "linha": "MATA GRANDE - MACEIÓ",
+        "origem": "MATA GRANDE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:50",
+            "12:30"
+        ],
+        "horarios_saida_destino": [
+            "03:30",
+            "12:30"
+        ]
+    },
+    {
+        "linha": "MATRIZ DO CAMARAGIBE - MACEIÓ",
+        "origem": "MATRIZ DO CAMARAGIBE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:10",
+            "05:50",
+            "06:10",
+            "06:50",
+            "07:10",
+            "07:30",
+            "07:50",
+            "08:10",
+            "08:30",
+            "09:10",
+            "09:30",
+            "09:50",
+            "10:30",
+            "10:50",
+            "11:10",
+            "11:30",
+            "11:50",
+            "12:10",
+            "12:30",
+            "13:30",
+            "13:50",
+            "14:10"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MESSIAS - MACEIÓ",
+        "origem": "MESSIAS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:34",
+            "04:47",
+            "05:00",
+            "05:13",
+            "05:26",
+            "05:39",
+            "05:52",
+            "06:05",
+            "06:18",
+            "06:31",
+            "06:44",
+            "06:57",
+            "07:10",
+            "07:23",
+            "07:36",
+            "07:49",
+            "08:02",
+            "08:15",
+            "08:28",
+            "08:41",
+            "08:54",
+            "09:07"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MINADOR DO NEGRÃO - ARAPIRACA",
+        "origem": "MINADOR DO NEGRÃO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:15"
+        ],
+        "horarios_saida_destino": [
+            "08:00"
+        ]
+    },
+    {
+        "linha": "MINADOR DO NEGRAO - PALMEIRA DOS ÍNDIOS",
+        "origem": "MINADOR DO NEGRAO",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "06:20",
+            "09:30",
+            "11:50",
+            "13:00",
+            "14:00",
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "08:30",
+            "10:10",
+            "12:50",
+            "14:00",
+            "15:00",
+            "16:30"
+        ]
+    },
+    {
+        "linha": "MURICI - MACEIÓ",
+        "origem": "MURICI",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:15",
+            "04:20",
+            "04:40",
+            "04:45",
+            "05:00",
+            "05:10",
+            "05:20",
+            "05:35",
+            "05:55",
+            "06:00",
+            "06:15",
+            "06:25",
+            "06:35",
+            "06:50",
+            "06:55",
+            "07:15",
+            "07:35",
+            "07:40",
+            "07:55",
+            "08:05",
+            "08:15",
+            "08:30",
+            "08:35",
+            "08:55",
+            "09:15",
+            "09:20",
+            "09:35",
+            "09:45",
+            "10:00",
+            "10:10",
+            "10:25",
+            "10:40",
+            "10:50",
+            "11:10",
+            "11:15",
+            "11:40",
+            "12:05",
+            "12:10",
+            "12:40",
+            "13:10",
+            "13:40"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "MURICI - UNIÃO DOS PALMARES",
+        "origem": "MURICI",
+        "destino": "UNIÃO DOS PALMARES",
+        "horarios_saida_origem": [
+            "05:25",
+            "06:05",
+            "06:50",
+            "07:40",
+            "08:35",
+            "09:45",
+            "10:25",
+            "11:00",
+            "11:40",
+            "12:45",
+            "13:30",
+            "14:30",
+            "15:30",
+            "16:30",
+            "17:30",
+            "18:25"
+        ],
+        "horarios_saida_destino": [
+            "05:25",
+            "06:05",
+            "06:50",
+            "07:40"
+        ]
+    },
+    {
+        "linha": "NOVO LINO - MACEIÓ",
+        "origem": "NOVO LINO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "07:15"
+        ],
+        "horarios_saida_destino": [
+            "13:15"
+        ]
+    },
+    {
+        "linha": "OLHO D'ÁGUA DAS FLORES - ARAPIRACA",
+        "origem": "OLHO D'ÁGUA DAS FLORES",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "04:45",
+            "05:15",
+            "05:45",
+            "06:15",
+            "06:45",
+            "07:15",
+            "07:45",
+            "08:15",
+            "08:45",
+            "09:15",
+            "09:45",
+            "10:15",
+            "10:45",
+            "11:15",
+            "11:45",
+            "12:15",
+            "12:45",
+            "13:15",
+            "13:45",
+            "14:15",
+            "14:45",
+            "15:15"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "OLHO D'ÁGUA DAS FLORES - DELMIRO GOUVEIA",
+        "origem": "OLHO D'ÁGUA DAS FLORES",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:00",
+            "07:30",
+            "09:30"
+        ],
+        "horarios_saida_destino": [
+            "14:30",
+            "16:30",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "OLHO D'ÁGUA DAS FLORES - SANTANA DO IPANEMA",
+        "origem": "OLHO D'ÁGUA DAS FLORES",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "OLHO D'ÁGUA GRANDE - ARAPIRACA",
+        "origem": "OLHO D'ÁGUA GRANDE",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "07:10",
+            "12:10",
+            "16:30"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "11:00",
+            "12:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "OLIVENÇA - ARAPIRACA",
+        "origem": "OLIVENÇA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "13:00"
+        ]
+    },
+    {
+        "linha": "OLIVENÇA - MACEIÓ",
+        "origem": "OLIVENÇA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00"
+        ],
+        "horarios_saida_destino": [
+            "13:30"
+        ]
+    },
+    {
+        "linha": "OLIVENÇA - SANTANA DO IPANEMA",
+        "origem": "OLIVENÇA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:10",
+            "07:20",
+            "07:50",
+            "08:40",
+            "09:30",
+            "10:20"
+        ],
+        "horarios_saida_destino": [
+            "08:30",
+            "09:30",
+            "10:10",
+            "11:00",
+            "11:50",
+            "12:40"
+        ]
+    },
+    {
+        "linha": "OURO BRANCO - ARAPIRACA",
+        "origem": "OURO BRANCO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "11:00",
+            "12:00"
+        ]
+    },
+    {
+        "linha": "OURO BRANCO - MACEIÓ",
+        "origem": "OURO BRANCO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "03:30",
+            "13:00",
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "05:30",
+            "06:30",
+            "11:50"
+        ]
+    },
+    {
+        "linha": "OURO BRANCO - SANTANA DO IPANEMA",
+        "origem": "OURO BRANCO",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:10",
+            "06:50",
+            "07:30",
+            "08:10",
+            "08:50",
+            "09:30",
+            "10:10",
+            "10:50",
+            "11:30",
+            "12:10",
+            "12:50",
+            "13:30",
+            "14:10",
+            "15:00",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "07:40",
+            "08:40",
+            "09:20",
+            "10:00"
+        ]
+    },
+    {
+        "linha": "PALESTINA - ARAPIRACA",
+        "origem": "PALESTINA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:45"
+        ],
+        "horarios_saida_destino": [
+            "11:10",
+            "13:00"
+        ]
+    },
+    {
+        "linha": "PALESTINA - PAO DE ACUCAR",
+        "origem": "PALESTINA",
+        "destino": "PAO DE ACUCAR",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "08:00",
+            "09:00",
+            "10:10",
+            "11:00",
+            "12:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "07:10",
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:15",
+            "13:00",
+            "14:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "PALESTINA - SANTANA DO IPANEMA",
+        "origem": "PALESTINA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:00",
+            "10:00"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "12:00"
+        ]
+    },
+    {
+        "linha": "PALMEIRA DOS ÍNDIOS - ARAPIRACA",
+        "origem": "PALMEIRA DOS ÍNDIOS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:12",
+            "05:18",
+            "05:24",
+            "05:36",
+            "05:48",
+            "06:00",
+            "06:12",
+            "06:24",
+            "06:30",
+            "06:36",
+            "06:48",
+            "07:00",
+            "07:06",
+            "07:12",
+            "07:24",
+            "07:36",
+            "07:42",
+            "07:48",
+            "08:00",
+            "08:12",
+            "08:18",
+            "08:24",
+            "08:36",
+            "08:48",
+            "08:54",
+            "09:00",
+            "09:12",
+            "09:30",
+            "09:48",
+            "10:06",
+            "10:24",
+            "10:42"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PALMEIRA DOS ÍNDIOS - MACEIÓ",
+        "origem": "PALMEIRA DOS ÍNDIOS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PALMEIRA DOS ÍNDIOS - SANTANA DO IPANEMA",
+        "origem": "PALMEIRA DOS ÍNDIOS",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:40",
+            "06:20",
+            "07:00",
+            "07:40",
+            "08:20",
+            "09:00",
+            "09:40",
+            "10:35",
+            "11:30",
+            "12:25",
+            "13:20",
+            "14:15",
+            "15:10",
+            "16:05",
+            "16:50"
+        ],
+        "horarios_saida_destino": [
+            "05:40",
+            "06:20",
+            "07:00",
+            "07:40",
+            "08:20"
+        ]
+    },
+    {
+        "linha": "PÃO DE AÇÚCAR - ARAPIRACA",
+        "origem": "PÃO DE AÇÚCAR",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "11:30",
+            "14:30"
+        ]
+    },
+    {
+        "linha": "PÃO DE AÇUCAR - MACEIÓ",
+        "origem": "PÃO DE AÇUCAR",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "03:20",
+            "03:50",
+            "04:00"
+        ],
+        "horarios_saida_destino": [
+            "10:00",
+            "10:30",
+            "11:00",
+            "13:00",
+            "13:30"
+        ]
+    },
+    {
+        "linha": "PÃO DE AÇUCAR - OLHO D'ÁGUA DAS FLORES",
+        "origem": "PÃO DE AÇUCAR",
+        "destino": "OLHO D'ÁGUA DAS FLORES",
+        "horarios_saida_origem": [
+            "06:30",
+            "07:05",
+            "07:40",
+            "08:15",
+            "08:50",
+            "09:25",
+            "10:00",
+            "10:35",
+            "11:10",
+            "11:45",
+            "12:20",
+            "12:55",
+            "13:30",
+            "14:05",
+            "14:40",
+            "15:15",
+            "15:50",
+            "16:25"
+        ],
+        "horarios_saida_destino": [
+            "06:30",
+            "07:05"
+        ]
+    },
+    {
+        "linha": "PÃO DE AÇUCAR - SANTANA DO IPANEMA",
+        "origem": "PÃO DE AÇUCAR",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:45",
+            "07:20",
+            "13:00",
+            "13:45"
+        ],
+        "horarios_saida_destino": [
+            "10:30",
+            "11:30",
+            "14:30",
+            "15:30"
+        ]
+    },
+    {
+        "linha": "PARICONHA - ARAPIRACA",
+        "origem": "PARICONHA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:40"
+        ],
+        "horarios_saida_destino": [
+            "12:30"
+        ]
+    },
+    {
+        "linha": "PARICONHA - DELMIRO GOUVEIA",
+        "origem": "PARICONHA",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:10",
+            "11:40",
+            "12:10",
+            "12:50",
+            "13:30",
+            "14:10",
+            "14:45",
+            "15:30",
+            "16:10"
+        ],
+        "horarios_saida_destino": [
+            "08:00",
+            "08:40"
+        ]
+    },
+    {
+        "linha": "PAULO JACINTO - ARAPIRACA",
+        "origem": "PAULO JACINTO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:30",
+            "06:30"
+        ],
+        "horarios_saida_destino": [
+            "07:30",
+            "09:00",
+            "10:30"
+        ]
+    },
+    {
+        "linha": "PAULO JACINTO - MACEIÓ",
+        "origem": "PAULO JACINTO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:50",
+            "06:40",
+            "07:20",
+            "09:00",
+            "10:50",
+            "13:00",
+            "13:20",
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "08:00",
+            "09:20",
+            "10:00",
+            "12:20",
+            "14:40",
+            "15:30",
+            "16:40"
+        ]
+    },
+    {
+        "linha": "PENEDO - ARAPIRACA",
+        "origem": "PENEDO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:45",
+            "06:15",
+            "06:45",
+            "07:15",
+            "07:55",
+            "08:35",
+            "09:15",
+            "09:55",
+            "10:35",
+            "11:15",
+            "11:55",
+            "12:35",
+            "13:15",
+            "13:55",
+            "14:35",
+            "15:05",
+            "15:35",
+            "16:05",
+            "16:45",
+            "17:25",
+            "18:05"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PENEDO - MACEIÓ ( VIA AL 101 SUL)",
+        "origem": "PENEDO",
+        "destino": "MACEIÓ ( VIA AL 101 SUL)",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:30",
+            "06:00",
+            "07:30",
+            "08:20",
+            "09:10",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00",
+            "17:00"
+        ],
+        "horarios_saida_destino": [
+            "05:00",
+            "05:50",
+            "06:40",
+            "07:30",
+            "08:20",
+            "09:10"
+        ]
+    },
+    {
+        "linha": "PENEDO - MACEIÓ ( VIA BR101)",
+        "origem": "PENEDO",
+        "destino": "MACEIÓ ( VIA BR101)",
+        "horarios_saida_origem": [
+            "05:45",
+            "08:10"
+        ],
+        "horarios_saida_destino": [
+            "05:45",
+            "09:50"
+        ]
+    },
+    {
+        "linha": "PIAÇABUÇU - ARAPIRACA",
+        "origem": "PIAÇABUÇU",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:40"
+        ],
+        "horarios_saida_destino": [
+            "08:05",
+            "11:25"
+        ]
+    },
+    {
+        "linha": "PIAÇABUÇU - PENEDO",
+        "origem": "PIAÇABUÇU",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:25",
+            "07:00",
+            "08:00",
+            "08:35",
+            "09:10",
+            "09:35",
+            "10:00",
+            "10:25",
+            "10:50",
+            "11:50",
+            "12:15",
+            "12:50",
+            "13:15",
+            "13:50",
+            "14:25",
+            "14:50",
+            "15:45",
+            "16:15",
+            "16:45",
+            "17:25"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PILAR - MACEIÓ (VIA POLO)",
+        "origem": "PILAR",
+        "destino": "MACEIÓ (VIA POLO)",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:20",
+            "08:30",
+            "08:35",
+            "09:15",
+            "13:00",
+            "15:20"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "08:00",
+            "11:15",
+            "13:00",
+            "13:10",
+            "16:00",
+            "16:50"
+        ]
+    },
+    {
+        "linha": "PILAR - MACEIÓ (VIA SATUBA)",
+        "origem": "PILAR",
+        "destino": "MACEIÓ (VIA SATUBA)",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:40",
+            "06:15",
+            "06:30",
+            "06:50",
+            "07:05",
+            "07:35",
+            "07:55",
+            "08:10",
+            "08:25",
+            "08:55",
+            "09:15",
+            "09:45",
+            "10:05",
+            "10:40",
+            "11:00",
+            "11:20",
+            "11:45",
+            "12:20",
+            "12:40",
+            "13:05",
+            "13:35"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PIRANHAS - ARAPIRACA",
+        "origem": "PIRANHAS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:35",
+            "12:30"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "10:00"
+        ]
+    },
+    {
+        "linha": "PIRANHAS - DELMIRO GOUVEIA",
+        "origem": "PIRANHAS",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "05:50",
+            "06:20",
+            "06:50",
+            "07:20",
+            "07:50",
+            "08:20",
+            "08:50",
+            "09:20",
+            "09:50",
+            "10:20",
+            "10:50",
+            "11:20",
+            "11:50",
+            "12:20",
+            "12:50",
+            "13:20",
+            "13:50",
+            "14:20",
+            "14:50",
+            "15:20",
+            "15:50",
+            "16:20"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PIRANHAS - MACEIÓ",
+        "origem": "PIRANHAS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:30",
+            "05:00"
+        ],
+        "horarios_saida_destino": [
+            "11:30",
+            "12:50"
+        ]
+    },
+    {
+        "linha": "PIRANHAS - SANTANA DO IPANEMA",
+        "origem": "PIRANHAS",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00",
+            "09:15"
+        ],
+        "horarios_saida_destino": [
+            "05:40",
+            "11:40"
+        ]
+    },
+    {
+        "linha": "POÇO DAS TRINCHEIRAS - SANTANA DO IPANEMA",
+        "origem": "POÇO DAS TRINCHEIRAS",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "05:40",
+            "06:00",
+            "06:20",
+            "06:40",
+            "07:00",
+            "07:20",
+            "07:40",
+            "08:00",
+            "08:20",
+            "08:40",
+            "09:00",
+            "09:20",
+            "09:40",
+            "10:00",
+            "10:20",
+            "10:40",
+            "11:00",
+            "11:20",
+            "11:40",
+            "12:00",
+            "12:20",
+            "12:40"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PORTO CALVO - MACEIÓ",
+        "origem": "PORTO CALVO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:10",
+            "05:50",
+            "06:10",
+            "06:50",
+            "07:10",
+            "07:30",
+            "07:50",
+            "08:10",
+            "08:30",
+            "09:10",
+            "09:30",
+            "09:50",
+            "10:30",
+            "10:50",
+            "11:10",
+            "11:30",
+            "11:50",
+            "12:10",
+            "12:30",
+            "13:30",
+            "13:50",
+            "14:10"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PORTO DE PEDRAS - MACEIÓ",
+        "origem": "PORTO DE PEDRAS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "07:00",
+            "09:30",
+            "10:55",
+            "13:00",
+            "14:50",
+            "16:30",
+            "17:20"
+        ],
+        "horarios_saida_destino": [
+            "06:20",
+            "07:45",
+            "09:15",
+            "11:05",
+            "13:10",
+            "14:15",
+            "16:45",
+            "18:10"
+        ]
+    },
+    {
+        "linha": "PORTO REAL DO COLÉGIO - ARAPIRACA",
+        "origem": "PORTO REAL DO COLÉGIO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:45",
+            "06:20",
+            "06:55",
+            "07:30",
+            "08:05",
+            "08:40",
+            "09:15",
+            "09:50",
+            "10:25",
+            "11:00",
+            "11:35",
+            "12:10",
+            "12:45",
+            "13:20",
+            "13:55",
+            "14:30",
+            "15:05",
+            "15:40",
+            "16:15",
+            "17:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "PORTO REAL DO COLÉGIO - MACEIÓ",
+        "origem": "PORTO REAL DO COLÉGIO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "12:00",
+            "13:10"
+        ]
+    },
+    {
+        "linha": "PORTO REAL DO COLÉGIO - PENEDO",
+        "origem": "PORTO REAL DO COLÉGIO",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "05:10",
+            "06:00",
+            "08:20",
+            "10:00",
+            "15:00",
+            "16:50"
+        ],
+        "horarios_saida_destino": [
+            "05:50",
+            "07:40",
+            "10:45",
+            "12:00",
+            "12:45",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "QUEBRANGULO - MACEIÓ",
+        "origem": "QUEBRANGULO",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00"
+        ],
+        "horarios_saida_destino": [
+            "13:00"
+        ]
+    },
+    {
+        "linha": "QUEBRANGULO - PALMEIRA DOS ÍNDIOS (VIA MAR VERMELHO)",
+        "origem": "QUEBRANGULO",
+        "destino": "PALMEIRA DOS ÍNDIOS (VIA MAR VERMELHO)",
+        "horarios_saida_origem": [
+            "06:00",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "15:30"
+        ]
+    },
+    {
+        "linha": "RIO LARGO - MACEIÓ (VIA GUSTAVO PAIVA)",
+        "origem": "RIO LARGO",
+        "destino": "MACEIÓ (VIA GUSTAVO PAIVA)",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:20",
+            "05:40",
+            "06:00",
+            "06:20",
+            "06:40",
+            "07:00",
+            "07:20",
+            "07:40",
+            "08:00",
+            "08:20",
+            "08:40",
+            "09:00",
+            "09:20",
+            "09:40",
+            "10:00",
+            "10:20",
+            "10:40",
+            "11:00",
+            "11:20",
+            "11:40",
+            "12:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "RIO LARGO - MACEIÓ ( VIA MATA DO ROLO)",
+        "origem": "RIO LARGO",
+        "destino": "MACEIÓ ( VIA MATA DO ROLO)",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:20",
+            "05:40",
+            "06:00",
+            "06:20",
+            "06:40",
+            "07:00",
+            "07:20",
+            "07:40",
+            "08:00",
+            "08:20",
+            "08:40",
+            "09:00",
+            "09:20",
+            "09:40",
+            "10:00",
+            "10:20",
+            "10:40",
+            "11:00",
+            "11:20",
+            "11:40",
+            "12:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "ROTEIRO - SÃO MIGUEL DOS CAMPOS",
+        "origem": "ROTEIRO",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:40",
+            "07:20",
+            "08:40",
+            "09:20",
+            "10:10",
+            "11:20",
+            "12:40"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00",
+            "15:00",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "SANTA CRUZ DO DESERTO - DELMIRO GOUVEIA",
+        "origem": "SANTA CRUZ DO DESERTO",
+        "destino": "DELMIRO GOUVEIA",
+        "horarios_saida_origem": [
+            "05:40",
+            "06:30",
+            "10:50",
+            "11:00"
+        ],
+        "horarios_saida_destino": [
+            "09:40",
+            "12:00",
+            "12:40",
+            "15:40"
+        ]
+    },
+    {
+        "linha": "SANTA CRUZ DO DESERTO - MACEIO (VIA ARAPIRACA)",
+        "origem": "SANTA CRUZ DO DESERTO",
+        "destino": "MACEIO (VIA ARAPIRACA)",
+        "horarios_saida_origem": [
+            "04:00"
+        ],
+        "horarios_saida_destino": [
+            "13:00"
+        ]
+    },
+    {
+        "linha": "SANTA LUZIA DO NORTE - MACEIÓ - (VIA LITORAL)",
+        "origem": "SANTA LUZIA DO NORTE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "06:30",
+            "09:00",
+            "12:30",
+            "15:30"
+        ],
+        "horarios_saida_destino": [
+            "07:50",
+            "11:10",
+            "14:20",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "SANTA LUZIA DO NORTE - MACEIÓ (VIA SATUBA)",
+        "origem": "SANTA LUZIA DO NORTE",
+        "destino": "MACEIÓ (VIA SATUBA)",
+        "horarios_saida_origem": [
+            "05:40",
+            "08:50",
+            "12:15",
+            "16:15"
+        ],
+        "horarios_saida_destino": [
+            "06:50",
+            "07:00",
+            "10:30",
+            "15:00",
+            "17:30",
+            "18:00"
+        ]
+    },
+    {
+        "linha": "SANTANA DO IPANEMA - ARAPIRACA",
+        "origem": "SANTANA DO IPANEMA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:10",
+            "08:50",
+            "09:10",
+            "10:00",
+            "11:00",
+            "11:50",
+            "12:30"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "06:50",
+            "07:40",
+            "08:30",
+            "09:20",
+            "10:10",
+            "11:00",
+            "11:50"
+        ]
+    },
+    {
+        "linha": "SANTANA DO IPANEMA - MACEIÓ",
+        "origem": "SANTANA DO IPANEMA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:20",
+            "05:50",
+            "12:00",
+            "12:30",
+            "13:00"
+        ],
+        "horarios_saida_destino": [
+            "04:45",
+            "05:00",
+            "05:15",
+            "11:20",
+            "12:00"
+        ]
+    },
+    {
+        "linha": "SANTANA DO MUNDAÚ - UNIÃO DOS PALMARES",
+        "origem": "SANTANA DO MUNDAÚ",
+        "destino": "UNIÃO DOS PALMARES",
+        "horarios_saida_origem": [
+            "05:45",
+            "06:30",
+            "07:00",
+            "07:45",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:15",
+            "11:00",
+            "11:45",
+            "12:30",
+            "13:15",
+            "13:45",
+            "14:15",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00",
+            "17:20",
+            "17:40",
+            "18:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "SAO BRAS - ARAPIRACA",
+        "origem": "SAO BRAS",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:00",
+            "07:40",
+            "13:45",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "05:40",
+            "11:30",
+            "12:00",
+            "14:00",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "SÃO BRAS - PENEDO",
+        "origem": "SÃO BRAS",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "04:45",
+            "10:45"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "15:00"
+        ]
+    },
+    {
+        "linha": "SÃO JOSÉ DA LAJE - MACEIÓ",
+        "origem": "SÃO JOSÉ DA LAJE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:40",
+            "05:00",
+            "05:40",
+            "06:30",
+            "06:40",
+            "08:00",
+            "09:00",
+            "09:40",
+            "10:40",
+            "11:40",
+            "12:30",
+            "12:40",
+            "13:30",
+            "14:00",
+            "14:30",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "07:40",
+            "08:40",
+            "09:40",
+            "10:40",
+            "11:30",
+            "12:45",
+            "14:00",
+            "14:45",
+            "15:00",
+            "16:00",
+            "17:00"
+        ]
+    },
+    {
+        "linha": "SÃO JOSÉ DA LAJE - UNIÃO DOS PALMARES",
+        "origem": "SÃO JOSÉ DA LAJE",
+        "destino": "UNIÃO DOS PALMARES",
+        "horarios_saida_origem": [
+            "05:45",
+            "06:00",
+            "06:15",
+            "06:30",
+            "06:45",
+            "07:00",
+            "07:15",
+            "07:30",
+            "07:45",
+            "08:00",
+            "08:15",
+            "08:30",
+            "08:45",
+            "09:00",
+            "09:15",
+            "09:30",
+            "09:45",
+            "10:00",
+            "10:15",
+            "10:30",
+            "10:45",
+            "11:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "SÃO JOSÉ DA TAPERA - ARAPIRACA",
+        "origem": "SÃO JOSÉ DA TAPERA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:40",
+            "06:20",
+            "07:00",
+            "07:40"
+        ],
+        "horarios_saida_destino": [
+            "09:40",
+            "10:40",
+            "12:00",
+            "13:00"
+        ]
+    },
+    {
+        "linha": "SAO JOSE DA TAPERA - MACEIO",
+        "origem": "SAO JOSE DA TAPERA",
+        "destino": "MACEIO",
+        "horarios_saida_origem": [
+            "05:00"
+        ],
+        "horarios_saida_destino": [
+            "12:00"
+        ]
+    },
+    {
+        "linha": "SÃO JOSÉ DA TAPERA - OLHO D'ÁGUA DAS FLORES",
+        "origem": "SÃO JOSÉ DA TAPERA",
+        "destino": "OLHO D'ÁGUA DAS FLORES",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "09:00",
+            "10:00",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00"
+        ],
+        "horarios_saida_destino": [
+            "07:00",
+            "07:40",
+            "08:20",
+            "09:00",
+            "09:50",
+            "11:00",
+            "12:00",
+            "13:00",
+            "14:00"
+        ]
+    },
+    {
+        "linha": "SÃO JOSÉ DA TAPERA - SANTANA DO IPANEMA",
+        "origem": "SÃO JOSÉ DA TAPERA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:30",
+            "08:00",
+            "10:30",
+            "11:30"
+        ],
+        "horarios_saida_destino": [
+            "09:30",
+            "10:30",
+            "11:30",
+            "13:50"
+        ]
+    },
+    {
+        "linha": "SÃO LUIZ DO QUITUNDE - MACEIÓ",
+        "origem": "SÃO LUIZ DO QUITUNDE",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "09:00",
+            "12:40"
+        ],
+        "horarios_saida_destino": [
+            "07:20",
+            "10:20"
+        ]
+    },
+    {
+        "linha": "SÃO MIGUEL DOS CAMPOS - MACEIÓ",
+        "origem": "SÃO MIGUEL DOS CAMPOS",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:20",
+            "06:45",
+            "07:10",
+            "07:35",
+            "08:00",
+            "08:25",
+            "08:50",
+            "09:15",
+            "09:40",
+            "10:05",
+            "10:30",
+            "10:55",
+            "11:20",
+            "11:45",
+            "12:10",
+            "12:35",
+            "13:00",
+            "13:25",
+            "13:50",
+            "14:15"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "SÃO SEBASTIÃO - ARAPIRACA",
+        "origem": "SÃO SEBASTIÃO",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:15",
+            "05:28",
+            "05:41",
+            "05:54",
+            "06:07",
+            "06:20",
+            "06:33",
+            "06:46",
+            "06:59",
+            "07:12",
+            "07:25",
+            "07:38",
+            "07:51",
+            "08:04",
+            "08:17",
+            "08:30",
+            "08:43",
+            "08:56",
+            "09:09",
+            "09:22",
+            "09:35",
+            "09:48"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "SÃO SEBASTIÃO - PENEDO",
+        "origem": "SÃO SEBASTIÃO",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "06:00",
+            "07:30",
+            "11:30",
+            "12:50"
+        ],
+        "horarios_saida_destino": [
+            "07:30",
+            "09:30",
+            "13:30",
+            "14:45"
+        ]
+    },
+    {
+        "linha": "SENADOR RUI PALMEIRA - OLHO D'ÁGUA DAS FLORES",
+        "origem": "SENADOR RUI PALMEIRA",
+        "destino": "OLHO D'ÁGUA DAS FLORES",
+        "horarios_saida_origem": [
+            "06:00",
+            "11:30"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "14:30"
+        ]
+    },
+    {
+        "linha": "SENADOR RUI PALMEIRA - SANTANA DO IPANEMA",
+        "origem": "SENADOR RUI PALMEIRA",
+        "destino": "SANTANA DO IPANEMA",
+        "horarios_saida_origem": [
+            "06:00",
+            "06:30",
+            "07:00",
+            "08:10",
+            "10:30"
+        ],
+        "horarios_saida_destino": [
+            "09:00",
+            "10:40",
+            "11:30",
+            "12:30",
+            "13:00"
+        ]
+    },
+    {
+        "linha": "TANQUE D'ARCA - ARAPIRACA",
+        "origem": "TANQUE D'ARCA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:45",
+            "06:20",
+            "12:50",
+            "13:25"
+        ],
+        "horarios_saida_destino": [
+            "11:15",
+            "11:40",
+            "16:45",
+            "17:35"
+        ]
+    },
+    {
+        "linha": "TANQUE D'ARCA - PALMEIRA DOS ÍNDIOS",
+        "origem": "TANQUE D'ARCA",
+        "destino": "PALMEIRA DOS ÍNDIOS",
+        "horarios_saida_origem": [
+            "06:30",
+            "06:45"
+        ],
+        "horarios_saida_destino": [
+            "11:30",
+            "12:30"
+        ]
+    },
+    {
+        "linha": "TEOTÔNIO VILELA - ARAPIRACA",
+        "origem": "TEOTÔNIO VILELA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:40",
+            "05:55",
+            "06:20",
+            "07:17",
+            "07:39",
+            "08:01",
+            "08:23",
+            "08:45",
+            "09:07",
+            "09:29",
+            "09:51",
+            "10:13",
+            "10:35",
+            "10:57",
+            "11:19",
+            "11:41",
+            "12:00",
+            "12:30",
+            "12:52",
+            "13:05",
+            "13:22",
+            "13:27"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "TEOTÔNIO VILELA - CORURIPE",
+        "origem": "TEOTÔNIO VILELA",
+        "destino": "CORURIPE",
+        "horarios_saida_origem": [
+            "06:30",
+            "08:00",
+            "09:30",
+            "11:00",
+            "12:30",
+            "14:00",
+            "16:00"
+        ],
+        "horarios_saida_destino": [
+            "07:25",
+            "08:50",
+            "10:15",
+            "11:40",
+            "13:05",
+            "14:30",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "TEOTONIO VILELA - JUNQUEIRO",
+        "origem": "TEOTONIO VILELA",
+        "destino": "JUNQUEIRO",
+        "horarios_saida_origem": [
+            "06:20",
+            "07:10",
+            "07:32",
+            "09:22",
+            "09:50",
+            "10:30"
+        ],
+        "horarios_saida_destino": [
+            "07:10",
+            "08:20",
+            "09:05",
+            "10:10",
+            "11:20",
+            "12:05"
+        ]
+    },
+    {
+        "linha": "TEOTÔNIO VILELA - MACEIÓ",
+        "origem": "TEOTÔNIO VILELA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:40",
+            "06:20",
+            "07:00",
+            "07:40",
+            "08:20",
+            "09:00",
+            "09:40",
+            "10:30"
+        ],
+        "horarios_saida_destino": [
+            "07:07",
+            "08:14",
+            "09:21",
+            "10:28",
+            "11:35",
+            "12:42",
+            "13:49",
+            "14:56",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "TEOTÔNIO VILELA - PENEDO",
+        "origem": "TEOTÔNIO VILELA",
+        "destino": "PENEDO",
+        "horarios_saida_origem": [
+            "06:00"
+        ],
+        "horarios_saida_destino": [
+            "10:40"
+        ]
+    },
+    {
+        "linha": "TEOTÔNIO VILELA - SÃO MIGUEL DOS CAMPOS",
+        "origem": "TEOTÔNIO VILELA",
+        "destino": "SÃO MIGUEL DOS CAMPOS",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:30",
+            "07:00",
+            "07:30",
+            "08:00",
+            "08:30",
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:40",
+            "15:10",
+            "15:50",
+            "16:10",
+            "16:30",
+            "17:00"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "TRAIPU - ARAPIRACA",
+        "origem": "TRAIPU",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "05:30",
+            "06:00",
+            "06:10",
+            "07:30",
+            "08:40",
+            "09:30",
+            "11:10",
+            "12:50",
+            "13:30"
+        ],
+        "horarios_saida_destino": [
+            "06:40",
+            "07:10",
+            "08:00",
+            "10:00",
+            "11:30",
+            "12:00",
+            "13:40",
+            "15:30"
+        ]
+    },
+    {
+        "linha": "UNIÃO DOS PALMARES - MACEIÓ",
+        "origem": "UNIÃO DOS PALMARES",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "05:00",
+            "05:15",
+            "05:30",
+            "05:45",
+            "06:00",
+            "06:15",
+            "06:30",
+            "06:50",
+            "07:10",
+            "07:30",
+            "07:50",
+            "08:10",
+            "08:30",
+            "08:50",
+            "08:54",
+            "09:10",
+            "09:12",
+            "09:30",
+            "09:50",
+            "10:10",
+            "10:30",
+            "10:50",
+            "11:00",
+            "11:10",
+            "11:18",
+            "11:30"
+        ],
+        "horarios_saida_destino": []
+    },
+    {
+        "linha": "VIÇOSA - ARAPIRACA",
+        "origem": "VIÇOSA",
+        "destino": "ARAPIRACA",
+        "horarios_saida_origem": [
+            "06:00",
+            "09:00",
+            "10:00",
+            "13:00",
+            "15:00",
+            "16:30"
+        ],
+        "horarios_saida_destino": [
+            "06:00",
+            "07:00",
+            "10:00",
+            "11:30",
+            "13:30",
+            "16:00"
+        ]
+    },
+    {
+        "linha": "VIÇOSA - MACEIÓ",
+        "origem": "VIÇOSA",
+        "destino": "MACEIÓ",
+        "horarios_saida_origem": [
+            "04:40",
+            "06:20",
+            "08:40",
+            "09:20",
+            "10:40",
+            "11:00",
+            "11:40",
+            "15:20",
+            "16:00",
+            "16:30"
+        ],
+        "horarios_saida_destino": [
+            "05:00",
+            "05:50",
+            "06:25",
+            "07:40",
+            "09:00",
+            "11:40",
+            "12:40",
+            "13:40",
+            "14:00",
+            "14:20"
+        ]
+    }
+]
