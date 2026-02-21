@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState, useEffect, useMemo, useTransition } from "react"
 import { Label } from "@/components/ui/label"
 import { busSchedules } from "@/lib/bus-data"
 import { MapPin, ArrowRight, Clock, Search, Check, ChevronsUpDown } from "lucide-react"
@@ -9,6 +8,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
+
+// Memoize origins outside the component to avoid recalculation on every render
+const memoizedOrigens = Object.keys(busSchedules).sort()
 
 export default function HomeContent() {
   const [origem, setOrigem] = useState<string>("")
@@ -19,15 +21,16 @@ export default function HomeContent() {
   const [openOrigem, setOpenOrigem] = useState(false)
   const [openDestino, setOpenDestino] = useState(false)
 
-  // Lista de cidades de origem
-  const origens = Object.keys(busSchedules).sort()
+  // React 18 Transition for smooth performance (Fixes INP)
+  const [isPending, startTransition] = useTransition()
 
   // Atualiza destinos quando a origem muda
   useEffect(() => {
     if (origem) {
       const destinosDisponiveis = Object.keys(busSchedules[origem] || {}).sort()
       setDestinos(destinosDisponiveis)
-      // Se o destino atual não estiver na nova lista, reseta para o primeiro
+
+      // We don't use transition here as it's an effect, but we ensure it's efficient
       if (!destinosDisponiveis.includes(destino)) {
         setDestino(destinosDisponiveis[0] || "")
       }
@@ -46,6 +49,33 @@ export default function HomeContent() {
     }
   }, [origem, destino])
 
+  // Optimized Handlers using startTransition
+  const handleOrigemSelect = (value: string) => {
+    startTransition(() => {
+      setOrigem(value)
+      setOpenOrigem(false)
+    })
+  }
+
+  const handleDestinoSelect = (value: string) => {
+    startTransition(() => {
+      setDestino(value)
+      setOpenDestino(false)
+    })
+  }
+
+  const handleOpenOrigemChange = (open: boolean) => {
+    startTransition(() => {
+      setOpenOrigem(open)
+    })
+  }
+
+  const handleOpenDestinoChange = (open: boolean) => {
+    startTransition(() => {
+      setOpenDestino(open)
+    })
+  }
+
   return (
     <div className="space-y-8">
       {/* Mobile-optimized Searchable Selectors */}
@@ -54,13 +84,16 @@ export default function HomeContent() {
           <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
             Saindo de
           </Label>
-          <Popover open={openOrigem} onOpenChange={setOpenOrigem}>
+          <Popover open={openOrigem} onOpenChange={handleOpenOrigemChange}>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 role="combobox"
                 aria-expanded={openOrigem}
-                className="w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between"
+                className={cn(
+                  "w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between",
+                  isPending && "opacity-80 cursor-wait"
+                )}
               >
                 <div className="flex items-center gap-4 min-w-0">
                   <MapPin className="text-primary flex-shrink-0" size={18} strokeWidth={2.5} />
@@ -77,14 +110,11 @@ export default function HomeContent() {
                 <CommandList className="max-h-[300px] overflow-y-auto scrollbar-hide">
                   <CommandEmpty className="py-6 text-center text-sm font-medium text-muted-foreground">Cidade não encontrada.</CommandEmpty>
                   <CommandGroup>
-                    {origens.map((cidade) => (
+                    {memoizedOrigens.map((cidade) => (
                       <CommandItem
                         key={cidade}
                         value={cidade}
-                        onSelect={(currentValue) => {
-                          setOrigem(currentValue === origem ? "" : currentValue)
-                          setOpenOrigem(false)
-                        }}
+                        onSelect={handleOrigemSelect}
                         className="py-4 px-4 text-base font-bold flex items-center justify-between cursor-pointer"
                       >
                         {cidade}
@@ -113,14 +143,17 @@ export default function HomeContent() {
           <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
             Indo para
           </Label>
-          <Popover open={openDestino} onOpenChange={setOpenDestino}>
+          <Popover open={openDestino} onOpenChange={handleOpenDestinoChange}>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 role="combobox"
                 aria-expanded={openDestino}
                 disabled={!origem}
-                className="w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between disabled:opacity-60"
+                className={cn(
+                  "w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between disabled:opacity-60",
+                  isPending && "opacity-80"
+                )}
               >
                 <div className="flex items-center gap-4 min-w-0">
                   <MapPin className="text-primary flex-shrink-0 rotate-180" size={18} strokeWidth={2.5} />
@@ -141,10 +174,7 @@ export default function HomeContent() {
                       <CommandItem
                         key={cidade}
                         value={cidade}
-                        onSelect={(currentValue) => {
-                          setDestino(currentValue === destino ? "" : currentValue)
-                          setOpenDestino(false)
-                        }}
+                        onSelect={handleDestinoSelect}
                         className="py-4 px-4 text-base font-bold flex items-center justify-between cursor-pointer"
                       >
                         {cidade}
