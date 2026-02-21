@@ -1,17 +1,23 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Label } from "@/components/ui/label"
 import { busSchedules } from "@/lib/bus-data"
-import { MapPin, ArrowRight, Clock, Search } from "lucide-react"
+import { MapPin, ArrowRight, Clock, Search, Check, ChevronsUpDown } from "lucide-react"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { cn } from "@/lib/utils"
 
 export default function HomeContent() {
   const [origem, setOrigem] = useState<string>("")
   const [destino, setDestino] = useState<string>("")
   const [destinos, setDestinos] = useState<string[]>([])
   const [horariosFiltrados, setHorariosFiltrados] = useState<string[]>([])
+
+  const [openOrigem, setOpenOrigem] = useState(false)
+  const [openDestino, setOpenDestino] = useState(false)
 
   // Lista de cidades de origem
   const origens = Object.keys(busSchedules).sort()
@@ -21,7 +27,10 @@ export default function HomeContent() {
     if (origem) {
       const destinosDisponiveis = Object.keys(busSchedules[origem] || {}).sort()
       setDestinos(destinosDisponiveis)
-      setDestino(destinosDisponiveis[0] || "")
+      // Se o destino atual não estiver na nova lista, reseta para o primeiro
+      if (!destinosDisponiveis.includes(destino)) {
+        setDestino(destinosDisponiveis[0] || "")
+      }
     } else {
       setDestinos([])
       setDestino("")
@@ -39,29 +48,59 @@ export default function HomeContent() {
 
   return (
     <div className="space-y-8">
-      {/* Mobile-optimized Selectors */}
+      {/* Mobile-optimized Searchable Selectors */}
       <div className="grid grid-cols-1 gap-4 relative">
         <div className="space-y-2">
-          <Label htmlFor="origem" className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
+          <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
             Saindo de
           </Label>
-          <div className="relative">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-primary z-10">
-              <MapPin size={18} strokeWidth={2.5} />
-            </div>
-            <Select value={origem} onValueChange={setOrigem}>
-              <SelectTrigger id="origem" className="h-16 pl-12 bg-background border-border/40 rounded-2xl shadow-sm focus:ring-primary/20 transition-all text-base font-bold">
-                <SelectValue placeholder="Cidade de Origem" />
-              </SelectTrigger>
-              <SelectContent className="rounded-2xl border-border/50 shadow-2xl max-h-[300px]">
-                {origens.map((cidade) => (
-                  <SelectItem key={cidade} value={cidade} className="py-4 text-base focus:bg-primary/5">
-                    {cidade}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Popover open={openOrigem} onOpenChange={setOpenOrigem}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={openOrigem}
+                className="w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between"
+              >
+                <div className="flex items-center gap-4 min-w-0">
+                  <MapPin className="text-primary flex-shrink-0" size={18} strokeWidth={2.5} />
+                  <span className={cn("text-base font-bold truncate", !origem && "text-muted-foreground")}>
+                    {origem ? origem : "Cidade de Origem"}
+                  </span>
+                </div>
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-border/50 shadow-2xl overflow-hidden" align="start">
+              <Command className="w-full">
+                <CommandInput placeholder="Pesquisar cidade..." className="h-12 border-none focus:ring-0 font-bold" />
+                <CommandList className="max-h-[300px] overflow-y-auto scrollbar-hide">
+                  <CommandEmpty className="py-6 text-center text-sm font-medium text-muted-foreground">Cidade não encontrada.</CommandEmpty>
+                  <CommandGroup>
+                    {origens.map((cidade) => (
+                      <CommandItem
+                        key={cidade}
+                        value={cidade}
+                        onSelect={(currentValue) => {
+                          setOrigem(currentValue === origem ? "" : currentValue)
+                          setOpenOrigem(false)
+                        }}
+                        className="py-4 px-4 text-base font-bold flex items-center justify-between cursor-pointer"
+                      >
+                        {cidade}
+                        <Check
+                          className={cn(
+                            "h-4 w-4 text-primary",
+                            origem === cidade ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div className="flex justify-center -my-2 z-10">
@@ -71,26 +110,57 @@ export default function HomeContent() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="destino" className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
+          <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 ml-1">
             Indo para
           </Label>
-          <div className="relative">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-primary z-10">
-              <MapPin size={18} strokeWidth={2.5} className="rotate-180" />
-            </div>
-            <Select value={destino} onValueChange={setDestino} disabled={!origem}>
-              <SelectTrigger id="destino" className="h-16 pl-12 bg-background border-border/40 rounded-2xl shadow-sm focus:ring-primary/20 transition-all text-base font-bold disabled:opacity-60">
-                <SelectValue placeholder="Cidade de Destino" />
-              </SelectTrigger>
-              <SelectContent className="rounded-2xl border-border/50 shadow-2xl max-h-[300px]">
-                {destinos.map((cidade) => (
-                  <SelectItem key={cidade} value={cidade} className="py-4 text-base focus:bg-primary/5">
-                    {cidade}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Popover open={openDestino} onOpenChange={setOpenDestino}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={openDestino}
+                disabled={!origem}
+                className="w-full h-16 px-4 bg-background border-border/40 rounded-2xl shadow-sm hover:bg-background/80 transition-all flex items-center justify-between disabled:opacity-60"
+              >
+                <div className="flex items-center gap-4 min-w-0">
+                  <MapPin className="text-primary flex-shrink-0 rotate-180" size={18} strokeWidth={2.5} />
+                  <span className={cn("text-base font-bold truncate", !destino && "text-muted-foreground")}>
+                    {destino ? destino : "Cidade de Destino"}
+                  </span>
+                </div>
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-border/50 shadow-2xl overflow-hidden" align="start">
+              <Command className="w-full">
+                <CommandInput placeholder="Pesquisar destino..." className="h-12 border-none focus:ring-0 font-bold" />
+                <CommandList className="max-h-[300px] overflow-y-auto scrollbar-hide">
+                  <CommandEmpty className="py-6 text-center text-sm font-medium text-muted-foreground">Destino não encontrado.</CommandEmpty>
+                  <CommandGroup>
+                    {destinos.map((cidade) => (
+                      <CommandItem
+                        key={cidade}
+                        value={cidade}
+                        onSelect={(currentValue) => {
+                          setDestino(currentValue === destino ? "" : currentValue)
+                          setOpenDestino(false)
+                        }}
+                        className="py-4 px-4 text-base font-bold flex items-center justify-between cursor-pointer"
+                      >
+                        {cidade}
+                        <Check
+                          className={cn(
+                            "h-4 w-4 text-primary",
+                            destino === cidade ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
 
