@@ -39,19 +39,19 @@ export default function Home() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-64 bg-primary/10 blur-[100px] rounded-full -z-10 opacity-70" />
 
       <nav className="sticky top-0 z-50 glass border-b border-border/5">
-        <div className="container mx-auto px-5 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <div className="relative w-32 h-10 md:w-48 md:h-16 transition-transform hover:scale-105 duration-300">
-              <Image
-                src="/logo_cabeçalho.png"
-                alt="Vou de Van Logo"
-                fill
-                className="object-contain object-left"
-                priority
-              />
-            </div>
+        <div className="container mx-auto px-5 py-6 md:py-10 flex flex-col items-center justify-center relative">
+          <div className="relative w-56 h-16 md:w-96 md:h-32 transition-all duration-1000 hover:scale-105">
+            <Image
+              src="/logo_cabeçalho.png"
+              alt="Vou de Van Logo"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
-          <DynamicDarkModeToggle />
+          <div className="absolute right-5 top-1/2 -translate-y-1/2 md:right-12">
+            <DynamicDarkModeToggle />
+          </div>
         </div>
       </nav>
 
