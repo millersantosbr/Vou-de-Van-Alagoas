@@ -27,30 +27,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "16:30",
       "17:00"
     ],
-    "DELMIRO GOUVEIA (VIA LAGOA DAS PEDRAS)": [
-      "06:00",
-      "06:30",
-      "07:00",
-      "07:30",
-      "08:00",
-      "08:30",
-      "09:00",
-      "09:30",
-      "10:00",
-      "10:30",
-      "11:00",
-      "11:30",
-      "12:00",
-      "12:30",
-      "13:10",
-      "13:50",
-      "14:30",
-      "15:00",
-      "15:30",
-      "16:00",
-      "16:30",
-      "17:00"
-    ],
     "MACEIO": [
       "04:00",
       "13:00"
@@ -106,6 +82,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "08:30",
       "09:30",
       "11:00",
+      "12:00",
       "13:00",
       "14:00",
       "15:00"
@@ -144,9 +121,12 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "05:30",
       "08:40"
     ],
-    "MACEIO ( VIA LITORAL)": [
+    "MACEIO": [
+      "05:00",
       "05:15",
+      "05:30",
       "05:40",
+      "05:55",
       "06:05",
       "06:30",
       "06:55",
@@ -166,12 +146,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "12:45",
       "13:10",
       "13:35",
-      "14:00"
-    ],
-    "MACEIO (VIA TAQUARANA)": [
-      "05:00",
-      "05:30",
-      "05:55",
+      "14:00",
       "15:20"
     ],
     "MAJOR ISIDORO": [
@@ -278,13 +253,8 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "16:00"
     ]
   },
-  "ARAPIRACA (VIA BONSUCESSO)": {
-    "CORURIPE": [
-      "12:00"
-    ]
-  },
   "ATALAIA": {
-    "MACEIO (VIA POLO)": [
+    "MACEIO": [
       "04:10",
       "04:30",
       "04:50",
@@ -308,7 +278,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "11:30",
       "11:50"
     ],
-    "MACEIO METROPOLITANA (VIA CHA DO PILAR)": [
+    "MACEIO METROPOLITANA": [
       "04:00",
       "04:20",
       "04:40",
@@ -513,17 +483,15 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "04:40",
       "05:20",
       "06:00",
+      "06:25",
       "06:30",
       "09:00",
       "12:20",
       "12:40",
+      "13:00",
       "14:20",
       "15:00",
       "15:40"
-    ],
-    "MACEIO (VIA AL": [
-      "06:25",
-      "13:00"
     ],
     "VICOSA": [
       "06:20",
@@ -693,35 +661,33 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     ]
   },
   "COQUEIRO SECO": {
-    "MACEIO ( VIA LITORAL)": [
-      "05:30",
-      "08:00",
-      "11:30",
-      "14:10",
-      "16:20"
-    ],
-    "MACEIO (VIA SATUBA)": [
+    "MACEIO": [
       "04:20",
       "04:40",
+      "05:30",
       "05:40",
       "06:40",
       "07:30",
       "07:40",
+      "08:00",
       "08:20",
       "08:50",
       "09:25",
       "09:30",
       "09:40",
       "10:40",
+      "11:30",
       "11:50",
       "12:50",
       "12:55",
       "13:40",
       "14:00",
+      "14:10",
       "14:30",
       "15:00",
       "15:30",
       "16:00",
+      "16:20",
       "16:40",
       "17:15",
       "17:20"
@@ -741,9 +707,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "17:00",
       "18:00"
     ],
-    "ARAPIRACA (VIA BONSUCESSO)": [
-      "05:30"
-    ],
     "MACEIO": [
       "05:45",
       "08:40",
@@ -753,14 +716,12 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "16:10"
     ],
     "PENEDO": [
+      "05:30",
       "06:50",
       "09:40",
       "12:05",
+      "13:30",
       "16:00"
-    ],
-    "PENEDO (VIA BOLIVAR)": [
-      "05:30",
-      "13:30"
     ],
     "TEOTONIO VILELA": [
       "07:25",
@@ -871,9 +832,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "04:00",
       "04:30",
       "05:30",
-      "06:15"
-    ],
-    "MACEIO (VIA TAQUARANA)": [
+      "06:15",
       "15:30"
     ],
     "MARAVILHA": [
@@ -1342,6 +1301,12 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "13:30",
       "16:00"
     ],
+    "ARAPIRACA": [
+      "05:15",
+      "08:45",
+      "13:00",
+      "14:40"
+    ],
     "BARRA DE SAO MIGUEL": [
       "05:50",
       "06:10",
@@ -1365,9 +1330,11 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "08:20",
       "08:40",
       "10:20",
+      "10:40",
       "12:00",
       "15:00",
       "15:20",
+      "16:55",
       "17:00",
       "17:30"
     ],
@@ -1401,6 +1368,28 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "06:50",
       "09:45"
     ],
+    "COQUEIRO SECO": [
+      "06:00",
+      "06:50",
+      "07:00",
+      "07:10",
+      "08:00",
+      "08:10",
+      "09:00",
+      "09:10",
+      "09:20",
+      "10:00",
+      "10:10",
+      "11:10",
+      "11:15",
+      "12:10",
+      "12:50",
+      "13:00",
+      "14:55",
+      "15:10",
+      "17:20",
+      "19:00"
+    ],
     "CORURIPE": [
       "06:15",
       "07:05",
@@ -1410,6 +1399,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "14:50"
     ],
     "DELMIRO GOUVEIA": [
+      "05:00",
       "11:45",
       "12:20",
       "13:00",
@@ -1481,6 +1471,25 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "15:30",
       "16:40"
     ],
+    "PENEDO": [
+      "05:00",
+      "05:45",
+      "05:50",
+      "06:40",
+      "07:30",
+      "08:20",
+      "09:10",
+      "09:50"
+    ],
+    "PILAR": [
+      "07:00",
+      "08:00",
+      "11:15",
+      "13:00",
+      "13:10",
+      "16:00",
+      "16:50"
+    ],
     "PIRANHAS": [
       "11:30",
       "12:50"
@@ -1502,10 +1511,18 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     "QUEBRANGULO": [
       "13:00"
     ],
+    "SANTA CRUZ DO DESERTO": [
+      "13:00"
+    ],
     "SANTA LUZIA DO NORTE": [
+      "06:50",
+      "07:00",
       "07:50",
+      "10:30",
       "11:10",
       "14:20",
+      "15:00",
+      "17:30",
       "18:00"
     ],
     "SANTANA DO IPANEMA": [
@@ -1558,92 +1575,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "13:40",
       "14:00",
       "14:20"
-    ]
-  },
-  "MACEIO ( VIA AL 101 SUL)": {
-    "PENEDO": [
-      "05:00",
-      "05:50",
-      "06:40",
-      "07:30",
-      "08:20",
-      "09:10"
-    ]
-  },
-  "MACEIO ( VIA BR101)": {
-    "PENEDO": [
-      "05:45",
-      "09:50"
-    ]
-  },
-  "MACEIO ( VIA LITORAL)": {
-    "COQUEIRO SECO": [
-      "06:50",
-      "07:00",
-      "08:10",
-      "09:20",
-      "10:00",
-      "12:50",
-      "13:00",
-      "14:55",
-      "15:10",
-      "17:20"
-    ]
-  },
-  "MACEIO (VIA AL": {
-    "CAJUEIRO": [
-      "10:40",
-      "16:55"
-    ]
-  },
-  "MACEIO (VIA ARAPIRACA)": {
-    "SANTA CRUZ DO DESERTO": [
-      "13:00"
-    ]
-  },
-  "MACEIO (VIA POLO)": {
-    "PILAR": [
-      "07:00",
-      "08:00",
-      "11:15",
-      "13:00",
-      "13:10",
-      "16:00",
-      "16:50"
-    ]
-  },
-  "MACEIO (VIA SATUBA)": {
-    "COQUEIRO SECO": [
-      "06:00",
-      "07:10",
-      "08:00",
-      "08:10",
-      "09:00",
-      "09:10",
-      "10:10",
-      "11:10",
-      "11:15",
-      "12:10",
-      "19:00"
-    ],
-    "SANTA LUZIA DO NORTE": [
-      "06:50",
-      "07:00",
-      "10:30",
-      "15:00",
-      "17:30",
-      "18:00"
-    ]
-  },
-  "MACEIO (VIA TAQUARANA)": {
-    "ARAPIRACA": [
-      "05:15",
-      "08:45",
-      "13:00",
-      "14:40"
-    ],
-    "DELMIRO GOUVEIA": [
-      "05:00"
     ]
   },
   "MACEO": {
@@ -1805,7 +1736,7 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     ]
   },
   "MASSAGUEIRA": {
-    "MACEIO (VIA BARRA NOVA)": [
+    "MACEIO": [
       "05:30",
       "06:10",
       "06:50",
@@ -2231,6 +2162,10 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "15:00",
       "16:30"
     ],
+    "QUEBRANGULO": [
+      "09:00",
+      "15:30"
+    ],
     "SANTANA DO IPANEMA": [
       "05:40",
       "06:20",
@@ -2251,12 +2186,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     "TANQUE D'ARCA": [
       "11:30",
       "12:30"
-    ]
-  },
-  "PALMEIRA DOS INDIOS (VIA MAR VERMELHO)": {
-    "QUEBRANGULO": [
-      "09:00",
-      "15:30"
     ]
   },
   "PAO DE ACUCAR": {
@@ -2376,7 +2305,9 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     "CORURIPE": [
       "07:00",
       "10:25",
+      "11:00",
       "13:35",
+      "15:30",
       "18:00"
     ],
     "FELIZ DESERTO": [
@@ -2411,11 +2342,13 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "10:15",
       "15:30"
     ],
-    "MACEIO ( VIA AL 101 SUL)": [
+    "MACEIO": [
       "05:00",
       "05:30",
+      "05:45",
       "06:00",
       "07:30",
+      "08:10",
       "08:20",
       "09:10",
       "10:00",
@@ -2426,10 +2359,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "15:00",
       "16:00",
       "17:00"
-    ],
-    "MACEIO ( VIA BR101)": [
-      "05:45",
-      "08:10"
     ],
     "PORTO REAL DO COLEGIO": [
       "05:50",
@@ -2451,12 +2380,6 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     ],
     "TEOTONIO VILELA": [
       "10:40"
-    ]
-  },
-  "PENEDO (VIA BOLIVAR)": {
-    "CORURIPE": [
-      "11:00",
-      "15:30"
     ]
   },
   "PIACABUCU": {
@@ -2489,19 +2412,12 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     ]
   },
   "PILAR": {
-    "MACEIO (VIA POLO)": [
-      "05:30",
-      "06:20",
-      "08:30",
-      "08:35",
-      "09:15",
-      "13:00",
-      "15:20"
-    ],
-    "MACEIO (VIA SATUBA)": [
+    "MACEIO": [
       "05:00",
+      "05:30",
       "05:40",
       "06:15",
+      "06:20",
       "06:30",
       "06:50",
       "07:05",
@@ -2509,6 +2425,8 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "07:55",
       "08:10",
       "08:25",
+      "08:30",
+      "08:35",
       "08:55",
       "09:15",
       "09:45",
@@ -2519,8 +2437,10 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "11:45",
       "12:20",
       "12:40",
+      "13:00",
       "13:05",
-      "13:35"
+      "13:35",
+      "15:20"
     ]
   },
   "PIRANHAS": {
@@ -2665,37 +2585,13 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
     "MACEIO": [
       "05:00"
     ],
-    "PALMEIRA DOS INDIOS (VIA MAR VERMELHO)": [
+    "PALMEIRA DOS INDIOS": [
       "06:00",
       "13:00"
     ]
   },
   "RIO LARGO": {
-    "MACEIO ( VIA MATA DO ROLO)": [
-      "05:00",
-      "05:20",
-      "05:40",
-      "06:00",
-      "06:20",
-      "06:40",
-      "07:00",
-      "07:20",
-      "07:40",
-      "08:00",
-      "08:20",
-      "08:40",
-      "09:00",
-      "09:20",
-      "09:40",
-      "10:00",
-      "10:20",
-      "10:40",
-      "11:00",
-      "11:20",
-      "11:40",
-      "12:00"
-    ],
-    "MACEIO (VIA GUSTAVO PAIVA)": [
+    "MACEIO": [
       "05:00",
       "05:20",
       "05:40",
@@ -2739,21 +2635,19 @@ export const busSchedules: Record<string, Record<string, string[]>> = {
       "10:50",
       "11:00"
     ],
-    "MACEIO (VIA ARAPIRACA)": [
+    "MACEIO": [
       "04:00"
     ]
   },
   "SANTA LUZIA DO NORTE": {
     "MACEIO": [
-      "06:30",
-      "09:00",
-      "12:30",
-      "15:30"
-    ],
-    "MACEIO (VIA SATUBA)": [
       "05:40",
+      "06:30",
       "08:50",
+      "09:00",
       "12:15",
+      "12:30",
+      "15:30",
       "16:15"
     ]
   },
