@@ -1,140 +1,260 @@
 import Link from "next/link"
-import { ArrowLeft, Clock, MapPin } from "lucide-react"
+import { notFound } from "next/navigation"
+import { ArrowLeft, Clock, MapPin, Shield, Route as RouteIcon, Info, Calendar, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TimetableHeader } from "@/components/timetable-header"
+import { todasAsLinhas, type LinhaVan } from "@/lib/bus-data"
 
-export default function RoutePage({ params }: { params: { id: string } }) {
-  // In a real app, you would fetch the route data based on the ID
-  const route = {
-    id: params.id,
-    number: "42",
-    name: "Central Station - University",
-    type: "Bus",
-    color: "bg-blue-500",
-    stops: [
-      { id: "1", name: "Central Station", time: "5:00 AM - 11:30 PM" },
-      { id: "2", name: "City Hall", time: "5:05 AM - 11:35 PM" },
-      { id: "3", name: "Market Square", time: "5:10 AM - 11:40 PM" },
-      { id: "4", name: "Library", time: "5:15 AM - 11:45 PM" },
-      { id: "5", name: "Science Park", time: "5:20 AM - 11:50 PM" },
-      { id: "6", name: "University", time: "5:25 AM - 11:55 PM" },
-    ],
-    schedule: [
-      { id: "1", departure: "5:00 AM", arrival: "5:25 AM", frequency: "Every 10 min" },
-      { id: "2", departure: "6:00 AM", arrival: "6:25 AM", frequency: "Every 8 min" },
-      { id: "3", departure: "7:00 AM", arrival: "7:25 AM", frequency: "Every 5 min" },
-      { id: "4", departure: "8:00 AM", arrival: "8:25 AM", frequency: "Every 5 min" },
-      { id: "5", departure: "9:00 AM", arrival: "9:25 AM", frequency: "Every 8 min" },
-      { id: "6", departure: "10:00 AM", arrival: "10:25 AM", frequency: "Every 10 min" },
-    ],
+interface RoutePageProps {
+  params: Promise<{ id: string }> | { id: string }
+}
+
+export default async function RoutePage({ params }: RoutePageProps) {
+  const resolvedParams = await params
+  const id = decodeURIComponent(resolvedParams.id)
+
+  const linha: LinhaVan | undefined = todasAsLinhas.find(
+    (l) => l.codigo === id || l.nome_linha.toLowerCase() === id.toLowerCase()
+  )
+
+  if (!linha) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <TimetableHeader />
+        <main className="container mx-auto px-4 py-20 flex-1 flex flex-col items-center justify-center text-center">
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary">
+            <RouteIcon size={32} />
+          </div>
+          <h1 className="text-2xl font-black text-foreground mb-2">Linha não encontrada</h1>
+          <p className="text-muted-foreground text-sm max-w-md mb-6">
+            Não encontramos a linha ARSAL especificada ({id}). Verifique o código e tente novamente.
+          </p>
+          <Button asChild className="rounded-xl font-bold">
+            <Link href="/">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar ao Início
+            </Link>
+          </Button>
+        </main>
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen bg-background">
       <TimetableHeader />
-      <main className="container mx-auto px-4 py-6">
-        <div className="max-w-5xl mx-auto space-y-6">
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Top Bar */}
+          <div className="flex items-center justify-between">
+            <Button variant="ghost" size="sm" asChild className="rounded-xl font-bold">
+              <Link href="/" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4 text-primary" />
+                <span>Voltar à busca</span>
               </Link>
             </Button>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div
-              className={`w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-2xl ${route.color}`}
-            >
-              {route.number}
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">{route.name}</h1>
-              <p className="text-muted-foreground">{route.type}</p>
+            <div className="flex items-center gap-2 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[10px] font-black text-green-600 uppercase tracking-widest">
+                ARSAL Oficial
+              </span>
             </div>
           </div>
 
-          <Tabs defaultValue="timetable" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-4">
-              <TabsTrigger value="timetable">Timetable</TabsTrigger>
-              <TabsTrigger value="stops">Stops</TabsTrigger>
-              <TabsTrigger value="map">Route Map</TabsTrigger>
+          {/* Hero Banner da Linha */}
+          <div className="bg-card border border-border/60 p-6 md:p-8 rounded-[2.5rem] shadow-sm relative overflow-hidden">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-black bg-primary text-primary-foreground px-3.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                    <Shield size={12} /> Linha {linha.codigo}
+                  </span>
+                  {linha.area && (
+                    <span className="text-xs font-black bg-muted text-muted-foreground px-3 py-1 rounded-full uppercase tracking-wider">
+                      {linha.area}
+                    </span>
+                  )}
+                  {linha.extensao && (
+                    <span className="text-xs font-bold bg-muted/60 text-muted-foreground px-3 py-1 rounded-full">
+                      📍 {linha.extensao}
+                    </span>
+                  )}
+                </div>
+
+                <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground">
+                  {linha.nome_linha}
+                </h1>
+
+                {linha.via && (
+                  <p className="text-sm font-bold text-primary flex items-center gap-1.5">
+                    <RouteIcon size={16} />
+                    Via {linha.via}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col items-start md:items-end justify-center bg-muted/30 p-4 rounded-2xl border border-border/30">
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Tipo de Serviço</span>
+                <span className="text-xs font-black text-foreground">{linha.servico || "Transporte Complementar"}</span>
+                {linha.viagens_semana && (
+                  <span className="text-[10px] text-muted-foreground mt-1">
+                    {linha.viagens_semana} viagens semanais autorizadas
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Tabs com Horários e Itinerário */}
+          <Tabs defaultValue="horarios" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 p-1.5 rounded-2xl bg-muted/50 border border-border/40 mb-6">
+              <TabsTrigger value="horarios" className="rounded-xl font-bold text-xs md:text-sm py-2.5">
+                Quadro de Horários
+              </TabsTrigger>
+              <TabsTrigger value="itinerario" className="rounded-xl font-bold text-xs md:text-sm py-2.5">
+                Itinerário & Regulamentação
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="timetable" className="space-y-4">
-              <div className="rounded-lg border bg-card p-6 shadow-sm">
-                <h2 className="text-xl font-semibold mb-4">Weekday Schedule</h2>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Departure</TableHead>
-                      <TableHead>Arrival</TableHead>
-                      <TableHead>Frequency</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {route.schedule.map((time) => (
-                      <TableRow key={time.id}>
-                        <TableCell className="font-medium">{time.departure}</TableCell>
-                        <TableCell>{time.arrival}</TableCell>
-                        <TableCell>{time.frequency}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-
-              <div className="flex justify-between">
-                <Button variant="outline">
-                  <Clock className="mr-2 h-4 w-4" />
-                  Earlier Times
-                </Button>
-                <Button variant="outline">
-                  Later Times
-                  <Clock className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="stops" className="space-y-4">
-              <div className="rounded-lg border bg-card p-6 shadow-sm">
-                <h2 className="text-xl font-semibold mb-4">Route Stops</h2>
-                <div className="space-y-4">
-                  {route.stops.map((stop, index) => (
-                    <div key={stop.id} className="flex items-start">
-                      <div className="relative mr-4">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${route.color}`}
-                        >
-                          {index + 1}
-                        </div>
-                        {index < route.stops.length - 1 && (
-                          <div className={`absolute top-8 left-1/2 w-0.5 h-12 -translate-x-1/2 ${route.color}`} />
-                        )}
-                      </div>
-                      <div className="flex-1 pb-8">
-                        <div className="font-medium">{stop.name}</div>
-                        <div className="text-sm text-muted-foreground">{stop.time}</div>
-                        <Button variant="ghost" size="sm" className="mt-1 h-8 px-2">
-                          <MapPin className="mr-1 h-3 w-3" />
-                          View Stop
-                        </Button>
-                      </div>
+            {/* TAB HORÁRIOS */}
+            <TabsContent value="horarios" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Saídas da Origem */}
+                <div className="bg-card border border-border/60 p-6 rounded-[2rem] shadow-sm space-y-4">
+                  <div className="flex items-center gap-2 pb-3 border-b border-border/20">
+                    <MapPin className="text-primary" size={18} />
+                    <div>
+                      <h3 className="font-black text-base text-foreground">Saídas de {linha.origem}</h3>
+                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.destino}</p>
                     </div>
-                  ))}
+                  </div>
+
+                  {linha.saidas_origem && linha.saidas_origem.length > 0 ? (
+                    <div className="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+                      {linha.saidas_origem.map((saida, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3.5 rounded-xl bg-muted/30 border border-border/30 hover:bg-muted/60 transition-colors"
+                        >
+                          <span className="text-2xl font-black text-primary tracking-tight">
+                            {saida.horario}
+                          </span>
+                          <div className="flex flex-wrap gap-1 justify-end max-w-[150px]">
+                            {saida.dias.length === 7 ? (
+                              <span className="text-[10px] font-bold bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-md">
+                                Diariamente
+                              </span>
+                            ) : (
+                              saida.dias.map((d) => (
+                                <span key={d} className="text-[9px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md">
+                                  {d.slice(0, 3)}
+                                </span>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-muted-foreground py-6 text-center">Nenhum horário cadastrado</p>
+                  )}
+                </div>
+
+                {/* Saídas do Destino (Volta) */}
+                <div className="bg-card border border-border/60 p-6 rounded-[2rem] shadow-sm space-y-4">
+                  <div className="flex items-center gap-2 pb-3 border-b border-border/20">
+                    <MapPin className="text-blue-500 rotate-180" size={18} />
+                    <div>
+                      <h3 className="font-black text-base text-foreground">Saídas de {linha.destino}</h3>
+                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.origem}</p>
+                    </div>
+                  </div>
+
+                  {linha.saidas_destino && linha.saidas_destino.length > 0 ? (
+                    <div className="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+                      {linha.saidas_destino.map((saida, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3.5 rounded-xl bg-muted/30 border border-border/30 hover:bg-muted/60 transition-colors"
+                        >
+                          <span className="text-2xl font-black text-blue-500 tracking-tight">
+                            {saida.horario}
+                          </span>
+                          <div className="flex flex-wrap gap-1 justify-end max-w-[150px]">
+                            {saida.dias.length === 7 ? (
+                              <span className="text-[10px] font-bold bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-md">
+                                Diariamente
+                              </span>
+                            ) : (
+                              saida.dias.map((d) => (
+                                <span key={d} className="text-[9px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md">
+                                  {d.slice(0, 3)}
+                                </span>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-muted-foreground py-6 text-center">Nenhum horário cadastrado</p>
+                  )}
                 </div>
               </div>
             </TabsContent>
 
-            <TabsContent value="map">
-              <div className="rounded-lg border bg-card p-6 shadow-sm">
-                <h2 className="text-xl font-semibold mb-4">Route Map</h2>
-                <div className="aspect-video bg-muted rounded-md flex items-center justify-center">
-                  <p className="text-muted-foreground">Route map visualization would be displayed here</p>
-                </div>
+            {/* TAB ITINERÁRIO & REGULAMENTAÇÃO */}
+            <TabsContent value="itinerario" className="space-y-6">
+              <div className="bg-card border border-border/60 p-6 md:p-8 rounded-[2rem] shadow-sm space-y-6">
+                {linha.itinerario?.ida && (
+                  <div className="space-y-1.5">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
+                      <RouteIcon size={14} className="text-primary" />
+                      Itinerário de Ida
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed pl-6">
+                      {linha.itinerario.ida}
+                    </p>
+                  </div>
+                )}
+
+                {linha.itinerario?.volta && (
+                  <div className="space-y-1.5">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
+                      <RouteIcon size={14} className="text-blue-500" />
+                      Itinerário de Volta
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed pl-6">
+                      {linha.itinerario.volta}
+                    </p>
+                  </div>
+                )}
+
+                {linha.itinerario?.seccionamentos && (
+                  <div className="space-y-1.5 pt-3 border-t border-border/20">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
+                      <MapPin size={14} className="text-amber-500" />
+                      Seccionamentos / Paradas Autorizadas
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed pl-6">
+                      {linha.itinerario.seccionamentos}
+                    </p>
+                  </div>
+                )}
+
+                {linha.itinerario?.observacoes && (
+                  <div className="space-y-1.5 pt-3 border-t border-border/20">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
+                      <Info size={14} className="text-primary" />
+                      Observações & Portarias ARSAL
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed pl-6">
+                      {linha.itinerario.observacoes}
+                    </p>
+                  </div>
+                )}
               </div>
             </TabsContent>
           </Tabs>
@@ -143,4 +263,3 @@ export default function RoutePage({ params }: { params: { id: string } }) {
     </div>
   )
 }
-

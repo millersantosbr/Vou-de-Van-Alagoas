@@ -17,18 +17,17 @@ const sourceSans3 = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: "Vou de Van - Alagoas",
-  description: "Consulte os horários das vans em Alagoas",
+  title: "Vou de Van - Alagoas | Horários Oficiais das Vans Intermunicipais",
+  description: "Consulte horários, rotas, vias e paradas das vans intermunicipais em todo o estado de Alagoas (Dados Oficiais ARSAL).",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/icon.png", sizes: "any" },
+      { url: "/logoicon.webp", sizes: "any" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/logoicon.webp", sizes: "180x180", type: "image/webp" }],
   },
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -39,10 +38,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning className={`${outfit.variable} ${sourceSans3.variable}`}>
       <head>
-        <link rel="icon" href="/icon.png" />
-        <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
-        <link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="icon" href="/logoicon.webp" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Vou de Van" />
@@ -54,7 +50,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-
-import './globals.css'
