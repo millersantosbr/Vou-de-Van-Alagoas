@@ -11,6 +11,12 @@ interface RoutePageProps {
   params: Promise<{ id: string }> | { id: string }
 }
 
+export async function generateStaticParams() {
+  return todasAsLinhas.map((linha) => ({
+    id: linha.codigo,
+  }))
+}
+
 export default async function RoutePage({ params }: RoutePageProps) {
   const resolvedParams = await params
   const id = decodeURIComponent(resolvedParams.id)
