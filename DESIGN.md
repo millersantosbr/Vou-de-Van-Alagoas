@@ -35,7 +35,10 @@ O **Vou de Van - Alagoas** é a plataforma de consulta de horários e rotas de t
 
 ---
 
-## 5. Stitch Project Info
+## 5. Telas Geradas no Stitch (Google Cloud)
 - **Project ID**: `123300281637714776`
 - **Design System Asset**: `assets/5493946063444212141`
-- **Plataforma**: [Stitch with Google](https://stitch.withgoogle.com/)
+- **Telas Criadas**:
+  1. `73a7faf6eff646c8bcabe36ae12d31ed`: **Horários - Vou de Van** (Busca e Próximas Saídas)
+  2. `f7bfc5e0272149c99c23794822025065`: **Mapa de Pontos e Terminais** (Mapa Interativo com Bottom Sheet)
+  3. `24c506e8551f48ec8b1145228730082c`: **Info ARSAL - Regulamentação e Direitos** (Guia do Passageiro e Ouvidoria)
