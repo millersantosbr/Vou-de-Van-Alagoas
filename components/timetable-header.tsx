@@ -18,9 +18,9 @@ export function TimetableHeader() {
         </div>
 
         <Link href="/" className="flex items-center gap-2">
-          <div className="relative w-36 h-10">
+          <div className="relative w-40 h-11">
             <Image
-              src="/logo_cabeçalho.png"
+              src="/logonome.webp"
               alt="Vou de Van Logo"
               fill
               className="object-contain"

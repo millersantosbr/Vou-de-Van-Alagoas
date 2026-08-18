@@ -42,9 +42,9 @@ export default function Home() {
       {/* Top Navbar */}
       <nav className="sticky top-0 z-40 glass border-b border-border/10">
         <div className="container mx-auto px-5 py-4 md:py-6 flex items-center justify-between relative">
-          <div className="relative w-44 h-12 md:w-60 md:h-16 transition-all hover:scale-105 group flex items-center">
+          <div className="relative w-48 h-14 md:w-64 md:h-18 transition-all hover:scale-105 group flex items-center">
             <Image
-              src="/logo_cabeçalho.png"
+              src="/logonome.webp"
               alt="Vou de Van - Alagoas"
               fill
               className="object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_0_20px_rgba(0,86,210,0.3)]"
@@ -134,9 +134,9 @@ export default function Home() {
       {/* Footer */}
       <footer className="mt-16 md:mt-24 container mx-auto px-6 text-center border-t border-border/10 pt-16 pb-20 opacity-80">
         <div className="flex flex-col items-center space-y-6">
-          <div className="relative w-36 h-10 md:w-48 md:h-12 transition-transform hover:scale-105 duration-300">
+          <div className="relative w-44 h-12 md:w-56 md:h-16 transition-transform hover:scale-105 duration-300">
             <Image
-              src="/logo_cabeçalho.png"
+              src="/logonome.webp"
               alt="Vou de Van Logo"
               fill
               className="object-contain"
