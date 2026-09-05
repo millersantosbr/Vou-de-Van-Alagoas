@@ -42,25 +42,8 @@ export default function Home() {
       {/* 🌊 Hero Section com Identidade Oficial de Alagoas */}
       <section className="bg-gradient-to-b from-[#001438] via-[#0038A8] to-[#002b80] dark:from-[#030914] dark:via-[#051636] dark:to-[#081f4d] text-white pt-2 sm:pt-4 overflow-hidden relative">
         
-        {/* Desktop Top Header Bar (Clean & Professional) */}
-        <header className="hidden md:flex items-center justify-between container mx-auto px-6 py-3 relative z-30 border-b border-white/10">
-          <a href="#quadro-horarios" className="flex items-center gap-2 group">
-            <span className="text-white font-black text-lg tracking-tight group-hover:text-blue-200 transition-colors">
-              Vou de Van <span className="text-[#D62828] text-xs font-black px-1.5 py-0.5 rounded bg-white/15 ml-1">ALAGOAS</span>
-            </span>
-          </a>
-          <nav className="flex items-center gap-6 text-sm font-bold text-white/90">
-            <a href="#quadro-horarios" className="hover:text-white hover:underline underline-offset-4 transition-all">Horários</a>
-            <a href="#explorar-regiao" className="hover:text-white hover:underline underline-offset-4 transition-all">Pontos de Embarque</a>
-            <a href="#info-arsal" className="hover:text-white hover:underline underline-offset-4 transition-all">Guia ARSAL</a>
-            <div className="pl-3 border-l border-white/20">
-              <DynamicDarkModeToggle />
-            </div>
-          </nav>
-        </header>
-
-        {/* Mobile Top Dark Mode Toggle */}
-        <div className="md:hidden absolute right-4 top-4 z-30 flex items-center gap-2">
+        {/* Top Floating Dark Mode Toggle */}
+        <div className="absolute right-4 top-4 sm:right-6 sm:top-6 z-30 flex items-center gap-2">
           <DynamicDarkModeToggle />
         </div>
 
