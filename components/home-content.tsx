@@ -43,9 +43,9 @@ import { cn } from "@/lib/utils"
 
 export default function HomeContent() {
   const isMobile = useIsMobile()
-  const [origem, setOrigem] = useState<string>("")
-  const [destino, setDestino] = useState<string>("")
-  const [destinos, setDestinos] = useState<string[]>([])
+  const [origem, setOrigem] = useState<string>("Maceió")
+  const [destinos, setDestinos] = useState<string[]>(() => getDestinosDisponiveis("Maceió"))
+  const [destino, setDestino] = useState<string>("Arapiraca")
   const [viasDisponiveis, setViasDisponiveis] = useState<string[]>([])
   const [filtroVia, setFiltroVia] = useState<string>("todas")
   const [filtroDia, setFiltroDia] = useState<FiltroDia>("hoje")
