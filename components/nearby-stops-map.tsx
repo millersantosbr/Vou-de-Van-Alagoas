@@ -387,7 +387,7 @@ export function NearbyStopsMap() {
         </div>
 
         {/* Mapa Interativo */}
-        <div className="h-[380px] sm:h-[440px] w-full relative z-0">
+        <div className="h-[380px] sm:h-[440px] lg:h-[500px] xl:h-[540px] w-full relative z-0">
           {/* Botão Flutuante de Trava / Destrava do Mapa */}
           <button
             type="button"

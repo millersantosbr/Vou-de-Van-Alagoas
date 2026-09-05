@@ -1000,327 +1000,335 @@ export default function HomeContent() {
                 </div>
               )}
 
-              {/* 🌟 Next Departure Featured Card (Hierarquia Estrita, Fundo Sólido Limpo) */}
-              {proximoHorario && (
-                <article
-                  className={cn(
-                    "bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-sm border overflow-hidden relative transition-all",
-                    proximaSaidaInfo?.isEncerradoHoje
-                      ? "border-amber-300 dark:border-amber-800/80 shadow-amber-500/5"
-                      : "border-slate-200 dark:border-slate-800 hover:border-[#0038A8]/40"
-                  )}
-                >
-                  {/* Subtle Top Accent Line */}
-                  <div
-                    className={cn(
-                      "absolute top-0 left-0 right-0 h-1.5",
-                      proximaSaidaInfo?.isEncerradoHoje
-                        ? "bg-amber-500"
-                        : "bg-[#0038A8]"
-                    )}
-                  />
-
-                  <div className="p-5 sm:p-6 space-y-4">
-                    {/* Top Row: Departure Badge & Tabular Time */}
-                    <div className="flex justify-between items-start gap-4">
-                      {proximaSaidaInfo?.isEncerradoHoje ? (
-                        <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 px-3.5 py-1.5 rounded-full shadow-xs">
-                          <MoonStars size={16} weight="fill" className="text-amber-600 dark:text-amber-400" />
-                          <span className="text-xs font-extrabold uppercase tracking-wide">
-                            {proximaSaidaInfo.diaBadge}
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border border-blue-200 dark:border-blue-900/60 px-3.5 py-1.5 rounded-full shadow-xs">
-                          <Clock size={16} weight="bold" />
-                          <span className="text-xs font-extrabold uppercase tracking-wide">
-                            {proximaSaidaInfo?.diaBadge || "Próxima Saída"}
-                          </span>
-                        </div>
+              {/* 🌟 Grade Responsiva: 1 Coluna no Mobile / 2 Colunas no Desktop */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 items-start">
+                {/* 🌟 Coluna Esquerda: Próxima Saída em Destaque (Fixa/Sticky no Desktop) */}
+                <div className="lg:col-span-5 xl:col-span-5 lg:sticky lg:top-6 space-y-4">
+                  {proximoHorario && (
+                    <article
+                      className={cn(
+                        "bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-sm border overflow-hidden relative transition-all",
+                        proximaSaidaInfo?.isEncerradoHoje
+                          ? "border-amber-300 dark:border-amber-800/80 shadow-amber-500/5"
+                          : "border-slate-200 dark:border-slate-800 hover:border-[#0038A8]/40"
                       )}
-
-                      <div className="text-right">
-                        <div className="tabular-nums text-4xl sm:text-5xl font-black text-slate-900 dark:text-slate-50 tracking-normal leading-none">
-                          {proximoHorario.horario}
-                        </div>
-                        <div
-                          className={cn(
-                            "text-xs sm:text-sm font-semibold mt-1.5 text-right leading-tight",
-                            proximaSaidaInfo?.isEncerradoHoje
-                              ? "text-amber-800 dark:text-amber-300"
-                              : "text-slate-600 dark:text-slate-400"
-                          )}
-                        >
-                          <span>{proximaSaidaInfo?.diaSubtitulo || `Saída programada às ${proximoHorario.horario}`}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Route Details */}
-                    <div className="space-y-2">
-                      {/* Trajeto Principal */}
-                      <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-50 flex items-center gap-2.5 flex-wrap tracking-tight">
-                        <span>{proximoHorario.origem}</span>
-                        <ArrowRight size={22} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
-                        <span className="text-[#0038A8] dark:text-blue-400">{proximoHorario.destino}</span>
-                      </div>
-
-                      {/* Ponto de Embarque Context */}
-                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                        <MapPin size={16} weight="fill" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
-                        <span>Ponto de Partida: <strong>{proximoHorario.origem === "Maceió" ? "Terminal Rodoviário e Pontos Autorizados" : `Terminal de ${proximoHorario.origem}`}</strong></span>
-                      </div>
-
-                      {/* Detalhes da Linha */}
-                      <div className="flex items-center gap-2 flex-wrap text-xs sm:text-sm pt-0.5">
-                        <span className="tabular-nums font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded-md">
-                          Linha {proximoHorario.codigoLinha}
-                        </span>
-                        {proximoHorario.via && (
-                          <span className="font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 px-2 py-0.5 rounded-md flex items-center gap-1">
-                            <Path size={14} weight="bold" />
-                            Via {proximoHorario.via}
-                          </span>
+                    >
+                      {/* Subtle Top Accent Line */}
+                      <div
+                        className={cn(
+                          "absolute top-0 left-0 right-0 h-1.5",
+                          proximaSaidaInfo?.isEncerradoHoje
+                            ? "bg-amber-500"
+                            : "bg-[#0038A8]"
                         )}
-                        <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                          <CalendarBlank size={15} />
-                          {proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}
-                        </span>
-                      </div>
-                    </div>
+                      />
 
-                    {/* Actions Row (Altura h-12 para ergonomia de toque) */}
-                    <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
-                      {/* Ação Principal: Ver Ponto de Embarque */}
-                      <Button
-                        type="button"
-                        onClick={handlePontoMaisProximo}
-                        disabled={isLocatingStop}
-                        className="h-12 px-6 flex-1 bg-[#0038A8] hover:bg-[#002b80] text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#0038A8]/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-                      >
-                        <MapPin
-                          size={18}
-                          weight="fill"
-                          className={cn(isLocatingStop ? "animate-spin text-white" : "text-white")}
-                        />
-                        <span>{isLocatingStop ? "Localizando Ponto..." : "Ver Ponto de Embarque"}</span>
-                      </Button>
-
-                      {/* Ação de Compartilhar Horários no WhatsApp */}
-                      <Button
-                        type="button"
-                        onClick={() => handleCompartilharHorarios(proximoHorario.codigoLinha)}
-                        disabled={sharingStatus !== "idle"}
-                        className="h-12 px-5 flex-1 bg-[#25D366] hover:bg-[#1EBE5D] active:bg-[#16A34A] focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#25D366]/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-                      >
-                        <WhatsAppIcon className="w-5 h-5 shrink-0 text-white" />
-                        <span>
-                          {sharingStatus === "preparing"
-                            ? "Preparando horários..."
-                            : sharingStatus === "shared"
-                            ? "Abrindo compartilhamento..."
-                            : "Compartilhar horários"}
-                        </span>
-                      </Button>
-                    </div>
-
-                  </div>
-                </article>
-              )}
-
-              {/* 📋 Subsequent Departure Cards List (Com Expansor de Saídas) */}
-              {horariosSubsequentes.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <div className="flex items-center justify-between px-1">
-                    <h3 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                      <Clock size={15} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
-                      {proximaSaidaInfo?.isEncerradoHoje
-                        ? `Outras Saídas de ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome})`
-                        : "Próximas Saídas"}
-                    </h3>
-                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
-                      {horariosSubsequentes.length} {horariosSubsequentes.length === 1 ? "saída" : "saídas"}
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-2.5">
-                    {(mostrarTodosHorarios ? horariosSubsequentes : horariosSubsequentes.slice(0, 4)).map((item) => {
-                      const isExpanded = !!expandedCards[item.id]
-                      const isProximaSaida = item.id === proximoHorario?.id
-
-                      return (
-                        <article
-                          key={item.id}
-                          className={cn(
-                            "bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl shadow-xs border p-4 transition-all hover:border-[#0038A8]/40 dark:hover:border-slate-700",
-                            isProximaSaida
-                              ? "border-[#0038A8]/30 dark:border-blue-500/30 bg-blue-50/15 dark:bg-blue-950/20"
-                              : "border-slate-200 dark:border-slate-800"
+                      <div className="p-5 sm:p-6 space-y-4">
+                        {/* Top Row: Departure Badge & Tabular Time */}
+                        <div className="flex justify-between items-start gap-4">
+                          {proximaSaidaInfo?.isEncerradoHoje ? (
+                            <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 px-3.5 py-1.5 rounded-full shadow-xs">
+                              <MoonStars size={16} weight="fill" className="text-amber-600 dark:text-amber-400" />
+                              <span className="text-xs font-extrabold uppercase tracking-wide">
+                                {proximaSaidaInfo.diaBadge}
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border border-blue-200 dark:border-blue-900/60 px-3.5 py-1.5 rounded-full shadow-xs">
+                              <Clock size={16} weight="bold" />
+                              <span className="text-xs font-extrabold uppercase tracking-wide">
+                                {proximaSaidaInfo?.diaBadge || "Próxima Saída"}
+                              </span>
+                            </div>
                           )}
-                        >
-                          <div className="flex items-center gap-4">
-                            {/* Tabular Time Badge */}
-                            <div className="shrink-0 text-center w-20 sm:w-24 border-r border-slate-200 dark:border-slate-800 pr-3">
-                              <div className="tabular-nums text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-normal">
-                                {item.horario}
-                              </div>
-                              <div
-                                className={cn(
-                                  "text-xs font-bold uppercase tracking-wider mt-0.5",
-                                  isProximaSaida
-                                    ? "text-[#0038A8] dark:text-blue-400 font-extrabold"
-                                    : proximaSaidaInfo?.isEncerradoHoje
-                                    ? "text-amber-700 dark:text-amber-400 font-extrabold"
-                                    : "text-slate-500 dark:text-slate-400"
-                                )}
-                              >
-                                {isProximaSaida
-                                  ? "Próxima"
-                                  : proximaSaidaInfo?.isEncerradoHoje
-                                  ? proximaSaidaInfo.diaNome
-                                  : "Partida"}
-                              </div>
+
+                          <div className="text-right">
+                            <div className="tabular-nums text-4xl sm:text-5xl font-black text-slate-900 dark:text-slate-50 tracking-normal leading-none">
+                              {proximoHorario.horario}
                             </div>
-
-                            {/* Center Info */}
-                            <div className="grow min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">
-                                  Linha {item.codigoLinha}
-                                </span>
-                                {item.via ? (
-                                  <span className="text-xs font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md flex items-center gap-1">
-                                    <Path size={12} weight="bold" />
-                                    Via {item.via}
-                                  </span>
-                                ) : (
-                                  <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
-                                    Direto
-                                  </span>
-                                )}
-                              </div>
-
-                              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1.5">
-                                <CalendarBlank size={13} />
-                                <span>{item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}</span>
-                              </div>
-                            </div>
-
-                            {/* Details Toggle Button */}
-                            <button
-                              type="button"
-                              onClick={() => toggleCardExpansion(item.id)}
-                              aria-label="Ver detalhes do horário"
-                              className="shrink-0 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-colors"
+                            <div
+                              className={cn(
+                                "text-xs sm:text-sm font-semibold mt-1.5 text-right leading-tight",
+                                proximaSaidaInfo?.isEncerradoHoje
+                                  ? "text-amber-800 dark:text-amber-300"
+                                  : "text-slate-600 dark:text-slate-400"
+                              )}
                             >
-                              {isExpanded ? <CaretUp size={16} /> : <CaretDown size={16} />}
-                            </button>
+                              <span>{proximaSaidaInfo?.diaSubtitulo || `Saída programada às ${proximoHorario.horario}`}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Route Details */}
+                        <div className="space-y-2">
+                          {/* Trajeto Principal */}
+                          <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-50 flex items-center gap-2.5 flex-wrap tracking-tight">
+                            <span>{proximoHorario.origem}</span>
+                            <ArrowRight size={22} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
+                            <span className="text-[#0038A8] dark:text-blue-400">{proximoHorario.destino}</span>
                           </div>
 
-                          {/* Expandable Details */}
-                          {isExpanded && (
-                            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm space-y-2 animate-in fade-in duration-200">
-                              <div className="flex justify-between items-center">
-                                <span className="font-semibold text-slate-900 dark:text-slate-100">Trajeto: {item.origem} → {item.destino}</span>
-                                <Link
-                                  href={`/routes/${item.codigoLinha}`}
-                                  className="text-[#0038A8] dark:text-blue-400 hover:underline font-bold text-xs inline-flex items-center gap-1"
-                                >
-                                  Página da Linha <ArrowSquareOut size={14} />
-                                </Link>
-                              </div>
-                              {item.itinerario?.ida && (
-                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed"><strong className="text-slate-900 dark:text-slate-100">Itinerário:</strong> {item.itinerario.ida}</p>
-                              )}
-                            </div>
-                          )}
-                        </article>
-                      )
-                    })}
-                  </div>
+                          {/* Ponto de Embarque Context */}
+                          <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                            <MapPin size={16} weight="fill" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
+                            <span>Ponto de Partida: <strong>{proximoHorario.origem === "Maceió" ? "Terminal Rodoviário e Pontos Autorizados" : `Terminal de ${proximoHorario.origem}`}</strong></span>
+                          </div>
 
-                  {/* Expander Button if more than 4 departures */}
-                  {horariosSubsequentes.length > 4 && (
-                    <button
-                      type="button"
-                      onClick={() => setMostrarTodosHorarios((v) => !v)}
-                      className="w-full h-12 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-xs active:scale-[0.99]"
-                    >
-                      {mostrarTodosHorarios ? (
-                        <>
-                          <CaretUp size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
-                          <span>Mostrar menos saídas</span>
-                        </>
-                      ) : (
-                        <>
-                          <CaretDown size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
-                          <span>Ver todos os horários ({horariosSubsequentes.length} saídas programadas)</span>
-                        </>
-                      )}
-                    </button>
-                  )}
-                </div>
-              )}
-
-              {/* 🕒 Seção Separada: Horários que já passaram */}
-              {filtroDia === "hoje" && horariosPassados.length > 0 && (
-                <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
-                  <button
-                    type="button"
-                    onClick={() => setMostrarViagensPassadas((v) => !v)}
-                    className="w-full py-3 px-4 rounded-xl md:rounded-2xl bg-slate-100/90 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold flex items-center justify-between transition-colors shadow-xs"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Clock size={16} className="text-slate-500 dark:text-slate-400" />
-                      <span>
-                        Horários que já passaram{" "}
-                        <span className="text-slate-500 dark:text-slate-400 font-normal">
-                          ({horariosPassados.length} {horariosPassados.length === 1 ? "saída anterior" : "saídas anteriores"})
-                        </span>
-                      </span>
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-                      <span>{mostrarViagensPassadas ? "Ocultar" : "Visualizar"}</span>
-                      {mostrarViagensPassadas ? <CaretUp size={16} /> : <CaretDown size={16} />}
-                    </span>
-                  </button>
-
-                  {mostrarViagensPassadas && (
-                    <div className="mt-3 space-y-2 animate-in fade-in duration-200">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-1">
-                        Estes horários já operaram mais cedo hoje ({diaHojeNome}) e foram finalizados:
-                      </p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 opacity-80">
-                        {horariosPassados.map((passado) => (
-                          <div
-                            key={`passado-${passado.id}`}
-                            className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs"
-                          >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <span className="tabular-nums font-extrabold text-sm text-slate-500 dark:text-slate-400 shrink-0 line-through decoration-slate-400">
-                                {passado.horario}
+                          {/* Detalhes da Linha */}
+                          <div className="flex items-center gap-2 flex-wrap text-xs sm:text-sm pt-0.5">
+                            <span className="tabular-nums font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded-md">
+                              Linha {proximoHorario.codigoLinha}
+                            </span>
+                            {proximoHorario.via && (
+                              <span className="font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <Path size={14} weight="bold" />
+                                Via {proximoHorario.via}
                               </span>
-                              <div className="truncate">
-                                <span className="text-slate-700 dark:text-slate-300 font-medium">
-                                  <strong className="text-slate-900 dark:text-slate-100">{passado.origem} → {passado.destino}</strong> (Linha {passado.codigoLinha})
-                                </span>
-                                {passado.via && (
-                                  <span className="text-[11px] text-slate-500 dark:text-slate-400 ml-1.5 font-normal">
-                                    • Via {passado.via}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                            <span className="shrink-0 px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-bold text-[10px] uppercase">
-                              Já passou
+                            )}
+                            <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                              <CalendarBlank size={15} />
+                              {proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}
                             </span>
                           </div>
-                        ))}
+                        </div>
+
+                        {/* Actions Row (Altura h-12 para ergonomia de toque) */}
+                        <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+                          {/* Ação Principal: Ver Ponto de Embarque */}
+                          <Button
+                            type="button"
+                            onClick={handlePontoMaisProximo}
+                            disabled={isLocatingStop}
+                            className="h-12 px-6 flex-1 bg-[#0038A8] hover:bg-[#002b80] text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#0038A8]/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                          >
+                            <MapPin
+                              size={18}
+                              weight="fill"
+                              className={cn(isLocatingStop ? "animate-spin text-white" : "text-white")}
+                            />
+                            <span>{isLocatingStop ? "Localizando Ponto..." : "Ver Ponto de Embarque"}</span>
+                          </Button>
+
+                          {/* Ação de Compartilhar Horários no WhatsApp */}
+                          <Button
+                            type="button"
+                            onClick={() => handleCompartilharHorarios(proximoHorario.codigoLinha)}
+                            disabled={sharingStatus !== "idle"}
+                            className="h-12 px-5 flex-1 bg-[#25D366] hover:bg-[#1EBE5D] active:bg-[#16A34A] focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#25D366]/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                          >
+                            <WhatsAppIcon className="w-5 h-5 shrink-0 text-white" />
+                            <span>
+                              {sharingStatus === "preparing"
+                                ? "Preparando horários..."
+                                : sharingStatus === "shared"
+                                ? "Abrindo compartilhamento..."
+                                : "Compartilhar horários"}
+                            </span>
+                          </Button>
+                        </div>
+
                       </div>
+                    </article>
+                  )}
+                </div>
+
+                {/* 📋 Coluna Direita: Próximas Saídas & Horários Anteriores */}
+                <div className="lg:col-span-7 xl:col-span-7 space-y-4">
+                  {/* 📋 Subsequent Departure Cards List (Com Expansor de Saídas) */}
+                  {horariosSubsequentes.length > 0 && (
+                    <div className="space-y-3 pt-2 lg:pt-0">
+                      <div className="flex items-center justify-between px-1">
+                        <h3 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                          <Clock size={15} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                          {proximaSaidaInfo?.isEncerradoHoje
+                            ? `Outras Saídas de ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome})`
+                            : "Próximas Saídas"}
+                        </h3>
+                        <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                          {horariosSubsequentes.length} {horariosSubsequentes.length === 1 ? "saída" : "saídas"}
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-2.5">
+                        {(mostrarTodosHorarios ? horariosSubsequentes : horariosSubsequentes.slice(0, 4)).map((item) => {
+                          const isExpanded = !!expandedCards[item.id]
+                          const isProximaSaida = item.id === proximoHorario?.id
+
+                          return (
+                            <article
+                              key={item.id}
+                              className={cn(
+                                "bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl shadow-xs border p-4 transition-all hover:border-[#0038A8]/40 dark:hover:border-slate-700",
+                                isProximaSaida
+                                  ? "border-[#0038A8]/30 dark:border-blue-500/30 bg-blue-50/15 dark:bg-blue-950/20"
+                                  : "border-slate-200 dark:border-slate-800"
+                              )}
+                            >
+                              <div className="flex items-center gap-4">
+                                {/* Tabular Time Badge */}
+                                <div className="shrink-0 text-center w-20 sm:w-24 border-r border-slate-200 dark:border-slate-800 pr-3">
+                                  <div className="tabular-nums text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-normal">
+                                    {item.horario}
+                                  </div>
+                                  <div
+                                    className={cn(
+                                      "text-xs font-bold uppercase tracking-wider mt-0.5",
+                                      isProximaSaida
+                                        ? "text-[#0038A8] dark:text-blue-400 font-extrabold"
+                                        : proximaSaidaInfo?.isEncerradoHoje
+                                        ? "text-amber-700 dark:text-amber-400 font-extrabold"
+                                        : "text-slate-500 dark:text-slate-400"
+                                    )}
+                                  >
+                                    {isProximaSaida
+                                      ? "Próxima"
+                                      : proximaSaidaInfo?.isEncerradoHoje
+                                      ? proximaSaidaInfo.diaNome
+                                      : "Partida"}
+                                  </div>
+                                </div>
+
+                                {/* Center Info */}
+                                <div className="grow min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">
+                                      Linha {item.codigoLinha}
+                                    </span>
+                                    {item.via ? (
+                                      <span className="text-xs font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                        <Path size={12} weight="bold" />
+                                        Via {item.via}
+                                      </span>
+                                    ) : (
+                                      <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
+                                        Direto
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1.5">
+                                    <CalendarBlank size={13} />
+                                    <span>{item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}</span>
+                                  </div>
+                                </div>
+
+                                {/* Details Toggle Button */}
+                                <button
+                                  type="button"
+                                  onClick={() => toggleCardExpansion(item.id)}
+                                  aria-label="Ver detalhes do horário"
+                                  className="shrink-0 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 flex items-center justify-center transition-colors"
+                                >
+                                  {isExpanded ? <CaretUp size={16} /> : <CaretDown size={16} />}
+                                </button>
+                              </div>
+
+                              {/* Expandable Details */}
+                              {isExpanded && (
+                                <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm space-y-2 animate-in fade-in duration-200">
+                                  <div className="flex justify-between items-center">
+                                    <span className="font-semibold text-slate-900 dark:text-slate-100">Trajeto: {item.origem} → {item.destino}</span>
+                                    <Link
+                                      href={`/routes/${item.codigoLinha}`}
+                                      className="text-[#0038A8] dark:text-blue-400 hover:underline font-bold text-xs inline-flex items-center gap-1"
+                                    >
+                                      Página da Linha <ArrowSquareOut size={14} />
+                                    </Link>
+                                  </div>
+                                  {item.itinerario?.ida && (
+                                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed"><strong className="text-slate-900 dark:text-slate-100">Itinerário:</strong> {item.itinerario.ida}</p>
+                                  )}
+                                </div>
+                              )}
+                            </article>
+                          )
+                        })}
+                      </div>
+
+                      {/* Expander Button if more than 4 departures */}
+                      {horariosSubsequentes.length > 4 && (
+                        <button
+                          type="button"
+                          onClick={() => setMostrarTodosHorarios((v) => !v)}
+                          className="w-full h-12 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-xs active:scale-[0.99]"
+                        >
+                          {mostrarTodosHorarios ? (
+                            <>
+                              <CaretUp size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                              <span>Mostrar menos saídas</span>
+                            </>
+                          ) : (
+                            <>
+                              <CaretDown size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                              <span>Ver todos os horários ({horariosSubsequentes.length} saídas programadas)</span>
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {/* 🕒 Seção Separada: Horários que já passaram */}
+                  {filtroDia === "hoje" && horariosPassados.length > 0 && (
+                    <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+                      <button
+                        type="button"
+                        onClick={() => setMostrarViagensPassadas((v) => !v)}
+                        className="w-full py-3 px-4 rounded-xl md:rounded-2xl bg-slate-100/90 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold flex items-center justify-between transition-colors shadow-xs"
+                      >
+                        <span className="flex items-center gap-2">
+                          <Clock size={16} className="text-slate-500 dark:text-slate-400" />
+                          <span>
+                            Horários que já passaram{" "}
+                            <span className="text-slate-500 dark:text-slate-400 font-normal">
+                              ({horariosPassados.length} {horariosPassados.length === 1 ? "saída anterior" : "saídas anteriores"})
+                            </span>
+                          </span>
+                        </span>
+                        <span className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                          <span>{mostrarViagensPassadas ? "Ocultar" : "Visualizar"}</span>
+                          {mostrarViagensPassadas ? <CaretUp size={16} /> : <CaretDown size={16} />}
+                        </span>
+                      </button>
+
+                      {mostrarViagensPassadas && (
+                        <div className="mt-3 space-y-2 animate-in fade-in duration-200">
+                          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-1">
+                            Estes horários já operaram mais cedo hoje ({diaHojeNome}) e foram finalizados:
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 opacity-80">
+                            {horariosPassados.map((passado) => (
+                              <div
+                                key={`passado-${passado.id}`}
+                                className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs"
+                              >
+                                <div className="flex items-center gap-2.5 min-w-0">
+                                  <span className="tabular-nums font-extrabold text-sm text-slate-500 dark:text-slate-400 shrink-0 line-through decoration-slate-400">
+                                    {passado.horario}
+                                  </span>
+                                  <div className="truncate">
+                                    <span className="text-slate-700 dark:text-slate-300 font-medium">
+                                      <strong className="text-slate-900 dark:text-slate-100">{passado.origem} → {passado.destino}</strong> (Linha {passado.codigoLinha})
+                                    </span>
+                                    {passado.via && (
+                                      <span className="text-[11px] text-slate-500 dark:text-slate-400 ml-1.5 font-normal">
+                                        • Via {passado.via}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                <span className="shrink-0 px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-bold text-[10px] uppercase">
+                                  Já passou
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
+              </div>
 
             </div>
           ) : (

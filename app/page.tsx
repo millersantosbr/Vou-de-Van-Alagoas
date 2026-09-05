@@ -91,12 +91,12 @@ export default function Home() {
 
       {/* Main Content Area - Overlapping seamlessly with Waves and Ambient Light */}
       <div className="container mx-auto px-3.5 sm:px-6 -mt-12 sm:-mt-18 md:-mt-22 pb-16 relative z-20">
-        <div className="max-w-4xl mx-auto space-y-12 sm:space-y-16">
+        <div className="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto space-y-12 sm:space-y-16">
 
           {/* Main Search Section (Quadro de Horários) */}
           <section id="quadro-horarios" className="scroll-mt-20 relative">
             {/* 🌟 Ambient Backlight Glow Behind Search Card - Deslocado para baixo e esticado nas laterais */}
-            <div className="absolute -top-4 sm:-top-6 left-1/2 -translate-x-1/2 w-[98%] max-w-4xl h-44 bg-gradient-to-b from-blue-200/20 via-white/90 to-transparent dark:from-blue-600/10 dark:via-slate-950/90 blur-2xl rounded-full pointer-events-none -z-10 translate-y-8" />
+            <div className="absolute -top-4 sm:-top-6 left-1/2 -translate-x-1/2 w-[98%] max-w-4xl lg:max-w-6xl xl:max-w-7xl h-44 bg-gradient-to-b from-blue-200/20 via-white/90 to-transparent dark:from-blue-600/10 dark:via-slate-950/90 blur-2xl rounded-full pointer-events-none -z-10 translate-y-8" />
             <DynamicHomeContent />
           </section>
 
