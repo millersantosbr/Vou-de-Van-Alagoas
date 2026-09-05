@@ -763,50 +763,27 @@ export default function HomeContent() {
 
                     {/* Route Details */}
                     <div className="space-y-2.5">
-                      {/* 🌟 Informação Principal Destacada: O Sentido Real da Viagem */}
-                      <div>
-                        <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-50 flex items-center gap-2.5 flex-wrap tracking-tight">
-                          <span>{proximoHorario.origem}</span>
-                          <ArrowRight size={22} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
-                          <span className="text-[#0038A8] dark:text-blue-400">{proximoHorario.destino}</span>
-                          {proximoHorario.extensao && (
-                            <span className="text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg">
-                              {proximoHorario.extensao}
-                            </span>
-                          )}
-                        </div>
+                      {/* 🌟 Trajeto Principal em Destaque */}
+                      <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-50 flex items-center gap-2.5 flex-wrap tracking-tight">
+                        <span>{proximoHorario.origem}</span>
+                        <ArrowRight size={22} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
+                        <span className="text-[#0038A8] dark:text-blue-400">{proximoHorario.destino}</span>
                       </div>
 
-                      {/* 📋 Informação Secundária / Regulamentar da Linha */}
+                      {/* 📋 Informações Práticas e Diretas da Linha */}
                       <div className="flex items-center gap-2 flex-wrap text-xs sm:text-sm">
-                        <span className="tabular-nums text-xs font-black bg-[#0038A8] text-white px-2.5 py-0.5 rounded-md shadow-xs">
+                        <span className="tabular-nums font-bold bg-[#0038A8] text-white px-2.5 py-0.5 rounded-md shadow-xs">
                           Linha {proximoHorario.codigoLinha}
                         </span>
-                        <span className="font-semibold text-slate-600 dark:text-slate-400">
-                          Linha Oficial: {proximoHorario.nomeLinha}
-                        </span>
-                        {proximoHorario.servico && (
-                          <span className="hidden sm:inline text-xs text-slate-400 dark:text-slate-500">
-                            • {proximoHorario.servico}
+                        {proximoHorario.via && (
+                          <span className="font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 px-2 py-0.5 rounded-md flex items-center gap-1">
+                            <Path size={14} weight="bold" />
+                            Via {proximoHorario.via}
                           </span>
                         )}
-                      </div>
-
-                      {proximoHorario.via && (
-                        <p className="text-xs sm:text-sm font-bold text-[#0038A8] dark:text-blue-400 flex items-center gap-1.5">
-                          <Path size={15} weight="bold" />
-                          Via {proximoHorario.via}
-                        </p>
-                      )}
-
-                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                        <CalendarBlank size={16} />
-                        <span>
-                          {proximaSaidaInfo?.isEncerradoHoje
-                            ? `Partida de ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome}) • ${proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}`
-                            : proximoHorario.dias.length === 7
-                            ? "Circula Diariamente"
-                            : proximoHorario.dias.join(", ")}
+                        <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                          <CalendarBlank size={15} />
+                          {proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}
                         </span>
                       </div>
                     </div>
@@ -888,7 +865,7 @@ export default function HomeContent() {
                         >
                           <div className="flex items-center gap-4">
                             {/* Tabular Time Badge */}
-                            <div className="shrink-0 text-center w-24 border-r border-slate-200 dark:border-slate-800 pr-3">
+                            <div className="shrink-0 text-center w-20 sm:w-24 border-r border-slate-200 dark:border-slate-800 pr-3">
                               <div className="tabular-nums text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-normal">
                                 {item.horario}
                               </div>
@@ -904,38 +881,27 @@ export default function HomeContent() {
                               </div>
                             </div>
 
-                            {/* Center Info */}
+                            {/* Center Info - Super Clean & Direct */}
                             <div className="grow min-w-0">
-                              {/* 🌟 Informação Principal Destacada: Trajeto */}
-                              <div className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-slate-100 flex items-center gap-1.5 truncate">
-                                <span>{item.origem}</span>
-                                <ArrowRight size={15} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
-                                <span className="text-[#0038A8] dark:text-blue-400">{item.destino}</span>
-                              </div>
-
-                              {/* Linha e Rota em formato secundário claro */}
-                              <div className="text-xs text-slate-600 dark:text-slate-400 truncate mt-0.5 font-medium flex items-center gap-1.5 flex-wrap">
-                                <span className="font-bold text-slate-800 dark:text-slate-200">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">
                                   Linha {item.codigoLinha}
                                 </span>
-                                <span>•</span>
-                                <span>{item.via ? `Via ${item.via}` : item.nomeLinha}</span>
-                                {item.extensao && (
-                                  <>
-                                    <span className="text-slate-400">•</span>
-                                    <span>{item.extensao}</span>
-                                  </>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-                                {proximaSaidaInfo?.isEncerradoHoje && (
-                                  <span className="px-2.5 py-0.5 bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/60 rounded text-xs font-bold">
-                                    {proximaSaidaInfo.diaNome} ({proximaSaidaInfo.diaSemanaNome})
+                                {item.via ? (
+                                  <span className="text-xs font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                    <Path size={12} weight="bold" />
+                                    Via {item.via}
+                                  </span>
+                                ) : (
+                                  <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
+                                    Direto
                                   </span>
                                 )}
-                                <span className="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded text-xs font-semibold">
-                                  {item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}
-                                </span>
+                              </div>
+
+                              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1.5">
+                                <CalendarBlank size={13} />
+                                <span>{item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}</span>
                               </div>
                             </div>
 
