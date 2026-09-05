@@ -633,24 +633,11 @@ export default function HomeContent() {
       {/* 🗓️ Filters & Day Selection */}
       {origem && destino && (
         <section className="space-y-3 animate-in fade-in duration-300">
-          <div className="flex items-center justify-between px-1">
+          <div className="flex items-center px-1">
             <h2 className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <CalendarBlank size={18} weight="bold" className="text-[#0038A8]" />
               Dia da viagem
             </h2>
-            {filtroDia === "hoje" && (
-              <span
-                className={cn(
-                  "text-xs font-bold px-2.5 py-0.5 rounded-full border flex items-center gap-1.5",
-                  proximaSaidaInfo?.isEncerradoHoje
-                    ? "text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 border-amber-300 dark:border-amber-800"
-                    : "text-[#0038A8] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400 border-blue-200/60 dark:border-blue-900/60"
-                )}
-              >
-                {proximaSaidaInfo?.isEncerradoHoje && <MoonStars size={13} weight="fill" />}
-                Hoje é {diaHojeNome} {proximaSaidaInfo?.isEncerradoHoje ? "• Encerrado" : ""}
-              </span>
-            )}
           </div>
 
           {/* Day Horizontal Scroll Selector */}
@@ -685,9 +672,9 @@ export default function HomeContent() {
             ))}
           </div>
 
-          {/* 🔍 Route Type / Via Chips */}
+          {/* 🔍 Route Type / Via Chips - Centralizadas */}
           {viasDisponiveis.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-1 px-0.5">
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1 px-0.5">
               <button
                 type="button"
                 onClick={() => setFiltroVia("todas")}
