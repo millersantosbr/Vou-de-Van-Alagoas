@@ -1,0 +1,45 @@
+name: "🚌 Atualização de Linha / Horário / Ponto de Embarque"
+description: "Sugira uma alteração ou adição de horários, linhas ou pontos de van em Alagoas."
+title: "[Rota/Horário]: "
+labels: ["dados", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar a manter os horários e pontos de vans atualizados em todo o estado de Alagoas! 🌴
+  - type: input
+    id: cidades
+    attributes:
+      label: "Cidades (Origem e Destino)"
+      description: "Exemplo: Maceió para Arapiraca, ou Penedo para Maceió"
+      placeholder: "Origem ➔ Destino"
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo_solicitacao
+    attributes:
+      label: "Tipo de Atualização"
+      options:
+        - "Novo horário que não está no app"
+        - "Horário existente que mudou ou foi cancelado"
+        - "Novo ponto ou terminal de embarque"
+        - "Linha inteira que falta no app"
+        - "Atualização de tarifa / valor da passagem"
+    validations:
+      required: true
+  - type: textarea
+    id: detalhes
+    attributes:
+      label: "Detalhes da Alteração"
+      description: "Quais são os novos horários? Onde exatamente fica o ponto de embarque (rua, referência ou coordenadas)?"
+      placeholder: "Ex: A van de São Miguel dos Campos para Maceió agora tem saída extra às 06:15 aos sábados..."
+    validations:
+      required: true
+  - type: input
+    id: fonte
+    attributes:
+      label: "Fonte da Informação"
+      description: "Como você soube dessa informação? (Ex: Sou passageiro frequente, aviso no terminal, motorista da van, cooperativa, post oficial ARSAL)"
+      placeholder: "Ex: Painel do Terminal Rodoviário de Arapiraca"
+    validations:
+      required: false

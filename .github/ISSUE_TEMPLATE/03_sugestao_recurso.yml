@@ -1,0 +1,25 @@
+name: "💡 Sugestão de Melhoria / Nova Funcionalidade"
+description: "Proponha uma nova funcionalidade, melhoria visual ou ideia para o projeto."
+title: "[Sugestão]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Adoramos novas ideias! Conte como podemos tornar a experiência dos passageiros ainda melhor.
+  - type: textarea
+    id: ideia
+    attributes:
+      label: "Qual é a sua proposta?"
+      description: "Descreva a funcionalidade ou melhoria de forma clara."
+      placeholder: "Ex: Seria incrível ter uma opção de salvar linhas favoritas na tela inicial..."
+    validations:
+      required: true
+  - type: textarea
+    id: motivo
+    attributes:
+      label: "Qual dor essa ideia resolve?"
+      description: "Como isso ajuda os passageiros de vans em Alagoas?"
+      placeholder: "Ex: Evitaria ter que selecionar a mesma origem e destino todos os dias ao ir para o trabalho..."
+    validations:
+      required: false

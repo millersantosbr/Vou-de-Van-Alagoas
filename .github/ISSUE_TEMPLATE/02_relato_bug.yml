@@ -1,0 +1,33 @@
+name: "🐛 Relato de Erro / Bug"
+description: "Avise-nos sobre algo que não está funcionando corretamente no site ou app."
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por relatar o problema! Seus detalhes nos ajudam a corrigir rapidamente.
+  - type: textarea
+    id: descricao
+    attributes:
+      label: "Descrição do Erro"
+      description: "O que aconteceu? O que você esperava que acontecesse?"
+      placeholder: "Ex: Ao clicar no botão de traçar rota no mapa pelo iPhone, nada acontece..."
+    validations:
+      required: true
+  - type: input
+    id: dispositivo
+    attributes:
+      label: "Dispositivo e Navegador"
+      description: "Em qual dispositivo o erro ocorreu?"
+      placeholder: "Ex: iPhone 13 (Safari / iOS 17) ou PC Windows 11 (Chrome 124)"
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: "Passos para Reproduzir"
+      description: "1. Acessei tal rota... 2. Cliquei em tal botão..."
+      placeholder: "1. Selecionar Maceió como origem e Maragogi como destino\n2. Clicar no botão 'Pontos de Embarque'..."
+    validations:
+      required: false

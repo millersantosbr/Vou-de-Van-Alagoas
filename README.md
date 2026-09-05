@@ -129,6 +129,19 @@ O projeto passou por rigorosa **auditoria de segurança técnica** cobrindo:
 
 ---
 
+## 🤝 Como Colaborar
+
+O **Vou de Van Alagoas** é um projeto **Open Source** feito pela e para a comunidade! Toda contribuição é bem-vinda, seja você programador ou não:
+
+- 🚌 **É passageiro ou motorista?** [Sugira novos horários ou pontos de embarque](https://github.com/millersantosbr/Vou-de-Van-Alagoas/issues/new?template=01_atualizacao_rota_horario.yml) que você conhece na sua cidade.
+- 🐛 **Encontrou um erro ou bug?** [Abra um relato de bug](https://github.com/millersantosbr/Vou-de-Van-Alagoas/issues/new?template=02_relato_bug.yml) informando o modelo do seu celular ou navegador.
+- 💡 **Tem uma sugestão de recurso?** [Envie sua ideia de melhoria](https://github.com/millersantosbr/Vou-de-Van-Alagoas/issues/new?template=03_sugestao_recurso.yml).
+- 💻 **Quer codar?** Leia nosso [Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md) para saber como configurar o ambiente, seguir os padrões de código e enviar um Pull Request.
+
+Consulte também nosso [Código de Conduta](CODE_OF_CONDUCT.md), a [Política de Segurança](SECURITY.md) e a [Licença MIT](LICENSE).
+
+---
+
 ## 👤 Autor
 
 Desenvolvido com dedicação por **Miller Santos**.
