@@ -97,10 +97,10 @@ export default async function RoutePage({ params }: RoutePageProps) {
               </div>
 
               <div className="flex flex-col items-start md:items-end justify-center bg-muted/30 p-4 rounded-2xl border border-border/30">
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Tipo de Serviço</span>
-                <span className="text-xs font-black text-foreground">{linha.servico || "Transporte Complementar"}</span>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Tipo de Serviço</span>
+                <span className="text-xs sm:text-sm font-black text-foreground">{linha.servico || "Transporte Complementar"}</span>
                 {linha.viagens_semana && (
-                  <span className="text-[10px] text-muted-foreground mt-1">
+                  <span className="text-xs text-muted-foreground mt-1">
                     {linha.viagens_semana} viagens semanais autorizadas
                   </span>
                 )}
@@ -128,7 +128,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
                     <MapPin className="text-primary" size={18} />
                     <div>
                       <h3 className="font-black text-base text-foreground">Saídas de {linha.origem}</h3>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.destino}</p>
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.destino}</p>
                     </div>
                   </div>
 
@@ -139,17 +139,17 @@ export default async function RoutePage({ params }: RoutePageProps) {
                           key={index}
                           className="flex items-center justify-between p-3.5 rounded-xl bg-muted/30 border border-border/30 hover:bg-muted/60 transition-colors"
                         >
-                          <span className="text-2xl font-black text-primary tracking-tight">
+                          <span className="text-2xl sm:text-3xl font-black text-primary tabular-nums tracking-normal">
                             {saida.horario}
                           </span>
-                          <div className="flex flex-wrap gap-1 justify-end max-w-[150px]">
+                          <div className="flex flex-wrap gap-1 justify-end max-w-[160px]">
                             {saida.dias.length === 7 ? (
-                              <span className="text-[10px] font-bold bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-md">
+                              <span className="text-xs font-bold bg-green-500/10 text-green-700 dark:text-green-400 px-2.5 py-0.5 rounded-md">
                                 Diariamente
                               </span>
                             ) : (
                               saida.dias.map((d) => (
-                                <span key={d} className="text-[9px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md">
+                                <span key={d} className="text-xs font-bold bg-muted text-muted-foreground px-2 py-0.5 rounded-md">
                                   {d.slice(0, 3)}
                                 </span>
                               ))
@@ -169,7 +169,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
                     <MapPin className="text-[#D62828] dark:text-red-400 rotate-180" size={18} />
                     <div>
                       <h3 className="font-black text-base text-foreground">Saídas de {linha.destino}</h3>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.origem}</p>
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.origem}</p>
                     </div>
                   </div>
 
@@ -180,17 +180,17 @@ export default async function RoutePage({ params }: RoutePageProps) {
                           key={index}
                           className="flex items-center justify-between p-3.5 rounded-xl bg-muted/30 border border-border/30 hover:bg-muted/60 transition-colors"
                         >
-                          <span className="text-2xl font-black text-[#D62828] dark:text-red-400 tracking-tight">
+                          <span className="text-2xl sm:text-3xl font-black text-[#D62828] dark:text-red-400 tabular-nums tracking-normal">
                             {saida.horario}
                           </span>
-                          <div className="flex flex-wrap gap-1 justify-end max-w-[150px]">
+                          <div className="flex flex-wrap gap-1 justify-end max-w-[160px]">
                             {saida.dias.length === 7 ? (
-                              <span className="text-[10px] font-bold bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded-md">
+                              <span className="text-xs font-bold bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2.5 py-0.5 rounded-md">
                                 Diariamente
                               </span>
                             ) : (
                               saida.dias.map((d) => (
-                                <span key={d} className="text-[9px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md">
+                                <span key={d} className="text-xs font-bold bg-muted text-muted-foreground px-2 py-0.5 rounded-md">
                                   {d.slice(0, 3)}
                                 </span>
                               ))

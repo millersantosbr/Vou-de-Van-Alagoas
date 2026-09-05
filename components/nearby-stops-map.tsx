@@ -378,18 +378,18 @@ export function NearbyStopsMap() {
               <div className="space-y-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span className={cn(
-                    "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md tracking-wider inline-flex items-center gap-1",
+                    "text-xs font-bold uppercase px-2.5 py-0.5 rounded-md tracking-wider inline-flex items-center gap-1",
                     selectedStop.type === "terminal"
                       ? "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                   )}>
-                    <ShieldCheck size={12} weight="bold" />
+                    <ShieldCheck size={13} weight="bold" />
                     {selectedStop.type === "terminal" ? "Terminal Rodoviário" : "Posto Autorizado"}
                   </span>
 
                   {selectedStop.distanceKm !== undefined && (
-                    <span className="text-[10px] font-bold bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
-                      <NavigationArrow size={11} weight="bold" />
+                    <span className="text-xs font-bold bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 px-2.5 py-0.5 rounded-md inline-flex items-center gap-1">
+                      <NavigationArrow size={12} weight="bold" />
                       {formatDistance(selectedStop.distanceKm)} de você
                     </span>
                   )}
@@ -400,8 +400,8 @@ export function NearbyStopsMap() {
                 </h4>
 
                 {selectedStop.address && (
-                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
-                    <MapPin size={13} weight="bold" className="shrink-0 text-[#0038A8]" />
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 flex items-center gap-1.5 truncate">
+                    <MapPin size={14} weight="bold" className="shrink-0 text-[#0038A8]" />
                     <span className="truncate">{selectedStop.address}</span>
                   </p>
                 )}
@@ -420,17 +420,17 @@ export function NearbyStopsMap() {
             {/* Cidades principais atendidas */}
             {selectedStop.cities && selectedStop.cities.length > 0 && (
               <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-                <span className="text-[11px] font-semibold text-slate-400 shrink-0">Rotas:</span>
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-300 shrink-0">Rotas:</span>
                 {selectedStop.cities.slice(0, 6).map((city) => (
                   <span
                     key={city}
-                    className="shrink-0 px-2 py-0.5 bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-lg text-[11px] font-medium"
+                    className="shrink-0 px-2.5 py-0.5 bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold"
                   >
                     {city}
                   </span>
                 ))}
                 {selectedStop.cities.length > 6 && (
-                  <span className="text-[11px] text-slate-400 font-medium shrink-0">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold shrink-0">
                     +{selectedStop.cities.length - 6}
                   </span>
                 )}

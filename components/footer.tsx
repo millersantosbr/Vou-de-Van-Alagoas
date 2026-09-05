@@ -32,7 +32,7 @@ export function Footer() {
         </p>
 
         {/* 2. Disclaimer de Projeto Independente */}
-        <p className="text-[11px] sm:text-xs text-muted-foreground/80 leading-relaxed bg-muted/30 dark:bg-slate-900/40 p-3 sm:p-4 rounded-2xl border border-border/40">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed bg-muted/30 dark:bg-slate-900/40 p-3.5 sm:p-4 rounded-2xl border border-border/40">
           Este é um projeto independente de utilidade pública, criado de forma autônoma e voluntária. Não possui qualquer vínculo institucional, apoio ou patrocínio de órgãos públicos ou empresas privadas.
         </p>
 
@@ -41,7 +41,7 @@ export function Footer() {
           <span className="w-3 h-2 rounded-xs bg-[#D62828]" title="Vermelho Alagoas" />
           <span className="w-3 h-2 rounded-xs bg-white border border-slate-300 dark:border-slate-700" title="Branco Alagoas" />
           <span className="w-3 h-2 rounded-xs bg-[#0038A8]" title="Azul Alagoas" />
-          <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 ml-1">
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-300 ml-1">
             Orgulho de Alagoas • Maceió e Interior
           </span>
         </div>

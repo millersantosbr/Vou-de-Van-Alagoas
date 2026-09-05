@@ -283,10 +283,10 @@ export default function HomeContent() {
                   </div>
 
                   <div className="grow min-w-0">
-                    <span className="block text-[11px] font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
                       Saindo de (Origem)
                     </span>
-                    <p className={cn("text-base sm:text-lg font-bold truncate", !origem ? "text-slate-400 dark:text-slate-500" : "text-slate-900 dark:text-slate-100")}>
+                    <p className={cn("text-lg sm:text-xl font-extrabold truncate", !origem ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                       {origem ? origem : "Selecione a cidade de partida..."}
                     </p>
                   </div>
@@ -325,10 +325,10 @@ export default function HomeContent() {
                     </div>
 
                     <div className="grow min-w-0">
-                      <span className="block text-[11px] font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
+                      <span className="block text-xs font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
                         Saindo de (Origem)
                       </span>
-                      <p className={cn("text-base sm:text-lg font-bold truncate", !origem ? "text-slate-400 dark:text-slate-500" : "text-slate-900 dark:text-slate-100")}>
+                      <p className={cn("text-lg sm:text-xl font-extrabold truncate", !origem ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                         {origem ? origem : "Selecione a cidade de partida..."}
                       </p>
                     </div>
@@ -388,10 +388,10 @@ export default function HomeContent() {
                   </div>
 
                   <div className="grow min-w-0">
-                    <span className="block text-[11px] font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
                       Indo para (Destino)
                     </span>
-                    <p className={cn("text-base sm:text-lg font-bold truncate", !destino ? "text-slate-400 dark:text-slate-500" : "text-slate-900 dark:text-slate-100")}>
+                    <p className={cn("text-lg sm:text-xl font-extrabold truncate", !destino ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                       {destino ? destino : "Selecione a cidade de destino..."}
                     </p>
                   </div>
@@ -430,10 +430,10 @@ export default function HomeContent() {
                     </div>
 
                     <div className="grow min-w-0">
-                      <span className="block text-[11px] font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
+                      <span className="block text-xs font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
                         Indo para (Destino)
                       </span>
-                      <p className={cn("text-base sm:text-lg font-bold truncate", !destino ? "text-slate-400 dark:text-slate-500" : "text-slate-900 dark:text-slate-100")}>
+                      <p className={cn("text-lg sm:text-xl font-extrabold truncate", !destino ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                         {destino ? destino : "Selecione a cidade de destino..."}
                       </p>
                     </div>
@@ -462,7 +462,7 @@ export default function HomeContent() {
               Dia da viagem
             </h2>
             {filtroDia === "hoje" && (
-              <span className="text-[11px] font-bold text-[#0038A8] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400 px-2.5 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
+              <span className="text-xs font-bold text-[#0038A8] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400 px-2.5 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
                 Hoje é {diaHojeNome}
               </span>
             )}
@@ -485,7 +485,7 @@ export default function HomeContent() {
                   "snap-start shrink-0 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 border",
                   filtroDia === item.id
                     ? "bg-[#0038A8] text-white border-[#0038A8] shadow-md shadow-[#0038A8]/20"
-                    : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
                 )}
               >
                 {item.label}
@@ -500,10 +500,10 @@ export default function HomeContent() {
                 type="button"
                 onClick={() => setFiltroVia("todas")}
                 className={cn(
-                  "px-3 py-1 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5",
+                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5",
                   filtroVia === "todas"
                     ? "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border-blue-300 dark:border-blue-800 shadow-xs"
-                    : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                    : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:border-slate-300"
                 )}
               >
                 <Path size={14} weight="bold" /> Todas as Vias
@@ -514,10 +514,10 @@ export default function HomeContent() {
                   type="button"
                   onClick={() => setFiltroVia(via)}
                   className={cn(
-                    "px-3 py-1 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5",
+                    "px-3 py-1.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5",
                     filtroVia === via
                       ? "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border-blue-300 dark:border-blue-800 shadow-xs"
-                      : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                      : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:border-slate-300"
                   )}
                 >
                   <span>Via {via}</span>
@@ -563,10 +563,10 @@ export default function HomeContent() {
                       </div>
 
                       <div className="text-right">
-                        <div className="font-mono text-4xl sm:text-5xl font-black text-slate-900 dark:text-slate-50 tracking-tight leading-none">
+                        <div className="tabular-nums text-4xl sm:text-5xl font-black text-slate-900 dark:text-slate-50 tracking-normal leading-none">
                           {proximoHorario.horario}
                         </div>
-                        <div className="text-xs font-extrabold text-[#D62828] dark:text-red-400 mt-1.5">
+                        <div className="text-xs sm:text-sm font-extrabold text-[#D62828] dark:text-red-400 mt-1.5">
                           {getMinutosRestantes(proximoHorario.horario)}
                         </div>
                       </div>
@@ -575,30 +575,30 @@ export default function HomeContent() {
                     {/* Route Details */}
                     <div className="space-y-2">
                       <div className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 flex items-center gap-2 flex-wrap">
-                        <span className="font-mono text-xs font-bold bg-[#0038A8] text-white px-2.5 py-0.5 rounded-md shadow-xs">
+                        <span className="tabular-nums text-xs font-bold bg-[#0038A8] text-white px-2.5 py-0.5 rounded-md shadow-xs">
                           Linha {proximoHorario.codigoLinha}
                         </span>
-                        <span className="font-extrabold">{proximoHorario.nomeLinha}</span>
+                        <span className="font-extrabold text-base sm:text-lg">{proximoHorario.nomeLinha}</span>
                       </div>
 
-                      <div className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-slate-900 dark:text-slate-200">{proximoHorario.origem}</span>
-                        <ArrowRight size={14} className="text-[#0038A8]" />
-                        <span className="font-bold text-slate-900 dark:text-slate-200">{proximoHorario.destino}</span>
+                      <div className="text-sm text-slate-700 dark:text-slate-300 flex items-center gap-2 flex-wrap font-medium">
+                        <span className="font-bold text-slate-900 dark:text-slate-100">{proximoHorario.origem}</span>
+                        <ArrowRight size={15} className="text-[#0038A8] dark:text-blue-400" />
+                        <span className="font-bold text-slate-900 dark:text-slate-100">{proximoHorario.destino}</span>
                         {proximoHorario.extensao && (
-                          <span className="text-slate-400 dark:text-slate-500">({proximoHorario.extensao})</span>
+                          <span className="text-slate-500 dark:text-slate-400 font-medium">({proximoHorario.extensao})</span>
                         )}
                       </div>
 
                       {proximoHorario.via && (
-                        <p className="text-xs font-bold text-[#0038A8] dark:text-blue-400 flex items-center gap-1.5">
-                          <Path size={14} weight="bold" />
+                        <p className="text-xs sm:text-sm font-bold text-[#0038A8] dark:text-blue-400 flex items-center gap-1.5">
+                          <Path size={15} weight="bold" />
                           Via {proximoHorario.via}
                         </p>
                       )}
 
-                      <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                        <CalendarBlank size={15} />
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        <CalendarBlank size={16} />
                         <span>
                           {proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}
                         </span>
@@ -621,7 +621,7 @@ export default function HomeContent() {
                         type="button"
                         variant="outline"
                         onClick={() => toggleCardExpansion(proximoHorario.id)}
-                        className="rounded-xl font-bold text-xs border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
+                        className="rounded-xl font-bold text-xs sm:text-sm border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
                       >
                         {expandedCards[proximoHorario.id] ? "Ocultar Itinerário" : "Ver Itinerário ARSAL"}
                         {expandedCards[proximoHorario.id] ? <CaretUp size={14} className="ml-1" /> : <CaretDown size={14} className="ml-1" />}
@@ -630,23 +630,23 @@ export default function HomeContent() {
 
                     {/* Expanded Regulatory Details */}
                     {expandedCards[proximoHorario.id] && (
-                      <div className="mt-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 text-xs space-y-2 animate-in fade-in duration-200">
+                      <div className="mt-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm space-y-2.5 animate-in fade-in duration-200">
                         {proximoHorario.itinerario?.ida && (
                           <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-[11px]">Itinerário Ida:</p>
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.ida}</p>
+                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Itinerário Ida:</p>
+                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.ida}</p>
                           </div>
                         )}
                         {proximoHorario.itinerario?.volta && (
                           <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-[11px]">Itinerário Volta:</p>
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.volta}</p>
+                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Itinerário Volta:</p>
+                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.volta}</p>
                           </div>
                         )}
                         {proximoHorario.itinerario?.seccionamentos && (
                           <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-[11px]">Paradas autorizadas:</p>
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.seccionamentos}</p>
+                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Paradas autorizadas:</p>
+                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.seccionamentos}</p>
                           </div>
                         )}
                       </div>
@@ -659,7 +659,7 @@ export default function HomeContent() {
               {/* 📋 Subsequent Departure Cards List */}
               {horariosSubsequentes.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-1">
+                  <h3 className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider px-1">
                     Próximas Saídas
                   </h3>
 
@@ -673,26 +673,26 @@ export default function HomeContent() {
                           className="bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 p-4 transition-all hover:border-[#0038A8]/40 dark:hover:border-slate-700"
                         >
                           <div className="flex items-center gap-4">
-                            {/* Monospaced Time Badge */}
-                            <div className="shrink-0 text-center w-20 border-r border-slate-200 dark:border-slate-800 pr-3">
-                              <div className="font-mono text-2xl font-black text-slate-900 dark:text-slate-100">
+                            {/* Tabular Time Badge */}
+                            <div className="shrink-0 text-center w-24 border-r border-slate-200 dark:border-slate-800 pr-3">
+                              <div className="tabular-nums text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-normal">
                                 {item.horario}
                               </div>
-                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
+                              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
                                 Partida
                               </div>
                             </div>
 
                             {/* Center Info */}
                             <div className="grow min-w-0">
-                              <div className="font-bold text-sm text-slate-900 dark:text-slate-100 truncate">
+                              <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate">
                                 Linha {item.codigoLinha} • {item.nomeLinha}
                               </div>
-                              <div className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 truncate mt-0.5 font-medium">
                                 {item.via ? `Via ${item.via}` : `${item.origem} para ${item.destino}`}
                               </div>
                               <div className="flex items-center gap-1.5 mt-1.5">
-                                <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded text-[10px] font-semibold">
+                                <span className="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded text-xs font-semibold">
                                   {item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}
                                 </span>
                               </div>
@@ -711,18 +711,18 @@ export default function HomeContent() {
 
                           {/* Expandable Details */}
                           {isExpanded && (
-                            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs space-y-2 animate-in fade-in duration-200">
+                            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm space-y-2 animate-in fade-in duration-200">
                               <div className="flex justify-between items-center">
                                 <span className="font-semibold text-slate-900 dark:text-slate-100">Trajeto: {item.origem} → {item.destino}</span>
                                 <Link
                                   href={`/routes/${item.codigoLinha}`}
-                                  className="text-[#0038A8] dark:text-blue-400 hover:underline font-bold text-[11px] inline-flex items-center gap-1"
+                                  className="text-[#0038A8] dark:text-blue-400 hover:underline font-bold text-xs inline-flex items-center gap-1"
                                 >
-                                  Página da Linha <ArrowSquareOut size={13} />
+                                  Página da Linha <ArrowSquareOut size={14} />
                                 </Link>
                               </div>
                               {item.itinerario?.ida && (
-                                <p className="text-slate-600 dark:text-slate-400"><strong className="text-slate-900 dark:text-slate-100">Itinerário:</strong> {item.itinerario.ida}</p>
+                                <p className="text-slate-700 dark:text-slate-300 leading-relaxed"><strong className="text-slate-900 dark:text-slate-100">Itinerário:</strong> {item.itinerario.ida}</p>
                               )}
                             </div>
                           )}

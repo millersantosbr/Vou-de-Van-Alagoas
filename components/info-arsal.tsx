@@ -29,7 +29,7 @@ export function InfoArsal() {
         <h2 className="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
           Guia do Passageiro ARSAL
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md">
           Regras essenciais e direitos garantidos para a sua viagem em Alagoas.
         </p>
       </div>
@@ -47,7 +47,7 @@ export function InfoArsal() {
               <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                 Gratuidade e Meia-Passagem
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Benefícios garantidos por lei estadual</p>
+              <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Benefícios garantidos por lei estadual</p>
             </div>
           </div>
 
@@ -56,7 +56,7 @@ export function InfoArsal() {
               <span className="text-xs font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md shrink-0">
                 60+
               </span>
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">Idosos:</strong> 2 vagas 100% gratuitas por van ou 50% de desconto com documento oficial com foto.
               </p>
             </div>
@@ -65,14 +65,14 @@ export function InfoArsal() {
               <span className="text-xs font-bold text-[#0038A8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-md shrink-0">
                 50%
               </span>
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">Estudantes:</strong> Meia-passagem garantida mediante apresentação da carteira estudantil válida.
               </p>
             </div>
 
             <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
               <Wheelchair size={18} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">PcD:</strong> Gratuidade integral assegurada com a carteira Passe Livre ARSAL.
               </p>
             </div>
@@ -89,28 +89,28 @@ export function InfoArsal() {
               <h3 className="font-bold text-base text-slate-900 dark:text-slate-100">
                 Bagagens e Animais
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Limites e condições de embarque</p>
+              <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Limites e condições de embarque</p>
             </div>
           </div>
 
           <div className="space-y-2.5 pt-1">
             <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
               <Suitcase size={18} weight="bold" className="text-[#D62828] dark:text-red-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">Bagagens:</strong> Até 20 kg no bagageiro e 5 kg de mão (acomodada no colo).
               </p>
             </div>
 
             <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
               <PawPrint size={18} weight="bold" className="text-[#D62828] dark:text-red-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">Animais domésticos:</strong> Permitidos em caixa de transporte com carteira de vacinação em dia.
               </p>
             </div>
 
             <div className="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/60">
               <ShieldCheck size={18} weight="bold" className="text-[#D62828] dark:text-red-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-slate-100 font-semibold">Cão-Guia:</strong> Embarque livre e 100% gratuito garantido por lei federal.
               </p>
             </div>
@@ -126,7 +126,7 @@ export function InfoArsal() {
                 Identificação da Van Autorizada
               </h3>
             </div>
-            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full">
+            <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">
               3 Itens Obrigatórios
             </span>
           </div>
@@ -137,10 +137,10 @@ export function InfoArsal() {
                 <Tag size={16} weight="bold" />
               </div>
               <div className="min-w-0">
-                <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">
+                <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 block">
                   Selo ARSAL Visível
                 </span>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   Adesivo oficial com ano vigente no para-brisa.
                 </p>
               </div>
@@ -151,10 +151,10 @@ export function InfoArsal() {
                 <IdentificationBadge size={16} weight="bold" />
               </div>
               <div className="min-w-0">
-                <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">
+                <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 block">
                   Crachá do Motorista
                 </span>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   Identificação profissional autorizada com foto.
                 </p>
               </div>
@@ -165,10 +165,10 @@ export function InfoArsal() {
                 <Car size={16} weight="bold" />
               </div>
               <div className="min-w-0">
-                <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">
+                <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 block">
                   Placa Comercial
                 </span>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   Placa vermelha de aluguel ou Mercosul comercial.
                 </p>
               </div>
@@ -184,7 +184,7 @@ export function InfoArsal() {
                 <Phone size={18} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
                 <span>Ouvidoria e Fiscalização ARSAL</span>
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
                 Para reclamações sobre descumprimento de horários ou transporte irregular:
               </p>
             </div>
@@ -199,10 +199,10 @@ export function InfoArsal() {
                 <Phone size={18} weight="bold" />
               </div>
               <div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block">
                   Ligação Gratuita
                 </span>
-                <span className="font-mono font-bold text-base text-slate-900 dark:text-slate-100">
+                <span className="tabular-nums font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100">
                   0800 284 0429
                 </span>
               </div>
@@ -218,11 +218,11 @@ export function InfoArsal() {
                 <ChatCircleDots size={18} weight="bold" />
               </div>
               <div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block">
                   WhatsApp ARSAL
                 </span>
-                <span className="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center gap-1">
-                  Atendimento Online <ArrowSquareOut size={13} className="text-slate-400" />
+                <span className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-1">
+                  Atendimento Online <ArrowSquareOut size={14} className="text-slate-500" />
                 </span>
               </div>
             </a>

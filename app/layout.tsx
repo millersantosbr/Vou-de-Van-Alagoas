@@ -1,16 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import { Bricolage_Grotesque, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
+import { Outfit, Inter, JetBrains_Mono } from "next/font/google"
 import { Providers } from "./providers"
 
-const bricolageGrotesque = Bricolage_Grotesque({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 })
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -45,7 +45,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${bricolageGrotesque.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable}`}
+      className={`${outfit.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <link rel="icon" href="/logoicon.webp" />
@@ -54,7 +54,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Vou de Van" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={plusJakartaSans.className}>
+      <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
