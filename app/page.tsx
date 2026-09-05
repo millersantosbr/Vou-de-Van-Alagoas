@@ -85,8 +85,8 @@ export default function Home() {
       </section>
 
       {/* Main Content Area - Overlapping seamlessly with Waves and Ambient Light */}
-      <div className="container mx-auto px-3.5 sm:px-6 -mt-12 sm:-mt-18 md:-mt-22 pb-12 relative z-20">
-        <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+      <div className="container mx-auto px-3.5 sm:px-6 -mt-12 sm:-mt-18 md:-mt-22 pb-16 relative z-20">
+        <div className="max-w-4xl mx-auto space-y-12 sm:space-y-16">
 
           {/* Main Search Section (Quadro de Horários) */}
           <section id="quadro-horarios" className="scroll-mt-20 relative">
@@ -97,12 +97,16 @@ export default function Home() {
 
           {/* Map Section (Explorar Região) */}
           <section id="explorar-regiao" className="space-y-4 scroll-mt-20">
-            <div className="flex flex-col items-center space-y-1 text-center">
+            <div className="flex flex-col items-center space-y-2 text-center">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 text-xs font-semibold text-[#0038A8] dark:text-blue-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0038A8] dark:bg-blue-400" />
+                <span>Pontos Autorizados</span>
+              </div>
               <h2 className="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">
                 Terminais e Pontos de Embarque
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md">
-                Localize no mapa os pontos autorizados em todo o estado.
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
+                Localize no mapa os terminais rodoviários e postos de apoio em Alagoas.
               </p>
             </div>
             <DynamicNearbyStopsMap />

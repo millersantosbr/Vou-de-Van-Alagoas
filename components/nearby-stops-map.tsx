@@ -13,7 +13,7 @@ import {
   X,
   Crosshair,
   Path,
-  WarningCircle
+  WarningCircle,
 } from "@phosphor-icons/react"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
@@ -23,9 +23,11 @@ import type { MapStop } from "./map-component"
 const MapComponent = dynamic(() => import("./map-component"), {
   ssr: false,
   loading: () => (
-    <div className="h-[450px] w-full flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900 text-slate-500 gap-2">
-      <Compass size={32} className="animate-spin text-[#0038A8]" />
-      <span className="text-xs font-bold uppercase tracking-wider">Carregando Mapa de Pontos...</span>
+    <div className="h-[420px] w-full flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900 text-slate-400 gap-2.5">
+      <Compass size={28} className="animate-spin text-[#0038A8]" />
+      <span className="text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-400">
+        Carregando mapa interativo...
+      </span>
     </div>
   ),
 })
@@ -154,7 +156,7 @@ export function NearbyStopsMap() {
   // Disparar permissão de geolocalização do navegador
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
-      setGeoError("Geolocalização não é suportada pelo seu navegador.")
+      setGeoError("Geolocalização não suportada.")
       return
     }
 
@@ -181,9 +183,9 @@ export function NearbyStopsMap() {
       (err) => {
         setIsLocating(false)
         if (err.code === err.PERMISSION_DENIED) {
-          setGeoError("Permissão de localização negada. Ative nas configurações do navegador.")
+          setGeoError("Permissão negada. Ative a localização no seu navegador.")
         } else {
-          setGeoError("Não foi possível obter sua localização no momento.")
+          setGeoError("Não foi possível obter sua localização.")
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
@@ -204,11 +206,9 @@ export function NearbyStopsMap() {
   // Filtrar e ordenar pontos
   const filteredStops = useMemo(() => {
     let result = stopsWithDistances.filter((stop) => {
-      // Filtro de categoria
       if (activeFilter === "terminais" && stop.type !== "terminal") return false
       if (activeFilter === "postos" && stop.type !== "posto") return false
 
-      // Filtro de pesquisa
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase()
         const matchesName = stop.name.toLowerCase().includes(query)
@@ -220,7 +220,6 @@ export function NearbyStopsMap() {
       return true
     })
 
-    // Se o filtro for próximos ou houver localização ativa, ordenar por proximidade
     if (userLocation && activeFilter === "proximos") {
       result = [...result].sort((a, b) => (a.distanceKm || 0) - (b.distanceKm || 0))
     }
@@ -237,152 +236,133 @@ export function NearbyStopsMap() {
   }
 
   return (
-    <div className="space-y-4">
-      {/* Container Principal do Mapa */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden relative">
+    <div className="space-y-3">
+      {/* Container Principal do Mapa com Design Clean */}
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden relative">
         
-        {/* Barra de Busca & Filtros */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md space-y-3 relative z-20">
+        {/* Barra de Controle Unificada: Busca & Filtros */}
+        <div className="p-3 sm:p-4 border-b border-slate-100 dark:border-slate-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md space-y-2.5 relative z-20">
           
-          {/* Banner de permissão quando localização não estiver ativa */}
-          {!userLocation && !geoError && (
-            <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-900/60 text-xs">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <Crosshair size={20} weight="bold" className="text-[#0038A8] shrink-0" />
-                <span className="text-slate-700 dark:text-slate-300 font-medium truncate">
-                  Ative o GPS para encontrar os terminais mais próximos e traçar rotas.
-                </span>
-              </div>
-              <Button
-                type="button"
-                onClick={handleGetLocation}
-                disabled={isLocating}
-                className="bg-[#0038A8] hover:bg-[#002b80] text-white text-xs font-bold rounded-xl px-3 py-1.5 shrink-0 shadow-sm"
-              >
-                {isLocating ? "Localizando..." : "Ativar GPS"}
-              </Button>
-            </div>
-          )}
-
-          {/* Mensagem de Erro de GPS */}
+          {/* Mensagem de Erro de GPS (Discreta) */}
           {geoError && (
-            <div className="flex items-center justify-between gap-2 p-3 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-xs text-red-800 dark:text-red-300">
+            <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200/60 dark:border-red-900/60 text-xs text-red-700 dark:text-red-300">
               <div className="flex items-center gap-2">
-                <WarningCircle size={18} weight="bold" className="shrink-0" />
+                <WarningCircle size={16} weight="bold" className="shrink-0" />
                 <span>{geoError}</span>
               </div>
               <button
                 type="button"
                 onClick={() => setGeoError(null)}
-                className="p-1 text-red-700 hover:text-red-900"
+                className="p-0.5 text-red-600 hover:text-red-800"
               >
                 <X size={14} />
               </button>
             </div>
           )}
 
-          {/* Search Bar */}
+          {/* Campo de Busca com Botão de GPS Integrado */}
           <div className="relative">
             <MagnifyingGlass size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar terminal, posto ou cidade de destino..."
-              className="w-full h-11 pl-10 pr-12 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0038A8]/20 transition-all"
+              placeholder="Buscar terminal, posto ou cidade atendida..."
+              className="w-full h-11 pl-10 pr-24 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 text-sm font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0038A8]/20 focus:border-[#0038A8] transition-all"
             />
-            {searchQuery ? (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                aria-label="Limpar busca"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-              >
-                <X size={16} />
-              </button>
-            ) : (
+            
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Limpar busca"
+                  className="w-7 h-7 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition-colors"
+                >
+                  <X size={15} />
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={handleGetLocation}
-                title="Usar minha localização atual"
-                aria-label="Usar minha localização atual"
+                title={userLocation ? "Localização Ativa" : "Usar meu GPS"}
                 className={cn(
-                  "absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
+                  "h-7 px-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-95",
                   userLocation
-                    ? "bg-[#0038A8] text-white"
-                    : "bg-slate-100 dark:bg-slate-700 text-[#0038A8] hover:bg-slate-200 dark:hover:bg-slate-600"
+                    ? "bg-[#0038A8] text-white shadow-xs"
+                    : "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 hover:bg-blue-100/80 border border-blue-200/60 dark:border-blue-900/60"
                 )}
               >
-                <Crosshair size={17} weight="bold" className={cn(isLocating && "animate-spin")} />
+                <Crosshair size={14} weight="bold" className={cn(isLocating && "animate-spin")} />
+                <span className="hidden sm:inline">{isLocating ? "Buscando..." : userLocation ? "GPS Ativo" : "Perto de mim"}</span>
               </button>
-            )}
+            </div>
           </div>
 
-          {/* Filter Chips */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+          {/* Filtros em Pílulas Minimalistas */}
+          <div className="flex gap-1.5 overflow-x-auto no-scrollbar pt-0.5">
             <button
               type="button"
               onClick={() => setActiveFilter("todos")}
               className={cn(
-                "shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border",
+                "shrink-0 px-3 py-1 rounded-xl text-xs font-medium transition-all",
                 activeFilter === "todos"
-                  ? "bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 border-slate-900 dark:border-slate-100 shadow-sm"
-                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                  ? "bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold shadow-xs"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200/70 dark:hover:bg-slate-700/70"
               )}
             >
-              Todos os Pontos ({STOPS_DATA.length})
+              Todos ({STOPS_DATA.length})
             </button>
 
             <button
               type="button"
               onClick={() => setActiveFilter("terminais")}
               className={cn(
-                "shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 border",
+                "shrink-0 px-3 py-1 rounded-xl text-xs font-medium transition-all flex items-center gap-1",
                 activeFilter === "terminais"
-                  ? "bg-[#0038A8] text-white border-[#0038A8] shadow-sm"
-                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                  ? "bg-[#0038A8] text-white font-semibold shadow-xs"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200/70 dark:hover:bg-slate-700/70"
               )}
             >
-              <Buildings size={14} weight="bold" /> Terminais
+              <Buildings size={13} weight="bold" />
+              <span>Terminais</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveFilter("postos")}
               className={cn(
-                "shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 border",
+                "shrink-0 px-3 py-1 rounded-xl text-xs font-medium transition-all flex items-center gap-1",
                 activeFilter === "postos"
-                  ? "bg-[#002060] text-white border-[#002060] shadow-sm"
-                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                  ? "bg-[#002060] text-white font-semibold shadow-xs"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200/70 dark:hover:bg-slate-700/70"
               )}
             >
-              <Bus size={14} weight="bold" /> Postos de Apoio
+              <Bus size={13} weight="bold" />
+              <span>Postos de Apoio</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => {
-                if (userLocation) {
-                  setActiveFilter("proximos")
-                } else {
-                  handleGetLocation()
-                }
-              }}
-              className={cn(
-                "shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 border",
-                activeFilter === "proximos"
-                  ? "bg-[#D62828] text-white border-[#D62828] font-bold shadow-sm"
-                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
-              )}
-            >
-              <NavigationArrow size={14} weight="bold" className={cn(isLocating && "animate-spin")} />
-              {userLocation ? "Mais Próximos de Mim" : "Ativar Localização"}
-            </button>
+            {userLocation && (
+              <button
+                type="button"
+                onClick={() => setActiveFilter("proximos")}
+                className={cn(
+                  "shrink-0 px-3 py-1 rounded-xl text-xs font-medium transition-all flex items-center gap-1",
+                  activeFilter === "proximos"
+                    ? "bg-[#D62828] text-white font-semibold shadow-xs"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200/70 dark:hover:bg-slate-700/70"
+                )}
+              >
+                <NavigationArrow size={13} weight="bold" />
+                <span>Mais Próximos</span>
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Visualizador do Mapa */}
-        <div className="h-[420px] sm:h-[480px] w-full relative z-0">
+        {/* Mapa Interativo */}
+        <div className="h-[380px] sm:h-[440px] w-full relative z-0">
           <MapComponent
             userLocation={userLocation}
             stops={filteredStops}
@@ -391,39 +371,38 @@ export function NearbyStopsMap() {
           />
         </div>
 
-        {/* Detalhes do Terminal Selecionado & Traçado de Rota */}
+        {/* Card Flutuante / Ficha Limpa do Ponto Selecionado */}
         {selectedStop && (
-          <div className="p-4 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md animate-in slide-in-from-bottom duration-300 relative z-20">
+          <div className="p-4 border-t border-slate-100 dark:border-slate-800/80 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md animate-in slide-in-from-bottom-3 duration-200 relative z-20 space-y-3">
             <div className="flex items-start justify-between gap-3">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 flex-wrap">
+              <div className="space-y-1 min-w-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
                   <span className={cn(
-                    "text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md tracking-wider flex items-center gap-1",
+                    "text-[10px] font-bold uppercase px-2 py-0.5 rounded-md tracking-wider inline-flex items-center gap-1",
                     selectedStop.type === "terminal"
-                      ? "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border border-blue-200 dark:border-blue-900"
-                      : "bg-blue-50 dark:bg-blue-950/40 text-[#0038A8] dark:text-blue-300 border border-blue-200 dark:border-blue-900"
+                      ? "bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                   )}>
                     <ShieldCheck size={12} weight="bold" />
-                    {selectedStop.type === "terminal" ? "Terminal Central ARSAL" : "Posto Autorizado"}
+                    {selectedStop.type === "terminal" ? "Terminal Rodoviário" : "Posto Autorizado"}
                   </span>
 
-                  {/* Selo de Distância em Relação ao Usuário */}
                   {selectedStop.distanceKm !== undefined && (
-                    <span className="font-mono text-[11px] font-bold bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 px-2 py-0.5 rounded-md border border-red-200 dark:border-red-900 flex items-center gap-1">
-                      <NavigationArrow size={12} weight="bold" />
+                    <span className="text-[10px] font-bold bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+                      <NavigationArrow size={11} weight="bold" />
                       {formatDistance(selectedStop.distanceKm)} de você
                     </span>
                   )}
                 </div>
 
-                <h4 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-tight">
+                <h4 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug truncate">
                   {selectedStop.name}
                 </h4>
 
                 {selectedStop.address && (
-                  <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1">
-                    <MapPin size={14} weight="bold" className="shrink-0 text-[#0038A8]" />
-                    {selectedStop.address}
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
+                    <MapPin size={13} weight="bold" className="shrink-0 text-[#0038A8]" />
+                    <span className="truncate">{selectedStop.address}</span>
                   </p>
                 )}
               </div>
@@ -432,49 +411,48 @@ export function NearbyStopsMap() {
                 type="button"
                 onClick={() => setSelectedStop(null)}
                 aria-label="Fechar detalhes"
-                className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 flex items-center justify-center transition-colors shrink-0"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 flex items-center justify-center transition-colors shrink-0"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
             </div>
 
-            {/* Destinos atendidos */}
+            {/* Cidades principais atendidas */}
             {selectedStop.cities && selectedStop.cities.length > 0 && (
-              <div className="mt-3.5 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5">
-                <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                  Destinos atendidos a partir deste ponto:
-                </p>
-                <div className="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto no-scrollbar">
-                  {selectedStop.cities.map((city) => (
-                    <span
-                      key={city}
-                      className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-md text-xs font-medium"
-                    >
-                      {city}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                <span className="text-[11px] font-semibold text-slate-400 shrink-0">Rotas:</span>
+                {selectedStop.cities.slice(0, 6).map((city) => (
+                  <span
+                    key={city}
+                    className="shrink-0 px-2 py-0.5 bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-lg text-[11px] font-medium"
+                  >
+                    {city}
+                  </span>
+                ))}
+                {selectedStop.cities.length > 6 && (
+                  <span className="text-[11px] text-slate-400 font-medium shrink-0">
+                    +{selectedStop.cities.length - 6}
+                  </span>
+                )}
               </div>
             )}
 
-            {/* Ação Principal: Traçar Rota */}
-            <div className="flex flex-wrap gap-2.5 mt-4">
-              <Button
-                asChild
-                className="flex-1 bg-[#0038A8] hover:bg-[#002b80] text-white font-bold rounded-xl text-xs sm:text-sm py-2.5 shadow-sm"
+            {/* Ação Direta: Traçar Rota */}
+            <Button
+              asChild
+              className="w-full bg-[#0038A8] hover:bg-[#002b80] text-white font-bold rounded-xl text-xs sm:text-sm h-10 shadow-xs"
+            >
+              <a
+                href={getGoogleMapsRouteUrl(selectedStop)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2"
               >
-                <a
-                  href={getGoogleMapsRouteUrl(selectedStop)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2"
-                >
-                  <Path size={16} weight="bold" />
-                  <span>{userLocation ? "Como Chegar (Traçar Rota)" : "Abrir Rota no Google Maps"}</span>
-                  <ArrowSquareOut size={14} />
-                </a>
-              </Button>
-            </div>
+                <Path size={16} weight="bold" />
+                <span>{userLocation ? "Traçar Rota no Google Maps" : "Abrir Localização no Mapa"}</span>
+                <ArrowSquareOut size={14} />
+              </a>
+            </Button>
           </div>
         )}
 
@@ -482,6 +460,7 @@ export function NearbyStopsMap() {
     </div>
   )
 }
+
 
 
 
