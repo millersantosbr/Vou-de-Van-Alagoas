@@ -37,18 +37,35 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen relative pb-28 overflow-x-hidden bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <main className="min-h-screen relative pb-28 md:pb-16 overflow-x-hidden bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
       
       {/* 🌊 Hero Section com Identidade Oficial de Alagoas */}
-      <section className="bg-gradient-to-b from-[#001438] via-[#0038A8] to-[#002b80] dark:from-[#030914] dark:via-[#051636] dark:to-[#081f4d] text-white pt-3 sm:pt-4 overflow-hidden relative">
+      <section className="bg-gradient-to-b from-[#001438] via-[#0038A8] to-[#002b80] dark:from-[#030914] dark:via-[#051636] dark:to-[#081f4d] text-white pt-2 sm:pt-4 overflow-hidden relative">
         
-        {/* Top Floating Dark Mode Toggle */}
-        <div className="absolute right-4 top-4 sm:right-6 sm:top-6 z-30 flex items-center gap-2">
+        {/* Desktop Top Header Bar (Clean & Professional) */}
+        <header className="hidden md:flex items-center justify-between container mx-auto px-6 py-3 relative z-30 border-b border-white/10">
+          <a href="#quadro-horarios" className="flex items-center gap-2 group">
+            <span className="text-white font-black text-lg tracking-tight group-hover:text-blue-200 transition-colors">
+              Vou de Van <span className="text-[#D62828] text-xs font-black px-1.5 py-0.5 rounded bg-white/15 ml-1">ALAGOAS</span>
+            </span>
+          </a>
+          <nav className="flex items-center gap-6 text-sm font-bold text-white/90">
+            <a href="#quadro-horarios" className="hover:text-white hover:underline underline-offset-4 transition-all">Horários</a>
+            <a href="#explorar-regiao" className="hover:text-white hover:underline underline-offset-4 transition-all">Pontos de Embarque</a>
+            <a href="#info-arsal" className="hover:text-white hover:underline underline-offset-4 transition-all">Guia ARSAL</a>
+            <div className="pl-3 border-l border-white/20">
+              <DynamicDarkModeToggle />
+            </div>
+          </nav>
+        </header>
+
+        {/* Mobile Top Dark Mode Toggle */}
+        <div className="md:hidden absolute right-4 top-4 z-30 flex items-center gap-2">
           <DynamicDarkModeToggle />
         </div>
 
-        {/* Hero Central Content: Logo em Destaque & Textos */}
-        <div className="container mx-auto px-4 sm:px-6 pt-4 sm:pt-6 pb-2 sm:pb-4 text-center flex flex-col items-center space-y-4 relative z-20">
+        {/* Hero Central Content: Logo em Destaque & Textos (Mantidos conforme solicitado) */}
+        <div className="container mx-auto px-4 sm:px-6 pt-3 sm:pt-6 pb-2 sm:pb-4 text-center flex flex-col items-center space-y-4 relative z-20">
           
           {/* Logo Centralizada e com Maior Destaque */}
           <div className="relative w-[260px] h-[140px] sm:w-[340px] sm:h-[185px] md:w-[420px] md:h-[230px] flex items-center justify-center transition-transform hover:scale-[1.02] duration-300">
@@ -63,9 +80,9 @@ export default function Home() {
 
           <div className="space-y-2.5 max-w-3xl">
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] text-balance">
-              Horários de Vans em Alagoas{" "}
+              Qual é o seu destino?{" "}
               <span className="text-white drop-shadow-[0_2px_12px_rgba(0,56,168,0.5)] block sm:inline relative">
-                em um só lugar
+                Horários de vans em Alagoas
                 <span className="hidden sm:block absolute -bottom-1 left-0 right-0 h-1 bg-[#D62828] rounded-full" />
               </span>
             </h1>

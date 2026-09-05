@@ -17,6 +17,7 @@ import {
   Clock,
   MagnifyingGlass,
   ArrowsDownUp,
+  ArrowsLeftRight,
   CalendarBlank,
   Path,
   CaretDown,
@@ -54,6 +55,7 @@ export default function HomeContent() {
   const [filtroDia, setFiltroDia] = useState<FiltroDia>("hoje")
   const [horariosFiltrados, setHorariosFiltrados] = useState<HorarioFormatado[]>([])
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({})
+  const [mostrarTodosHorarios, setMostrarTodosHorarios] = useState(false)
 
   const [openOrigem, setOpenOrigem] = useState(false)
   const [openDestino, setOpenDestino] = useState(false)
@@ -92,6 +94,7 @@ export default function HomeContent() {
   }
 
   const diaHojeNome = useMemo(() => getDiaSemanaHoje(), [])
+  const diaAmanhaNome = useMemo(() => getDiaSemanaOffset(1), [])
 
   // Relógio em tempo real atualizado a cada 30 segundos
   const [agora, setAgora] = useState(() => new Date())
@@ -107,9 +110,10 @@ export default function HomeContent() {
     return `${hh}:${mm}`
   }, [agora])
 
-  // Resetar viagens passadas quando a rota muda
+  // Resetar viagens passadas e expansores quando a rota ou dia mudam
   useEffect(() => {
     setMostrarViagensPassadas(false)
+    setMostrarTodosHorarios(false)
   }, [origem, destino, filtroDia])
 
   // Atualiza destinos e vias quando a origem muda
@@ -206,7 +210,26 @@ export default function HomeContent() {
   const proximaSaidaInfo = useMemo(() => {
     if (!origem || !destino) return null
 
-    // Quando o filtro NÃO for "hoje" (o usuário escolheu manualmente um dia ou "todos")
+    // Quando o filtro for "amanha"
+    if (filtroDia === "amanha") {
+      if (horariosFiltrados.length === 0) return null
+      const primeiro = horariosFiltrados[0]
+      return {
+        isHoje: false,
+        isAmanha: true,
+        isEncerradoHoje: false,
+        diaBadge: `Primeira Saída • Amanhã (${diaAmanhaNome})`,
+        diaNome: "Amanhã",
+        diaSemanaNome: diaAmanhaNome,
+        diaSubtitulo: `Saída programada do terminal às ${primeiro.horario}`,
+        proximoHorario: primeiro,
+        horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== primeiro.id),
+        totalHorarios: horariosFiltrados.length,
+        alertaEncerramento: null,
+      }
+    }
+
+    // Quando o filtro NÃO for "hoje" nem "amanha" (o usuário escolheu manualmente um dia ou "todos")
     if (filtroDia !== "hoje") {
       if (horariosFiltrados.length === 0) return null
       const primeiro = horariosFiltrados[0]
@@ -225,7 +248,7 @@ export default function HomeContent() {
         diaBadge: `Programado (${labelFiltro})`,
         diaNome: labelFiltro,
         diaSemanaNome: labelFiltro,
-        diaSubtitulo: `Partida programada • ${labelFiltro}`,
+        diaSubtitulo: `Saída programada do terminal às ${primeiro.horario}`,
         proximoHorario: primeiro,
         horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== primeiro.id),
         totalHorarios: horariosFiltrados.length,
@@ -245,20 +268,20 @@ export default function HomeContent() {
       const diffMs = saida.getTime() - agora.getTime()
       const diffMin = Math.round(diffMs / 60000)
 
-      let tempoTexto = `Hoje às ${saidaRestanteHoje.horario}`
+      let tempoTexto = `Saída programada do terminal às ${saidaRestanteHoje.horario}`
       if (diffMin > 0 && diffMin <= 60) {
-        tempoTexto = `Hoje às ${saidaRestanteHoje.horario} • Em ${diffMin} min`
+        tempoTexto = `Saída programada do terminal às ${saidaRestanteHoje.horario} • Em ${diffMin} min`
       } else if (diffMin > 60) {
         const horas = Math.floor(diffMin / 60)
         const mins = diffMin % 60
-        tempoTexto = `Hoje às ${saidaRestanteHoje.horario} • Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
+        tempoTexto = `Saída programada do terminal às ${saidaRestanteHoje.horario} • Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
       }
 
       return {
         isHoje: true,
         isAmanha: false,
         isEncerradoHoje: false,
-        diaBadge: "Próxima Saída (Hoje)",
+        diaBadge: `Próxima Saída • Hoje (${diaHojeNome})`,
         diaNome: "Hoje",
         diaSemanaNome: diaHojeNome,
         diaSubtitulo: tempoTexto,
@@ -314,7 +337,7 @@ export default function HomeContent() {
         diaBadge: isAmanha ? `Próxima Saída • Amanhã (${diaSemanaNome})` : `Próxima Saída • ${diaSemanaNome}`,
         diaNome: labelDia,
         diaSemanaNome,
-        diaSubtitulo: `${labelDia} (${diaSemanaNome}) às ${proximoAmanha.horario} • ${tempoAteSaida}`,
+        diaSubtitulo: `Primeira saída amanhã às ${proximoAmanha.horario} • ${tempoAteSaida}`,
         proximoHorario: proximoAmanha,
         horariosSubsequentes: horariosDiaAmanha.filter((h) => h.id !== proximoAmanha?.id),
         totalHorarios: horariosDiaAmanha.length,
@@ -337,7 +360,7 @@ export default function HomeContent() {
       totalHorarios: horariosFiltrados.length,
       alertaEncerramento: "Viagens de hoje já finalizadas.",
     }
-  }, [origem, destino, filtroDia, filtroVia, horariosFiltrados, horaAtualString, diaHojeNome, agora])
+  }, [origem, destino, filtroDia, filtroVia, horariosFiltrados, horaAtualString, diaHojeNome, diaAmanhaNome, agora])
 
   const proximoHorario = proximaSaidaInfo?.proximoHorario || null
   const horariosSubsequentes = proximaSaidaInfo?.horariosSubsequentes || []
@@ -408,58 +431,17 @@ export default function HomeContent() {
     <div className="space-y-6">
       {/* 🚀 Search Card - Cores de Alagoas (Azul e Vermelho) com Uilora Aesthetics */}
       <section className="relative">
-        <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-[0_12px_36px_-6px_rgba(0,56,168,0.12)] dark:shadow-[0_12px_36px_-6px_rgba(0,0,0,0.6)] border border-slate-200/90 dark:border-slate-800/90 p-3 sm:p-4 relative z-10">
-          <div className="relative flex flex-col gap-2">
+        <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-[0_12px_36px_-6px_rgba(0,56,168,0.12)] dark:shadow-[0_12px_36px_-6px_rgba(0,0,0,0.6)] border border-slate-200/90 dark:border-slate-800/90 p-3.5 sm:p-5 relative z-10">
+          <div className="relative flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] md:items-center gap-2 sm:gap-3">
             
             {/* Origin Input Card (Azul Alagoas) */}
-            {isMobile ? (
-              <>
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setOpenOrigem(true)}
-                  className={cn(
-                    "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-blue-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#0038A8]/30",
-                    isPending && "opacity-80"
-                  )}
-                >
-                  <div className="flex flex-col items-center justify-center relative shrink-0">
-                    <Circle size={18} weight="bold" className="text-[#0038A8] z-10" />
-                    <div className="w-0.5 h-8 bg-gradient-to-b from-[#0038A8] to-[#D62828] opacity-30 absolute top-4 left-1/2 -translate-x-1/2" />
-                  </div>
-
-                  <div className="grow min-w-0">
-                    <span className="block text-xs font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
-                      Saindo de (Origem)
-                    </span>
-                    <p className={cn("text-lg sm:text-xl font-extrabold truncate", !origem ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
-                      {origem ? origem : "Selecione a cidade de partida..."}
-                    </p>
-                  </div>
-
-                  <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
-                </div>
-
-                <Drawer open={openOrigem} onOpenChange={setOpenOrigem}>
-                  <DrawerContent className="max-h-[85dvh] p-0 z-50">
-                    <DrawerHeader className="border-b border-slate-200 dark:border-slate-800 pb-3 pt-3 px-4 text-left">
-                      <DrawerTitle className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                        <Circle size={16} weight="bold" className="text-[#0038A8]" />
-                        Selecione a cidade de origem
-                      </DrawerTitle>
-                    </DrawerHeader>
-                    <div className="p-2 pb-6">
-                      {renderOrigemList()}
-                    </div>
-                  </DrawerContent>
-                </Drawer>
-              </>
-            ) : (
-              <Popover open={openOrigem} onOpenChange={(open) => startTransition(() => setOpenOrigem(open))}>
-                <PopoverTrigger asChild>
+            <div className="w-full">
+              {isMobile ? (
+                <>
                   <div
                     role="button"
                     tabIndex={0}
+                    onClick={() => setOpenOrigem(true)}
                     className={cn(
                       "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-blue-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#0038A8]/30",
                       isPending && "opacity-80"
@@ -467,12 +449,11 @@ export default function HomeContent() {
                   >
                     <div className="flex flex-col items-center justify-center relative shrink-0">
                       <Circle size={18} weight="bold" className="text-[#0038A8] z-10" />
-                      <div className="w-0.5 h-8 bg-gradient-to-b from-[#0038A8] to-[#D62828] opacity-30 absolute top-4 left-1/2 -translate-x-1/2" />
                     </div>
 
                     <div className="grow min-w-0">
                       <span className="block text-xs font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
-                        Saindo de (Origem)
+                        De onde? (Origem)
                       </span>
                       <p className={cn("text-lg sm:text-xl font-extrabold truncate", !origem ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                         {origem ? origem : "Selecione a cidade de partida..."}
@@ -481,15 +462,57 @@ export default function HomeContent() {
 
                     <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50" align="start" side="bottom" sideOffset={6}>
-                  {renderOrigemList()}
-                </PopoverContent>
-              </Popover>
-            )}
 
-            {/* Floating Swap Button com Física de Mola Uilora */}
-            <div className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30">
+                  <Drawer open={openOrigem} onOpenChange={setOpenOrigem}>
+                    <DrawerContent className="max-h-[85dvh] p-0 z-50">
+                      <DrawerHeader className="border-b border-slate-200 dark:border-slate-800 pb-3 pt-3 px-4 text-left">
+                        <DrawerTitle className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                          <Circle size={16} weight="bold" className="text-[#0038A8]" />
+                          Selecione a cidade de origem
+                        </DrawerTitle>
+                      </DrawerHeader>
+                      <div className="p-2 pb-6">
+                        {renderOrigemList()}
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+                </>
+              ) : (
+                <Popover open={openOrigem} onOpenChange={(open) => startTransition(() => setOpenOrigem(open))}>
+                  <PopoverTrigger asChild>
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      className={cn(
+                        "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-blue-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#0038A8]/30",
+                        isPending && "opacity-80"
+                      )}
+                    >
+                      <div className="flex flex-col items-center justify-center relative shrink-0">
+                        <Circle size={18} weight="bold" className="text-[#0038A8] z-10" />
+                      </div>
+
+                      <div className="grow min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-wider text-[#0038A8] dark:text-blue-400 mb-0.5">
+                          De onde? (Origem)
+                        </span>
+                        <p className={cn("text-lg sm:text-xl font-extrabold truncate", !origem ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
+                          {origem ? origem : "Selecione a cidade de partida..."}
+                        </p>
+                      </div>
+
+                      <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50" align="start" side="bottom" sideOffset={6}>
+                    {renderOrigemList()}
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
+
+            {/* Central Swap Button (Mobile stacked in center / Desktop between inputs) */}
+            <div className="flex justify-center -my-2.5 md:my-0 z-20 shrink-0">
               <motion.button
                 type="button"
                 aria-label="Inverter Rota"
@@ -499,72 +522,39 @@ export default function HomeContent() {
                 whileTap={{ scale: 0.9, rotate: 180 }}
                 transition={{ type: "spring", stiffness: 350, damping: 20 }}
                 className={cn(
-                  "w-11 h-11 sm:w-12 sm:h-12 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors duration-200 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none ring-2 ring-transparent hover:ring-[#0038A8]/20",
+                  "w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-full shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-colors duration-200 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none hover:border-[#0038A8]/40 ring-2 ring-transparent hover:ring-[#0038A8]/20",
                   isSwapping && "border-[#0038A8]"
                 )}
               >
                 <ArrowsDownUp
+                  size={18}
+                  weight="bold"
+                  className={cn(
+                    "text-[#0038A8] dark:text-blue-400 transition-transform duration-300 md:hidden",
+                    isSwapping && "rotate-180"
+                  )}
+                />
+                <ArrowsLeftRight
                   size={20}
                   weight="bold"
                   className={cn(
-                    "text-[#0038A8] dark:text-blue-400 transition-transform duration-300",
-                    isSwapping && "rotate-180"
+                    "text-[#0038A8] dark:text-blue-400 transition-transform duration-300 hidden md:block",
+                    isSwapping && "scale-x-[-1]"
                   )}
                 />
               </motion.button>
             </div>
 
             {/* Destination Input Card (Vermelho Alagoas) */}
-            {isMobile ? (
-              <>
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => {
-                    if (origem) setOpenDestino(true)
-                  }}
-                  className={cn(
-                    "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-red-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#D62828]/30",
-                    !origem && "opacity-60 cursor-not-allowed",
-                    isPending && "opacity-80"
-                  )}
-                >
-                  <div className="flex flex-col items-center justify-center relative shrink-0">
-                    <MapPin size={18} weight="fill" className="text-[#D62828] z-10" />
-                  </div>
-
-                  <div className="grow min-w-0">
-                    <span className="block text-xs font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
-                      Indo para (Destino)
-                    </span>
-                    <p className={cn("text-lg sm:text-xl font-extrabold truncate", !destino ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
-                      {destino ? destino : "Selecione a cidade de destino..."}
-                    </p>
-                  </div>
-
-                  <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
-                </div>
-
-                <Drawer open={openDestino} onOpenChange={setOpenDestino}>
-                  <DrawerContent className="max-h-[85dvh] p-0 z-50">
-                    <DrawerHeader className="border-b border-slate-200 dark:border-slate-800 pb-3 pt-3 px-4 text-left">
-                      <DrawerTitle className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                        <MapPin size={16} weight="fill" className="text-[#D62828]" />
-                        Selecione a cidade de destino
-                      </DrawerTitle>
-                    </DrawerHeader>
-                    <div className="p-2 pb-6">
-                      {renderDestinoList()}
-                    </div>
-                  </DrawerContent>
-                </Drawer>
-              </>
-            ) : (
-              <Popover open={openDestino} onOpenChange={(open) => startTransition(() => setOpenDestino(open))}>
-                <PopoverTrigger asChild>
+            <div className="w-full">
+              {isMobile ? (
+                <>
                   <div
                     role="button"
                     tabIndex={0}
+                    onClick={() => {
+                      if (origem) setOpenDestino(true)
+                    }}
                     className={cn(
                       "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-red-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#D62828]/30",
                       !origem && "opacity-60 cursor-not-allowed",
@@ -577,7 +567,7 @@ export default function HomeContent() {
 
                     <div className="grow min-w-0">
                       <span className="block text-xs font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
-                        Indo para (Destino)
+                        Para onde? (Destino)
                       </span>
                       <p className={cn("text-lg sm:text-xl font-extrabold truncate", !destino ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
                         {destino ? destino : "Selecione a cidade de destino..."}
@@ -586,16 +576,57 @@ export default function HomeContent() {
 
                     <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50" align="start" side="bottom" sideOffset={6}>
-                  {renderDestinoList()}
-                </PopoverContent>
-              </Popover>
-            )}
+
+                  <Drawer open={openDestino} onOpenChange={setOpenDestino}>
+                    <DrawerContent className="max-h-[85dvh] p-0 z-50">
+                      <DrawerHeader className="border-b border-slate-200 dark:border-slate-800 pb-3 pt-3 px-4 text-left">
+                        <DrawerTitle className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                          <MapPin size={16} weight="fill" className="text-[#D62828]" />
+                          Selecione a cidade de destino
+                        </DrawerTitle>
+                      </DrawerHeader>
+                      <div className="p-2 pb-6">
+                        {renderDestinoList()}
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+                </>
+              ) : (
+                <Popover open={openDestino} onOpenChange={(open) => startTransition(() => setOpenDestino(open))}>
+                  <PopoverTrigger asChild>
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      className={cn(
+                        "relative bg-slate-50 dark:bg-slate-800/70 hover:bg-red-50/50 dark:hover:bg-slate-800 rounded-xl md:rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all cursor-pointer border border-transparent hover:border-[#D62828]/30",
+                        !origem && "opacity-60 cursor-not-allowed",
+                        isPending && "opacity-80"
+                      )}
+                    >
+                      <div className="flex flex-col items-center justify-center relative shrink-0">
+                        <MapPin size={18} weight="fill" className="text-[#D62828] z-10" />
+                      </div>
+
+                      <div className="grow min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-wider text-[#D62828] dark:text-red-400 mb-0.5">
+                          Para onde? (Destino)
+                        </span>
+                        <p className={cn("text-lg sm:text-xl font-extrabold truncate", !destino ? "text-slate-500 dark:text-slate-400" : "text-slate-900 dark:text-slate-100")}>
+                          {destino ? destino : "Selecione a cidade de destino..."}
+                        </p>
+                      </div>
+
+                      <CaretUpDown size={18} className="shrink-0 opacity-40 text-slate-500" />
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 rounded-2xl border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden z-50" align="start" side="bottom" sideOffset={6}>
+                    {renderDestinoList()}
+                  </PopoverContent>
+                </Popover>
+              )}
+            </div>
 
           </div>
-
-
         </div>
       </section>
 
@@ -627,7 +658,11 @@ export default function HomeContent() {
             {[
               {
                 id: "hoje",
-                label: proximaSaidaInfo?.isEncerradoHoje ? "Hoje (Encerrado)" : "Hoje",
+                label: proximaSaidaInfo?.isEncerradoHoje ? `Hoje (${diaHojeNome}) • Encerrado` : `Hoje (${diaHojeNome})`,
+              },
+              {
+                id: "amanha",
+                label: `Amanhã (${diaAmanhaNome})`,
               },
               { id: "semana", label: "Seg a Sex" },
               { id: "sabado", label: "Sábado" },
@@ -639,13 +674,13 @@ export default function HomeContent() {
                 type="button"
                 onClick={() => setFiltroDia(item.id as FiltroDia)}
                 className={cn(
-                  "snap-start shrink-0 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 border",
+                  "snap-start shrink-0 h-10 px-3.5 sm:px-4 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 border flex items-center justify-center gap-1.5",
                   filtroDia === item.id
-                    ? "bg-[#0038A8] text-white border-[#0038A8] shadow-md shadow-[#0038A8]/20"
+                    ? "bg-[#0038A8] text-white border-[#0038A8] shadow-sm shadow-[#0038A8]/20"
                     : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800"
                 )}
               >
-                {item.label}
+                <span>{item.label}</span>
               </button>
             ))}
           </div>
@@ -707,7 +742,7 @@ export default function HomeContent() {
 
               {/* 🌙 Alerta em Destaque quando as viagens de HOJE já encerraram */}
               {proximaSaidaInfo?.isEncerradoHoje && (
-                <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/20 p-4 sm:p-5 shadow-sm space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/20 p-4 sm:p-5 shadow-sm space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
                   <div className="flex items-start gap-3.5">
                     <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-700/50 flex items-center justify-center shrink-0 text-amber-700 dark:text-amber-300 shadow-xs">
                       <MoonStars size={22} weight="fill" />
@@ -729,17 +764,38 @@ export default function HomeContent() {
                       </p>
                     </div>
                   </div>
+
+                  {/* Ações diretas recomendadas */}
+                  <div className="flex flex-wrap gap-2 pt-1 sm:pl-[52px]">
+                    <Button
+                      type="button"
+                      onClick={() => setFiltroDia("amanha")}
+                      className="h-10 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs"
+                    >
+                      <CalendarBlank size={15} className="mr-1.5" weight="bold" />
+                      Ver saídas de amanhã ({diaAmanhaNome})
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleInverterSentido}
+                      className="h-10 px-4 rounded-xl border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-900 text-amber-900 dark:text-amber-200 font-bold text-xs"
+                    >
+                      <ArrowsDownUp size={15} className="mr-1.5" weight="bold" />
+                      Inverter rota ({destino} → {origem})
+                    </Button>
+                  </div>
                 </div>
               )}
 
-              {/* 🌟 Next Departure Featured Card (Inspirado no Card Dynamic do Uilora) */}
+              {/* 🌟 Next Departure Featured Card (Hierarquia Estrita, Fundo Sólido Limpo) */}
               {proximoHorario && (
                 <article
                   className={cn(
-                    "bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden relative group transition-all",
+                    "bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-sm border overflow-hidden relative transition-all",
                     proximaSaidaInfo?.isEncerradoHoje
-                      ? "border-2 border-amber-400/80 dark:border-amber-600/60 shadow-[0_8px_30px_rgba(245,158,11,0.12)]"
-                      : "border-2 border-[#D62828]/60 dark:border-[#D62828]/40 shadow-[0_8px_30px_rgba(214,40,40,0.12)]"
+                      ? "border-amber-300 dark:border-amber-800/80 shadow-amber-500/5"
+                      : "border-slate-200 dark:border-slate-800 hover:border-[#0038A8]/40"
                   )}
                 >
                   {/* Subtle Top Accent Line */}
@@ -747,13 +803,13 @@ export default function HomeContent() {
                     className={cn(
                       "absolute top-0 left-0 right-0 h-1.5",
                       proximaSaidaInfo?.isEncerradoHoje
-                        ? "bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500"
-                        : "bg-gradient-to-r from-[#D62828] via-[#FF4D4D] to-[#D62828]"
+                        ? "bg-amber-500"
+                        : "bg-[#0038A8]"
                     )}
                   />
 
                   <div className="p-5 sm:p-6 space-y-4">
-                    {/* Top Row: Live Radar / Tomorrow Indicator & Monospaced Time */}
+                    {/* Top Row: Departure Badge & Tabular Time */}
                     <div className="flex justify-between items-start gap-4">
                       {proximaSaidaInfo?.isEncerradoHoje ? (
                         <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 px-3.5 py-1.5 rounded-full shadow-xs">
@@ -763,11 +819,8 @@ export default function HomeContent() {
                           </span>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 border border-red-200 dark:border-red-900/70 px-3.5 py-1.5 rounded-full shadow-xs">
-                          <span className="relative flex h-2.5 w-2.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D62828] opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D62828]" />
-                          </span>
+                        <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/60 text-[#0038A8] dark:text-blue-400 border border-blue-200 dark:border-blue-900/60 px-3.5 py-1.5 rounded-full shadow-xs">
+                          <Clock size={16} weight="bold" />
                           <span className="text-xs font-extrabold uppercase tracking-wide">
                             {proximaSaidaInfo?.diaBadge || "Próxima Saída"}
                           </span>
@@ -780,29 +833,35 @@ export default function HomeContent() {
                         </div>
                         <div
                           className={cn(
-                            "text-xs sm:text-sm font-extrabold mt-1.5 text-right leading-tight",
+                            "text-xs sm:text-sm font-semibold mt-1.5 text-right leading-tight",
                             proximaSaidaInfo?.isEncerradoHoje
                               ? "text-amber-800 dark:text-amber-300"
-                              : "text-[#D62828] dark:text-red-400"
+                              : "text-slate-600 dark:text-slate-400"
                           )}
                         >
-                          <span>{proximaSaidaInfo?.diaSubtitulo || "Partida programada"}</span>
+                          <span>{proximaSaidaInfo?.diaSubtitulo || `Saída programada às ${proximoHorario.horario}`}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Route Details */}
-                    <div className="space-y-2.5">
-                      {/* 🌟 Trajeto Principal em Destaque */}
+                    <div className="space-y-2">
+                      {/* Trajeto Principal */}
                       <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-50 flex items-center gap-2.5 flex-wrap tracking-tight">
                         <span>{proximoHorario.origem}</span>
                         <ArrowRight size={22} weight="bold" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
                         <span className="text-[#0038A8] dark:text-blue-400">{proximoHorario.destino}</span>
                       </div>
 
-                      {/* 📋 Informações Práticas e Diretas da Linha */}
-                      <div className="flex items-center gap-2 flex-wrap text-xs sm:text-sm">
-                        <span className="tabular-nums font-bold bg-[#0038A8] text-white px-2.5 py-0.5 rounded-md shadow-xs">
+                      {/* Ponto de Embarque Context */}
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        <MapPin size={16} weight="fill" className="text-[#0038A8] dark:text-blue-400 shrink-0" />
+                        <span>Ponto de Partida: <strong>{proximoHorario.origem === "Maceió" ? "Terminal Rodoviário e Pontos Autorizados" : `Terminal de ${proximoHorario.origem}`}</strong></span>
+                      </div>
+
+                      {/* Detalhes da Linha */}
+                      <div className="flex items-center gap-2 flex-wrap text-xs sm:text-sm pt-0.5">
+                        <span className="tabular-nums font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded-md">
                           Linha {proximoHorario.codigoLinha}
                         </span>
                         {proximoHorario.via && (
@@ -818,30 +877,33 @@ export default function HomeContent() {
                       </div>
                     </div>
 
-                    {/* Actions Row */}
-                    <div className="flex flex-wrap gap-2.5 pt-2">
-                      <Button
-                        asChild
-                        className="flex-1 bg-[#0038A8] hover:bg-[#002b80] text-white font-bold rounded-xl py-2.5 text-xs sm:text-sm shadow-md shadow-[#0038A8]/25 transition-all active:scale-95"
-                      >
-                        <Link href={`/routes/${proximoHorario.codigoLinha}`}>
-                          <Info size={16} className="mr-1.5" weight="bold" />
-                          Ver Detalhes da Linha
-                        </Link>
-                      </Button>
-
+                    {/* Actions Row (Altura h-12 para ergonomia de toque) */}
+                    <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+                      {/* Ação Principal: Ver Ponto de Embarque */}
                       <Button
                         type="button"
                         onClick={handlePontoMaisProximo}
                         disabled={isLocatingStop}
-                        className="rounded-xl font-bold text-xs sm:text-sm border-2 border-[#0038A8]/30 dark:border-blue-700/50 bg-blue-50/70 dark:bg-blue-950/50 text-[#0038A8] dark:text-blue-300 hover:bg-[#0038A8] hover:text-white dark:hover:bg-[#0038A8] dark:hover:text-white transition-all active:scale-95 shadow-xs flex items-center gap-1.5"
+                        className="h-12 px-6 flex-1 bg-[#0038A8] hover:bg-[#002b80] text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#0038A8]/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                       >
                         <MapPin
-                          size={16}
+                          size={18}
                           weight="fill"
-                          className={cn(isLocatingStop ? "animate-spin text-[#0038A8]" : "text-[#D62828]")}
+                          className={cn(isLocatingStop ? "animate-spin text-white" : "text-white")}
                         />
-                        <span>{isLocatingStop ? "Localizando Ponto..." : "Ponto Mais Próximo"}</span>
+                        <span>{isLocatingStop ? "Localizando Ponto..." : "Ver Ponto de Embarque"}</span>
+                      </Button>
+
+                      {/* Ação Secundária: Detalhes da Linha */}
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="h-12 px-5 rounded-xl font-bold text-sm border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all active:scale-[0.98]"
+                      >
+                        <Link href={`/routes/${proximoHorario.codigoLinha}`}>
+                          <Info size={18} className="mr-1.5" weight="bold" />
+                          Detalhes da Linha
+                        </Link>
                       </Button>
                     </div>
 
@@ -849,7 +911,7 @@ export default function HomeContent() {
                 </article>
               )}
 
-              {/* 📋 Subsequent Departure Cards List */}
+              {/* 📋 Subsequent Departure Cards List (Com Expansor de Saídas) */}
               {horariosSubsequentes.length > 0 && (
                 <div className="space-y-3 pt-2">
                   <div className="flex items-center justify-between px-1">
@@ -865,7 +927,7 @@ export default function HomeContent() {
                   </div>
 
                   <div className="grid grid-cols-1 gap-2.5">
-                    {horariosSubsequentes.map((item) => {
+                    {(mostrarTodosHorarios ? horariosSubsequentes : horariosSubsequentes.slice(0, 4)).map((item) => {
                       const isExpanded = !!expandedCards[item.id]
 
                       return (
@@ -891,7 +953,7 @@ export default function HomeContent() {
                               </div>
                             </div>
 
-                            {/* Center Info - Super Clean & Direct */}
+                            {/* Center Info */}
                             <div className="grow min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
                                 <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-slate-100">
@@ -947,6 +1009,27 @@ export default function HomeContent() {
                       )
                     })}
                   </div>
+
+                  {/* Expander Button if more than 4 departures */}
+                  {horariosSubsequentes.length > 4 && (
+                    <button
+                      type="button"
+                      onClick={() => setMostrarTodosHorarios((v) => !v)}
+                      className="w-full h-12 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-xs active:scale-[0.99]"
+                    >
+                      {mostrarTodosHorarios ? (
+                        <>
+                          <CaretUp size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                          <span>Mostrar menos saídas</span>
+                        </>
+                      ) : (
+                        <>
+                          <CaretDown size={16} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                          <span>Ver todos os horários ({horariosSubsequentes.length} saídas programadas)</span>
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
               )}
 
@@ -999,14 +1082,35 @@ export default function HomeContent() {
 
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-12 px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
-              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3 text-slate-500">
-                <Clock size={22} />
+            <div className="flex flex-col items-center justify-center py-12 px-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-3">
+              <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+                <Clock size={24} />
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Nenhum horário encontrado para este dia</h4>
-              <p className="text-slate-500 dark:text-slate-400 text-xs max-w-xs mt-1 leading-relaxed">
-                Tente alterar o dia da viagem ou selecionar outra via para ver mais saídas.
-              </p>
+              <div className="space-y-1">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
+                  Nenhum horário encontrado para este dia
+                </h4>
+                <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-sm">
+                  Esta rota pode operar em outros dias ou com itinerários alternativos.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 justify-center pt-2">
+                <Button
+                  type="button"
+                  onClick={() => setFiltroDia("todos")}
+                  className="h-10 px-4 rounded-xl bg-[#0038A8] hover:bg-[#002b80] text-white font-bold text-xs"
+                >
+                  Ver todos os dias
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleInverterSentido}
+                  className="h-10 px-4 rounded-xl font-bold text-xs"
+                >
+                  Inverter sentido ({destino} → {origem})
+                </Button>
+              </div>
             </div>
           )
         ) : (

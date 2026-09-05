@@ -16,8 +16,8 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "horarios", label: "Horários", targetId: "quadro-horarios", icon: Clock },
-  { id: "mapa", label: "Mapa & Pontos", targetId: "explorar-regiao", icon: MapPin },
-  { id: "info", label: "Guia ARSAL", targetId: "info-arsal", icon: Shield },
+  { id: "mapa", label: "Pontos", targetId: "explorar-regiao", icon: MapPin },
+  { id: "info", label: "Ajuda", targetId: "info-arsal", icon: Shield },
 ]
 
 export function BottomNav() {
@@ -83,8 +83,8 @@ export function BottomNav() {
         )}
       </AnimatePresence>
 
-      {/* Floating Apple Glass Nav (Uilora Inspired) */}
-      <div className="fixed bottom-3.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-sm">
+      {/* Floating Apple Glass Nav (Mobile only, hidden on desktop) */}
+      <div className="md:hidden fixed bottom-3.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-sm">
         <nav className="relative p-1.5 rounded-full bg-white/85 dark:bg-slate-950/85 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-[0_16px_40px_-8px_rgba(0,56,168,0.18),0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.7)] flex items-center justify-between ring-1 ring-black/5 dark:ring-white/5">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon

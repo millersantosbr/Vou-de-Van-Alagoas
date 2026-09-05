@@ -44,7 +44,7 @@ export interface HorarioFormatado {
   isIntermediaria?: boolean
 }
 
-export type FiltroDia = "hoje" | "todos" | "semana" | "sabado" | "domingo" | "Segunda" | "Terça" | "Quarta" | "Quinta" | "Sexta" | "Sábado" | "Domingo"
+export type FiltroDia = "hoje" | "amanha" | "todos" | "semana" | "sabado" | "domingo" | "Segunda" | "Terça" | "Quarta" | "Quinta" | "Sexta" | "Sábado" | "Domingo"
 
 export const dataset = rawData as {
   metadata: {
@@ -167,6 +167,11 @@ export function verificarDia(diasSaida: string[], filtro: FiltroDia): boolean {
   if (filtro === "hoje") {
     const hoje = getDiaSemanaHoje()
     return diasSaida.includes(hoje)
+  }
+
+  if (filtro === "amanha") {
+    const amanha = getDiaSemanaOffset(1)
+    return diasSaida.includes(amanha)
   }
 
   if (filtro === "semana") {
