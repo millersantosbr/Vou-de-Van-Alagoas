@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo, useTransition } from "react"
+import { useState, useEffect, useMemo, useRef, useTransition } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -10,6 +10,7 @@ import {
   buscarHorariosRota,
   getDiaSemanaHoje,
   getDiaSemanaOffset,
+  normalizarTexto,
   type HorarioFormatado,
   type FiltroDia,
 } from "@/lib/bus-data"
@@ -44,6 +45,7 @@ import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
 import { dispatchFocusClosestStop } from "@/lib/route-events"
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon"
 
 export default function HomeContent() {
   const isMobile = useIsMobile()
@@ -64,6 +66,89 @@ export default function HomeContent() {
   const [isPending, startTransition] = useTransition()
   const [mostrarViagensPassadas, setMostrarViagensPassadas] = useState(false)
   const [isLocatingStop, setIsLocatingStop] = useState(false)
+  const [sharingStatus, setSharingStatus] = useState<"idle" | "preparing" | "shared">("idle")
+
+  const isParamsRestored = useRef(false)
+
+  // 🔗 Restaurar consulta a partir dos parâmetros de URL na inicialização
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    if (isParamsRestored.current) return
+    isParamsRestored.current = true
+
+    const searchParams = new URLSearchParams(window.location.search)
+    const paramOrigem = searchParams.get("origem")
+    const paramDestino = searchParams.get("destino")
+    const paramDia = searchParams.get("dia")
+    const paramVia = searchParams.get("via")
+
+    if (!paramOrigem && !paramDestino && !paramDia && !paramVia) return
+
+    let origemEscolhida = "Maceió"
+    if (paramOrigem) {
+      const matchedOrigem = listaCidades.find(
+        (c) => normalizarTexto(c) === normalizarTexto(paramOrigem)
+      )
+      if (matchedOrigem) {
+        origemEscolhida = matchedOrigem
+        setOrigem(matchedOrigem)
+      }
+    }
+
+    let destinoEscolhido = "Arapiraca"
+    if (paramDestino) {
+      const destinosPossiveis = getDestinosDisponiveis(origemEscolhida)
+      const matchedDestino = destinosPossiveis.find(
+        (d) => normalizarTexto(d) === normalizarTexto(paramDestino)
+      )
+      if (matchedDestino) {
+        destinoEscolhido = matchedDestino
+        setDestino(matchedDestino)
+      }
+    }
+
+    if (paramDia) {
+      const diaNorm = normalizarTexto(paramDia)
+      const mapDias: Record<string, FiltroDia> = {
+        HOJE: "hoje",
+        AMANHA: "amanha",
+        SEMANA: "semana",
+        SABADO: "sabado",
+        DOMINGO: "domingo",
+        TODOS: "todos",
+      }
+      if (mapDias[diaNorm]) {
+        setFiltroDia(mapDias[diaNorm])
+      }
+    }
+
+    if (paramVia && origemEscolhida && destinoEscolhido) {
+      const viasPossiveis = getViasDisponiveis(origemEscolhida, destinoEscolhido)
+      const matchedVia = viasPossiveis.find(
+        (v) => normalizarTexto(v) === normalizarTexto(paramVia)
+      )
+      if (matchedVia) {
+        setFiltroVia(matchedVia)
+      }
+    }
+  }, [])
+
+  // 🔗 Sincronizar parâmetros de consulta na barra de endereços
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    if (!origem || !destino) return
+
+    const params = new URLSearchParams()
+    params.set("origem", normalizarTexto(origem).toLowerCase())
+    params.set("destino", normalizarTexto(destino).toLowerCase())
+    params.set("dia", normalizarTexto(filtroDia).toLowerCase())
+    if (filtroVia && filtroVia !== "todas") {
+      params.set("via", normalizarTexto(filtroVia).toLowerCase())
+    }
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`
+    window.history.replaceState(null, "", newUrl)
+  }, [origem, destino, filtroDia, filtroVia])
 
   // Ação de localizar e focar o ponto de embarque mais próximo que REALMENTE atende a rota
   const handlePontoMaisProximo = () => {
@@ -130,17 +215,147 @@ export default function HomeContent() {
     }
   }, [origem])
 
-  // Atualiza vias e horários quando a origem ou destino mudam
+  // Atualiza vias e horários quando a origem ou destino mudam (preservando via válida)
   useEffect(() => {
     if (origem && destino) {
       const vias = getViasDisponiveis(origem, destino)
       setViasDisponiveis(vias)
-      setFiltroVia("todas")
+      setFiltroVia((prev) => (prev !== "todas" && vias.includes(prev) ? prev : "todas"))
     } else {
       setViasDisponiveis([])
       setFiltroVia("todas")
     }
   }, [origem, destino])
+
+  // Gerar URL da consulta compartilhável
+  const getUrlConsulta = () => {
+    const baseUrl =
+      typeof window !== "undefined" && window.location.origin
+        ? window.location.origin
+        : "https://voudevan-al.web.app"
+
+    const params = new URLSearchParams()
+    params.set("origem", normalizarTexto(origem).toLowerCase())
+    params.set("destino", normalizarTexto(destino).toLowerCase())
+    params.set("dia", normalizarTexto(filtroDia).toLowerCase())
+    if (filtroVia && filtroVia !== "todas") {
+      params.set("via", normalizarTexto(filtroVia).toLowerCase())
+    }
+    return `${baseUrl}/?${params.toString()}`
+  }
+
+  // Gerar mensagem de compartilhamento conforme o modelo oficial solicitado
+  const gerarMensagemCompartilhamento = (urlConsulta: string, linhaCodigo?: string | null) => {
+    const formatarDiaMensagem = (dia: FiltroDia): string => {
+      if (dia === "hoje") return `Hoje (${diaHojeNome})`
+      if (dia === "amanha") return `Amanhã (${diaAmanhaNome})`
+      if (dia === "semana") return "Segunda a Sexta"
+      if (dia === "sabado") return "Sábado"
+      if (dia === "domingo") return "Domingo"
+      if (dia === "todos") return "Todos os dias"
+      return dia
+    }
+
+    let listaDeHorarios = ""
+
+    if (filtroDia === "hoje") {
+      const horariosFuturos = horariosFiltrados
+        .filter((h) => h.horario >= horaAtualString)
+        .sort((a, b) => a.horario.localeCompare(b.horario))
+
+      if (horariosFuturos.length === 0) {
+        listaDeHorarios = "Não há mais saídas programadas para hoje. Consulte os próximos horários no link."
+      } else {
+        const primeiros10 = horariosFuturos.slice(0, 10).map((h) => h.horario).join(", ")
+        if (horariosFuturos.length > 10) {
+          listaDeHorarios = `${primeiros10}\n➕ Veja os demais horários no link.`
+        } else {
+          listaDeHorarios = primeiros10
+        }
+      }
+    } else {
+      const horariosOrdenados = [...horariosFiltrados].sort((a, b) => a.horario.localeCompare(b.horario))
+      if (horariosOrdenados.length === 0) {
+        listaDeHorarios = "Nenhum horário programado para este filtro."
+      } else {
+        const primeiros10 = horariosOrdenados.slice(0, 10).map((h) => h.horario).join(", ")
+        if (horariosOrdenados.length > 10) {
+          listaDeHorarios = `${primeiros10}\n➕ Veja os demais horários no link.`
+        } else {
+          listaDeHorarios = primeiros10
+        }
+      }
+    }
+
+    const linhas: string[] = [
+      `🚌 *Horários de vans: ${origem} → ${destino}*`,
+      "",
+      `📅 *${formatarDiaMensagem(filtroDia)}*`,
+    ]
+
+    if (filtroVia && filtroVia !== "todas") {
+      linhas.push(`🛣️ Via: ${filtroVia}`)
+    }
+
+    if (linhaCodigo) {
+      linhas.push(`🚌 Linha: ${linhaCodigo}`)
+    }
+
+    linhas.push("")
+    linhas.push("⏰ *Saídas:*")
+    linhas.push(listaDeHorarios)
+    linhas.push("")
+    linhas.push("🔗 Consulte os horários, pontos de embarque e detalhes da rota:")
+    linhas.push(urlConsulta)
+    linhas.push("")
+    linhas.push("Fonte dos horários: ARSAL")
+    linhas.push("Vou de Van — Alagoas")
+
+    return linhas.join("\n")
+  }
+
+  // Ação de compartilhamento com Web Share API e fallback para WhatsApp
+  const handleCompartilharHorarios = async (codigoLinha?: string | null) => {
+    if (!origem || !destino) return
+    if (sharingStatus !== "idle") return
+
+    setSharingStatus("preparing")
+
+    const urlConsulta = getUrlConsulta()
+    const mensagem = gerarMensagemCompartilhamento(urlConsulta, codigoLinha)
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensagem)}`
+
+    // Breve pausa para percepção do feedback visual
+    await new Promise((resolve) => setTimeout(resolve, 200))
+    setSharingStatus("shared")
+
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: `Horários de vans: ${origem} → ${destino}`,
+          text: mensagem,
+          url: urlConsulta,
+        })
+      } catch (err: unknown) {
+        const isAbort =
+          err instanceof Error &&
+          (err.name === "AbortError" ||
+            err.message.toLowerCase().includes("cancel") ||
+            err.name === "NotAllowedError")
+
+        // Se não foi cancelamento do usuário, abrir via WhatsApp direto
+        if (!isAbort) {
+          window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+        }
+      }
+    } else {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+    }
+
+    setTimeout(() => {
+      setSharingStatus("idle")
+    }, 2000)
+  }
 
   // Atualiza os horários filtrados
   useEffect(() => {
@@ -881,16 +1096,21 @@ export default function HomeContent() {
                         <span>{isLocatingStop ? "Localizando Ponto..." : "Ver Ponto de Embarque"}</span>
                       </Button>
 
-                      {/* Ação Secundária: Detalhes da Linha */}
+                      {/* Ação de Compartilhar Horários no WhatsApp */}
                       <Button
-                        asChild
-                        variant="outline"
-                        className="h-12 px-5 rounded-xl font-bold text-sm border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all active:scale-[0.98]"
+                        type="button"
+                        onClick={() => handleCompartilharHorarios(proximoHorario.codigoLinha)}
+                        disabled={sharingStatus !== "idle"}
+                        className="h-12 px-5 flex-1 bg-[#25D366] hover:bg-[#1EBE5D] active:bg-[#16A34A] focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 text-white font-extrabold rounded-xl text-sm shadow-md shadow-[#25D366]/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                       >
-                        <Link href={`/routes/${proximoHorario.codigoLinha}`}>
-                          <Info size={18} className="mr-1.5" weight="bold" />
-                          Detalhes da Linha
-                        </Link>
+                        <WhatsAppIcon className="w-5 h-5 shrink-0 text-white" />
+                        <span>
+                          {sharingStatus === "preparing"
+                            ? "Preparando horários..."
+                            : sharingStatus === "shared"
+                            ? "Abrindo compartilhamento..."
+                            : "Compartilhar horários"}
+                        </span>
                       </Button>
                     </div>
 
