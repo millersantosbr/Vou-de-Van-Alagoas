@@ -5,16 +5,8 @@ import { useEffect, useRef } from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 
-export interface MapStop {
-  id: string
-  name: string
-  type: "terminal" | "posto" | "ponto"
-  address?: string
-  lat: number
-  lng: number
-  cities?: string[]
-  distanceKm?: number
-}
+import type { MapStop } from "@/lib/stops-data"
+export type { MapStop }
 
 interface MapComponentProps {
   userLocation: [number, number] | null
@@ -93,8 +85,9 @@ const MapComponent: React.FC<MapComponentProps> = ({
     stops.forEach((stop) => {
       const isSelected = selectedStop?.id === stop.id
       const isTerminal = stop.type === "terminal"
+      const isPosto = stop.type === "posto"
 
-      const pinColor = isTerminal ? "#0038A8" : "#D62828"
+      const pinColor = isTerminal ? "#0038A8" : isPosto ? "#002060" : "#D62828"
 
       const stopDivIcon = L.divIcon({
         className: "custom-leaflet-marker",
@@ -105,7 +98,9 @@ const MapComponent: React.FC<MapComponentProps> = ({
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 ${isTerminal 
                   ? '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.2 6 18.2 6H5.8C4.8 6 3.9 6.8 3.6 7.8L2.2 12.8c-.1.4-.2.8-.2 1.2 0 .4.1.8.2 1.2.3 1.1.8 2.8.8 2.8h3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>' 
-                  : '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'
+                  : isPosto
+                    ? '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/>'
+                    : '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'
                 }
               </svg>
             </div>

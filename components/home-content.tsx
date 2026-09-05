@@ -42,6 +42,7 @@ import { useIsMobile } from "@/components/ui/use-mobile"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
+import { dispatchFocusClosestStop } from "@/lib/route-events"
 
 export default function HomeContent() {
   const isMobile = useIsMobile()
@@ -60,6 +61,35 @@ export default function HomeContent() {
 
   const [isPending, startTransition] = useTransition()
   const [mostrarViagensPassadas, setMostrarViagensPassadas] = useState(false)
+  const [isLocatingStop, setIsLocatingStop] = useState(false)
+
+  // Ação de localizar e focar o ponto de embarque mais próximo que REALMENTE atende a rota
+  const handlePontoMaisProximo = () => {
+    setIsLocatingStop(true)
+
+    const finishWithCoords = (coords: [number, number] | null) => {
+      setIsLocatingStop(false)
+      dispatchFocusClosestStop({
+        origem,
+        destino,
+        userCoords: coords,
+      })
+    }
+
+    if (typeof navigator !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          finishWithCoords([pos.coords.latitude, pos.coords.longitude])
+        },
+        () => {
+          finishWithCoords(null)
+        },
+        { enableHighAccuracy: true, timeout: 6000, maximumAge: 60000 }
+      )
+    } else {
+      finishWithCoords(null)
+    }
+  }
 
   const diaHojeNome = useMemo(() => getDiaSemanaHoje(), [])
 
@@ -802,38 +832,18 @@ export default function HomeContent() {
 
                       <Button
                         type="button"
-                        variant="outline"
-                        onClick={() => toggleCardExpansion(proximoHorario.id)}
-                        className="rounded-xl font-bold text-xs sm:text-sm border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
+                        onClick={handlePontoMaisProximo}
+                        disabled={isLocatingStop}
+                        className="rounded-xl font-bold text-xs sm:text-sm border-2 border-[#0038A8]/30 dark:border-blue-700/50 bg-blue-50/70 dark:bg-blue-950/50 text-[#0038A8] dark:text-blue-300 hover:bg-[#0038A8] hover:text-white dark:hover:bg-[#0038A8] dark:hover:text-white transition-all active:scale-95 shadow-xs flex items-center gap-1.5"
                       >
-                        {expandedCards[proximoHorario.id] ? "Ocultar Itinerário" : "Ver Itinerário ARSAL"}
-                        {expandedCards[proximoHorario.id] ? <CaretUp size={14} className="ml-1" /> : <CaretDown size={14} className="ml-1" />}
+                        <MapPin
+                          size={16}
+                          weight="fill"
+                          className={cn(isLocatingStop ? "animate-spin text-[#0038A8]" : "text-[#D62828]")}
+                        />
+                        <span>{isLocatingStop ? "Localizando Ponto..." : "Ponto Mais Próximo"}</span>
                       </Button>
                     </div>
-
-                    {/* Expanded Regulatory Details */}
-                    {expandedCards[proximoHorario.id] && (
-                      <div className="mt-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm space-y-2.5 animate-in fade-in duration-200">
-                        {proximoHorario.itinerario?.ida && (
-                          <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Itinerário Ida:</p>
-                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.ida}</p>
-                          </div>
-                        )}
-                        {proximoHorario.itinerario?.volta && (
-                          <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Itinerário Volta:</p>
-                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.volta}</p>
-                          </div>
-                        )}
-                        {proximoHorario.itinerario?.seccionamentos && (
-                          <div>
-                            <p className="font-bold text-slate-900 dark:text-slate-100 text-xs uppercase tracking-wide">Paradas autorizadas:</p>
-                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mt-0.5">{proximoHorario.itinerario.seccionamentos}</p>
-                          </div>
-                        )}
-                      </div>
-                    )}
 
                   </div>
                 </article>

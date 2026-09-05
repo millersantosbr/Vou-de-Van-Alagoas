@@ -13,4 +13,5 @@ firebase-debug.log
 .DS_Store
 apikeyuilora.txt
 *.bak
+*.tsbuildinfo
 stitch_data/
