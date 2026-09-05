@@ -439,6 +439,7 @@ export default function HomeContent() {
         diaSubtitulo: `Saída programada do terminal às ${primeiro.horario}`,
         proximoHorario: primeiro,
         horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== primeiro.id),
+        horariosPassados: [],
         totalHorarios: horariosFiltrados.length,
         alertaEncerramento: null,
       }
@@ -466,6 +467,7 @@ export default function HomeContent() {
         diaSubtitulo: `Saída programada do terminal às ${primeiro.horario}`,
         proximoHorario: primeiro,
         horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== primeiro.id),
+        horariosPassados: [],
         totalHorarios: horariosFiltrados.length,
         alertaEncerramento: null,
       }
@@ -492,6 +494,10 @@ export default function HomeContent() {
         tempoTexto = `Saída programada do terminal às ${saidaRestanteHoje.horario} • Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
       }
 
+      // Separar saídas futuras (começando da próxima) e saídas que já passaram hoje
+      const horariosFuturosHoje = horariosFiltrados.filter((h) => h.horario >= horaAtualString)
+      const horariosPassadosHoje = horariosFiltrados.filter((h) => h.horario < horaAtualString)
+
       return {
         isHoje: true,
         isAmanha: false,
@@ -501,7 +507,8 @@ export default function HomeContent() {
         diaSemanaNome: diaHojeNome,
         diaSubtitulo: tempoTexto,
         proximoHorario: saidaRestanteHoje,
-        horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== saidaRestanteHoje.id),
+        horariosSubsequentes: horariosFuturosHoje,
+        horariosPassados: horariosPassadosHoje,
         totalHorarios: horariosFiltrados.length,
         alertaEncerramento: null,
       }
@@ -555,6 +562,7 @@ export default function HomeContent() {
         diaSubtitulo: `Primeira saída amanhã às ${proximoAmanha.horario} • ${tempoAteSaida}`,
         proximoHorario: proximoAmanha,
         horariosSubsequentes: horariosDiaAmanha.filter((h) => h.id !== proximoAmanha?.id),
+        horariosPassados: horariosFiltrados,
         totalHorarios: horariosDiaAmanha.length,
         alertaEncerramento: mensagemAlerta,
       }
@@ -572,6 +580,7 @@ export default function HomeContent() {
       diaSubtitulo: "Partida programada",
       proximoHorario: horariosFiltrados[0],
       horariosSubsequentes: horariosFiltrados.slice(1),
+      horariosPassados: horariosFiltrados,
       totalHorarios: horariosFiltrados.length,
       alertaEncerramento: "Viagens de hoje já finalizadas.",
     }
@@ -579,6 +588,7 @@ export default function HomeContent() {
 
   const proximoHorario = proximaSaidaInfo?.proximoHorario || null
   const horariosSubsequentes = proximaSaidaInfo?.horariosSubsequentes || []
+  const horariosPassados = proximaSaidaInfo?.horariosPassados || []
 
   // Conteúdo do Seletor de Origem
   const renderOrigemList = () => (
@@ -1136,11 +1146,17 @@ export default function HomeContent() {
                   <div className="grid grid-cols-1 gap-2.5">
                     {(mostrarTodosHorarios ? horariosSubsequentes : horariosSubsequentes.slice(0, 4)).map((item) => {
                       const isExpanded = !!expandedCards[item.id]
+                      const isProximaSaida = item.id === proximoHorario?.id
 
                       return (
                         <article
                           key={item.id}
-                          className="bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 p-4 transition-all hover:border-[#0038A8]/40 dark:hover:border-slate-700"
+                          className={cn(
+                            "bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl shadow-xs border p-4 transition-all hover:border-[#0038A8]/40 dark:hover:border-slate-700",
+                            isProximaSaida
+                              ? "border-[#0038A8]/30 dark:border-blue-500/30 bg-blue-50/15 dark:bg-blue-950/20"
+                              : "border-slate-200 dark:border-slate-800"
+                          )}
                         >
                           <div className="flex items-center gap-4">
                             {/* Tabular Time Badge */}
@@ -1151,12 +1167,18 @@ export default function HomeContent() {
                               <div
                                 className={cn(
                                   "text-xs font-bold uppercase tracking-wider mt-0.5",
-                                  proximaSaidaInfo?.isEncerradoHoje
+                                  isProximaSaida
+                                    ? "text-[#0038A8] dark:text-blue-400 font-extrabold"
+                                    : proximaSaidaInfo?.isEncerradoHoje
                                     ? "text-amber-700 dark:text-amber-400 font-extrabold"
                                     : "text-slate-500 dark:text-slate-400"
                                 )}
                               >
-                                {proximaSaidaInfo?.isEncerradoHoje ? proximaSaidaInfo.diaNome : "Partida"}
+                                {isProximaSaida
+                                  ? "Próxima"
+                                  : proximaSaidaInfo?.isEncerradoHoje
+                                  ? proximaSaidaInfo.diaNome
+                                  : "Partida"}
                               </div>
                             </div>
 
@@ -1240,44 +1262,57 @@ export default function HomeContent() {
                 </div>
               )}
 
-              {/* 🕒 Seção de Viagens de Hoje já realizadas */}
-              {proximaSaidaInfo?.isEncerradoHoje && horariosFiltrados.length > 0 && (
+              {/* 🕒 Seção Separada: Horários que já passaram */}
+              {filtroDia === "hoje" && horariosPassados.length > 0 && (
                 <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
                   <button
                     type="button"
                     onClick={() => setMostrarViagensPassadas((v) => !v)}
-                    className="w-full py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold flex items-center justify-between transition-colors"
+                    className="w-full py-3 px-4 rounded-xl md:rounded-2xl bg-slate-100/90 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold flex items-center justify-between transition-colors shadow-xs"
                   >
                     <span className="flex items-center gap-2">
-                      <Clock size={16} className="text-slate-500" />
-                      {mostrarViagensPassadas
-                        ? `Ocultar viagens de hoje (${diaHojeNome}) já finalizadas`
-                        : `Ver viagens de hoje (${diaHojeNome}) que já encerraram (${horariosFiltrados.length})`}
+                      <Clock size={16} className="text-slate-500 dark:text-slate-400" />
+                      <span>
+                        Horários que já passaram{" "}
+                        <span className="text-slate-500 dark:text-slate-400 font-normal">
+                          ({horariosPassados.length} {horariosPassados.length === 1 ? "saída anterior" : "saídas anteriores"})
+                        </span>
+                      </span>
                     </span>
-                    {mostrarViagensPassadas ? <CaretUp size={16} /> : <CaretDown size={16} />}
+                    <span className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                      <span>{mostrarViagensPassadas ? "Ocultar" : "Visualizar"}</span>
+                      {mostrarViagensPassadas ? <CaretUp size={16} /> : <CaretDown size={16} />}
+                    </span>
                   </button>
 
                   {mostrarViagensPassadas && (
                     <div className="mt-3 space-y-2 animate-in fade-in duration-200">
                       <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-1">
-                        Estes horários operaram mais cedo hoje ({diaHojeNome}) e já foram finalizados:
+                        Estes horários já operaram mais cedo hoje ({diaHojeNome}) e foram finalizados:
                       </p>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 opacity-75">
-                        {horariosFiltrados.map((passado) => (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 opacity-80">
+                        {horariosPassados.map((passado) => (
                           <div
                             key={`passado-${passado.id}`}
-                            className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
+                            className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs"
                           >
-                            <div className="flex items-center gap-2.5">
-                              <span className="tabular-nums font-extrabold text-sm text-slate-600 dark:text-slate-300">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <span className="tabular-nums font-extrabold text-sm text-slate-500 dark:text-slate-400 shrink-0 line-through decoration-slate-400">
                                 {passado.horario}
                               </span>
-                              <span className="text-slate-700 dark:text-slate-300 truncate max-w-[180px] font-medium">
-                                <strong className="text-slate-900 dark:text-slate-100">{passado.origem} → {passado.destino}</strong> (Linha {passado.codigoLinha})
-                              </span>
+                              <div className="truncate">
+                                <span className="text-slate-700 dark:text-slate-300 font-medium">
+                                  <strong className="text-slate-900 dark:text-slate-100">{passado.origem} → {passado.destino}</strong> (Linha {passado.codigoLinha})
+                                </span>
+                                {passado.via && (
+                                  <span className="text-[11px] text-slate-500 dark:text-slate-400 ml-1.5 font-normal">
+                                    • Via {passado.via}
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                            <span className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-bold text-[10px] uppercase">
-                              Encerrado
+                            <span className="shrink-0 px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-bold text-[10px] uppercase">
+                              Já passou
                             </span>
                           </div>
                         ))}
@@ -1327,7 +1362,7 @@ export default function HomeContent() {
             </div>
             <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Consulte os horários</h4>
             <p className="text-slate-500 dark:text-slate-400 text-xs max-w-xs mt-1 leading-relaxed">
-              Selecione a cidade de origem e destino acima para ver os horários oficiais ARSAL.
+              Selecione a cidade de origem e destino acima para ver os horários da ARSAL.
             </p>
           </div>
         )}

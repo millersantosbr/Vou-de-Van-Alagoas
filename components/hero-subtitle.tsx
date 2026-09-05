@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const MENSAGENS_HERO = [
   {
-    destaque: "Oficial ARSAL",
+    destaque: "Dados da ARSAL",
     texto: "Horários atualizados",
   },
   {

@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Vou de Van - Alagoas | Horários Oficiais das Vans Intermunicipais",
-  description: "Consulte horários, rotas, vias e paradas das vans intermunicipais em todo o estado de Alagoas (Dados Oficiais ARSAL).",
+  description: "Consulte horários, rotas, vias e paradas das vans intermunicipais em todo o estado de Alagoas (Dados da ARSAL).",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
