@@ -8,6 +8,7 @@ import { InfoArsal } from "@/components/info-arsal"
 import { BottomNav } from "@/components/bottom-nav"
 import { Footer } from "@/components/footer"
 import { AnimatedWaves } from "@/components/animated-waves"
+import { HeroSubtitle } from "@/components/hero-subtitle"
 
 const DynamicHomeContent = dynamic(() => import("@/components/home-content"), { ssr: false })
 const DynamicDarkModeToggle = dynamic(
@@ -69,9 +70,8 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-xs sm:text-base text-slate-100/90 max-w-lg mx-auto leading-relaxed px-2 font-medium">
-              Consulta rápida, gratuita e fácil para quem anda de transporte complementar todos os dias.
-            </p>
+            {/* Dynamic Minimalist Status Pill Tagline */}
+            <HeroSubtitle />
           </div>
         </div>
 
