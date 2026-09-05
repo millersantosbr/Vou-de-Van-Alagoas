@@ -28,7 +28,6 @@ import {
   MapPin,
   ArrowSquareOut,
   Sparkle,
-  Lightning,
 } from "@phosphor-icons/react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
@@ -41,15 +40,6 @@ import { useIsMobile } from "@/components/ui/use-mobile"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
-
-// Rotas mais procuradas em Alagoas para acesso em 1 toque
-const ROTAS_RAPIDAS = [
-  { de: "Maceió", para: "Arapiraca" },
-  { de: "Maceió", para: "Marechal Deodoro" },
-  { de: "Maceió", para: "Maragogi" },
-  { de: "Maceió", para: "Palmeira dos Índios" },
-  { de: "Maceió", para: "União dos Palmares" },
-]
 
 export default function HomeContent() {
   const isMobile = useIsMobile()
@@ -157,15 +147,6 @@ export default function HomeContent() {
     startTransition(() => {
       setDestino(value)
       setOpenDestino(false)
-      setExpandedCards({})
-    })
-  }
-
-  const selecionarRotaRapida = (de: string, para: string) => {
-    startTransition(() => {
-      setOrigem(de)
-      setDestinos(getDestinosDisponiveis(de))
-      setDestino(para)
       setExpandedCards({})
     })
   }
@@ -468,35 +449,6 @@ export default function HomeContent() {
 
           </div>
 
-          {/* ⚡ Quick Route Pills (Uilora Modern Button Style) */}
-          <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/80">
-            <div className="flex items-center gap-1.5 mb-2 px-1 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-              <Lightning size={14} weight="fill" className="text-[#0038A8] dark:text-blue-400" />
-              Rotas mais procuradas:
-            </div>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {ROTAS_RAPIDAS.map((r) => {
-                const isSelected = origem === r.de && destino === r.para
-                return (
-                  <button
-                    key={`${r.de}-${r.para}`}
-                    type="button"
-                    onClick={() => selecionarRotaRapida(r.de, r.para)}
-                    className={cn(
-                      "px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 active:scale-95 border",
-                      isSelected
-                        ? "bg-[#0038A8] text-white border-[#0038A8] shadow-[0_2px_8px_rgba(0,56,168,0.3)]"
-                        : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border-slate-200/60 dark:border-slate-700/60 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-[#0038A8]"
-                    )}
-                  >
-                    <span>{r.de}</span>
-                    <span className="text-[#D62828] font-bold">⇄</span>
-                    <span>{r.para}</span>
-                  </button>
-                )
-              })}
-            </div>
-          </div>
 
         </div>
       </section>

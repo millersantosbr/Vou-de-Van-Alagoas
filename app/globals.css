@@ -151,43 +151,61 @@
   border-radius: 1.5rem !important;
 }
 
-/* Tropical Wave Keyframe Animations */
-@keyframes waveMotion1 {
-  0% { transform: translate3d(-90px, 0, 0); }
-  100% { transform: translate3d(85px, 0, 0); }
-}
-@keyframes waveMotion2 {
-  0% { transform: translate3d(-60px, 0, 0); }
-  100% { transform: translate3d(90px, 0, 0); }
-}
-@keyframes waveMotion3 {
-  0% { transform: translate3d(-40px, 0, 0); }
-  100% { transform: translate3d(70px, 0, 0); }
-}
-@keyframes waveMotion4 {
-  0% { transform: translate3d(-20px, 0, 0); }
-  100% { transform: translate3d(50px, 0, 0); }
+/* ==========================================================================
+   🌊 Alagoas Ocean Wave Fluid Infinite Loops
+   Seamless GPU-composited 60fps translation with zero loop glitch/hitch
+   ========================================================================== */
+@keyframes waveFlowForward {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
-.wave-layer-1 {
-  animation: waveMotion1 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+@keyframes waveFlowReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
-.wave-layer-2 {
-  animation: waveMotion2 15s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+
+.wave-track-1 {
+  animation: waveFlowForward 28s linear infinite;
+  will-change: transform;
 }
-.wave-layer-3 {
-  animation: waveMotion3 11s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+
+.wave-track-2 {
+  animation: waveFlowReverse 22s linear infinite;
+  will-change: transform;
 }
-.wave-layer-4 {
-  animation: waveMotion4 7s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+
+.wave-track-3 {
+  animation: waveFlowForward 16s linear infinite;
+  will-change: transform;
+}
+
+.wave-track-4 {
+  animation: waveFlowReverse 11s linear infinite;
+  will-change: transform;
+}
+
+.wave-track-5 {
+  animation: waveFlowForward 8s linear infinite;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wave-layer-1,
-  .wave-layer-2,
-  .wave-layer-3,
-  .wave-layer-4 {
+  .wave-track-1,
+  .wave-track-2,
+  .wave-track-3,
+  .wave-track-4,
+  .wave-track-5 {
     animation: none !important;
   }
 }
+
 
