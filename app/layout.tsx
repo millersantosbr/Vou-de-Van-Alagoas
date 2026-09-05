@@ -53,6 +53,27 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Vou de Van" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if ('serviceWorker' in navigator) {
+                  navigator.serviceWorker.getRegistrations().then(function(regs) {
+                    for (var r of regs) { r.unregister(); }
+                  });
+                }
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (var name of names) { caches.delete(name); }
+                  });
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
