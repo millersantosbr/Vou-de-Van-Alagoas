@@ -750,13 +750,12 @@ export default function HomeContent() {
                         </div>
                         <div
                           className={cn(
-                            "text-xs sm:text-sm font-extrabold mt-1.5 flex items-center justify-end gap-1",
+                            "text-xs sm:text-sm font-extrabold mt-1.5 text-right leading-tight",
                             proximaSaidaInfo?.isEncerradoHoje
                               ? "text-amber-800 dark:text-amber-300"
                               : "text-[#D62828] dark:text-red-400"
                           )}
                         >
-                          <Clock size={13} weight="bold" />
                           <span>{proximaSaidaInfo?.diaSubtitulo || "Partida programada"}</span>
                         </div>
                       </div>
