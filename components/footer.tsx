@@ -2,10 +2,14 @@
 
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
+import { PwaInstallBanner } from "@/components/pwa-install-banner"
 
 export function Footer() {
   return (
     <footer className="mt-16 sm:mt-24 container mx-auto px-4 sm:px-6 text-center border-t border-border/20 pt-12 pb-24 space-y-6">
+      {/* Mecanismo que identifica se o usuário instalou o app e permite instalar */}
+      <PwaInstallBanner />
+
       <div className="flex flex-col items-center space-y-4 max-w-2xl mx-auto">
         {/* Logo */}
         <div className="relative w-40 h-10 sm:w-48 sm:h-12 transition-transform hover:scale-105 duration-300">
