@@ -9,6 +9,7 @@ import {
   getViasDisponiveis,
   buscarHorariosRota,
   getDiaSemanaHoje,
+  getDiaSemanaOffset,
   type HorarioFormatado,
   type FiltroDia,
 } from "@/lib/bus-data"
@@ -28,6 +29,7 @@ import {
   MapPin,
   ArrowSquareOut,
   Sparkle,
+  MoonStars,
 } from "@phosphor-icons/react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
@@ -57,16 +59,28 @@ export default function HomeContent() {
   const [isSwapping, setIsSwapping] = useState(false)
 
   const [isPending, startTransition] = useTransition()
+  const [mostrarViagensPassadas, setMostrarViagensPassadas] = useState(false)
 
   const diaHojeNome = useMemo(() => getDiaSemanaHoje(), [])
 
-  // Obter hora atual formatada (HH:MM)
-  const horaAtualDate = new Date()
-  const horaAtualString = useMemo(() => {
-    const hh = String(horaAtualDate.getHours()).padStart(2, "0")
-    const mm = String(horaAtualDate.getMinutes()).padStart(2, "0")
-    return `${hh}:${mm}`
+  // Relógio em tempo real atualizado a cada 30 segundos
+  const [agora, setAgora] = useState(() => new Date())
+  useEffect(() => {
+    const interval = setInterval(() => setAgora(new Date()), 30000)
+    return () => clearInterval(interval)
   }, [])
+
+  // Obter hora atual formatada (HH:MM)
+  const horaAtualString = useMemo(() => {
+    const hh = String(agora.getHours()).padStart(2, "0")
+    const mm = String(agora.getMinutes()).padStart(2, "0")
+    return `${hh}:${mm}`
+  }, [agora])
+
+  // Resetar viagens passadas quando a rota muda
+  useEffect(() => {
+    setMostrarViagensPassadas(false)
+  }, [origem, destino, filtroDia])
 
   // Atualiza destinos e vias quando a origem muda
   useEffect(() => {
@@ -158,43 +172,145 @@ export default function HomeContent() {
     }))
   }
 
-  // Identificar o primeiro horário seguinte ao horário atual (se o filtro for "hoje")
-  const proximoHorario = useMemo(() => {
-    if (horariosFiltrados.length === 0) return null
-    if (filtroDia === "hoje") {
-      const proximo = horariosFiltrados.find((h) => h.horario >= horaAtualString)
-      return proximo || horariosFiltrados[0]
-    }
-    return horariosFiltrados[0]
-  }, [filtroDia, horariosFiltrados, horaAtualString])
+  // Estrutura inteligente para identificar a próxima saída e status de hoje / amanhã
+  const proximaSaidaInfo = useMemo(() => {
+    if (!origem || !destino) return null
 
-  // Calcular tempo restante para a próxima saída em minutos
-  const getMinutosRestantes = (horarioStr: string) => {
-    try {
-      const [h, m] = horarioStr.split(":").map(Number)
-      const now = new Date()
-      const saida = new Date()
+    // Quando o filtro NÃO for "hoje" (o usuário escolheu manualmente um dia ou "todos")
+    if (filtroDia !== "hoje") {
+      if (horariosFiltrados.length === 0) return null
+      const primeiro = horariosFiltrados[0]
+      const labelMap: Record<string, string> = {
+        semana: "Seg a Sex",
+        sabado: "Sábado",
+        domingo: "Domingo",
+        todos: "Todos os dias",
+      }
+      const labelFiltro = labelMap[filtroDia] || filtroDia
+
+      return {
+        isHoje: false,
+        isAmanha: false,
+        isEncerradoHoje: false,
+        diaBadge: `Programado (${labelFiltro})`,
+        diaNome: labelFiltro,
+        diaSemanaNome: labelFiltro,
+        diaSubtitulo: `Partida programada • ${labelFiltro}`,
+        proximoHorario: primeiro,
+        horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== primeiro.id),
+        totalHorarios: horariosFiltrados.length,
+        alertaEncerramento: null,
+      }
+    }
+
+    // Quando o filtro É "hoje":
+    // 1. Procurar se ainda há van hoje com horário >= hora atual
+    const saidaRestanteHoje = horariosFiltrados.find((h) => h.horario >= horaAtualString)
+
+    if (saidaRestanteHoje) {
+      // ✅ AINDA HÁ VAN HOJE!
+      const [h, m] = saidaRestanteHoje.horario.split(":").map(Number)
+      const saida = new Date(agora)
       saida.setHours(h, m, 0, 0)
-      const diffMs = saida.getTime() - now.getTime()
+      const diffMs = saida.getTime() - agora.getTime()
       const diffMin = Math.round(diffMs / 60000)
-      if (diffMin > 0 && diffMin <= 120) {
-        return `Em ${diffMin} min`
-      } else if (diffMin > 120) {
+
+      let tempoTexto = `Hoje às ${saidaRestanteHoje.horario}`
+      if (diffMin > 0 && diffMin <= 60) {
+        tempoTexto = `Hoje às ${saidaRestanteHoje.horario} • Em ${diffMin} min`
+      } else if (diffMin > 60) {
         const horas = Math.floor(diffMin / 60)
         const mins = diffMin % 60
-        return `Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
+        tempoTexto = `Hoje às ${saidaRestanteHoje.horario} • Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
       }
-      return "Partida programada"
-    } catch {
-      return "Hoje"
-    }
-  }
 
-  // Horários subsequentes
-  const horariosSubsequentes = useMemo(() => {
-    if (!proximoHorario) return []
-    return horariosFiltrados.filter((h) => h.id !== proximoHorario.id)
-  }, [horariosFiltrados, proximoHorario])
+      return {
+        isHoje: true,
+        isAmanha: false,
+        isEncerradoHoje: false,
+        diaBadge: "Próxima Saída (Hoje)",
+        diaNome: "Hoje",
+        diaSemanaNome: diaHojeNome,
+        diaSubtitulo: tempoTexto,
+        proximoHorario: saidaRestanteHoje,
+        horariosSubsequentes: horariosFiltrados.filter((h) => h.id !== saidaRestanteHoje.id),
+        totalHorarios: horariosFiltrados.length,
+        alertaEncerramento: null,
+      }
+    }
+
+    // 🌙 NÃO HÁ MAIS SAÍDAS HOJE (ou não opera hoje)!
+    // Vamos buscar nos próximos dias (Amanhã offset=1, depois de amanhã offset=2, etc.)
+    let offsetEncontrado = 1
+    let proximoAmanha: HorarioFormatado | null = null
+    let horariosDiaAmanha: HorarioFormatado[] = []
+    let diaSemanaNome = ""
+
+    for (let offset = 1; offset <= 7; offset++) {
+      const diaNome = getDiaSemanaOffset(offset)
+      const saidasProxDia = buscarHorariosRota(origem, destino, diaNome, filtroVia)
+      if (saidasProxDia.length > 0) {
+        offsetEncontrado = offset
+        proximoAmanha = saidasProxDia[0]
+        horariosDiaAmanha = saidasProxDia
+        diaSemanaNome = diaNome
+        break
+      }
+    }
+
+    if (proximoAmanha) {
+      const isAmanha = offsetEncontrado === 1
+      const labelDia = isAmanha ? "Amanhã" : diaSemanaNome
+
+      // Calcular tempo restante até a primeira saída do dia seguinte
+      const [h, m] = proximoAmanha.horario.split(":").map(Number)
+      const targetDate = new Date(agora)
+      targetDate.setDate(targetDate.getDate() + offsetEncontrado)
+      targetDate.setHours(h, m, 0, 0)
+      const diffMs = targetDate.getTime() - agora.getTime()
+      const diffMin = Math.max(0, Math.round(diffMs / 60000))
+      const horas = Math.floor(diffMin / 60)
+      const mins = diffMin % 60
+      const tempoAteSaida = `Em ${horas}h${mins > 0 ? ` ${mins}m` : ""}`
+
+      const mensagemAlerta = isAmanha
+        ? `As viagens de hoje foram encerradas. A próxima van disponível sairá amanhã (${diaSemanaNome}) às ${proximoAmanha.horario}.`
+        : `Não há partidas programadas para hoje nem amanhã. A próxima van disponível sairá na ${diaSemanaNome} às ${proximoAmanha.horario}.`
+
+      return {
+        isHoje: false,
+        isAmanha,
+        isEncerradoHoje: true,
+        diaBadge: isAmanha ? `Próxima Saída • Amanhã (${diaSemanaNome})` : `Próxima Saída • ${diaSemanaNome}`,
+        diaNome: labelDia,
+        diaSemanaNome,
+        diaSubtitulo: `${labelDia} (${diaSemanaNome}) às ${proximoAmanha.horario} • ${tempoAteSaida}`,
+        proximoHorario: proximoAmanha,
+        horariosSubsequentes: horariosDiaAmanha.filter((h) => h.id !== proximoAmanha?.id),
+        totalHorarios: horariosDiaAmanha.length,
+        alertaEncerramento: mensagemAlerta,
+      }
+    }
+
+    // Fallback caso seja rota sem horários
+    if (horariosFiltrados.length === 0) return null
+    return {
+      isHoje: false,
+      isAmanha: false,
+      isEncerradoHoje: true,
+      diaBadge: "Horário Programado",
+      diaNome: "Programado",
+      diaSemanaNome: diaHojeNome,
+      diaSubtitulo: "Partida programada",
+      proximoHorario: horariosFiltrados[0],
+      horariosSubsequentes: horariosFiltrados.slice(1),
+      totalHorarios: horariosFiltrados.length,
+      alertaEncerramento: "Viagens de hoje já finalizadas.",
+    }
+  }, [origem, destino, filtroDia, filtroVia, horariosFiltrados, horaAtualString, diaHojeNome, agora])
+
+  const proximoHorario = proximaSaidaInfo?.proximoHorario || null
+  const horariosSubsequentes = proximaSaidaInfo?.horariosSubsequentes || []
 
   // Conteúdo do Seletor de Origem
   const renderOrigemList = () => (
@@ -462,8 +578,16 @@ export default function HomeContent() {
               Dia da viagem
             </h2>
             {filtroDia === "hoje" && (
-              <span className="text-xs font-bold text-[#0038A8] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400 px-2.5 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
-                Hoje é {diaHojeNome}
+              <span
+                className={cn(
+                  "text-xs font-bold px-2.5 py-0.5 rounded-full border flex items-center gap-1.5",
+                  proximaSaidaInfo?.isEncerradoHoje
+                    ? "text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 border-amber-300 dark:border-amber-800"
+                    : "text-[#0038A8] bg-blue-50 dark:bg-blue-950/60 dark:text-blue-400 border-blue-200/60 dark:border-blue-900/60"
+                )}
+              >
+                {proximaSaidaInfo?.isEncerradoHoje && <MoonStars size={13} weight="fill" />}
+                Hoje é {diaHojeNome} {proximaSaidaInfo?.isEncerradoHoje ? "• Encerrado" : ""}
               </span>
             )}
           </div>
@@ -471,7 +595,10 @@ export default function HomeContent() {
           {/* Day Horizontal Scroll Selector */}
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 snap-x px-0.5">
             {[
-              { id: "hoje", label: "Hoje" },
+              {
+                id: "hoje",
+                label: proximaSaidaInfo?.isEncerradoHoje ? "Hoje (Encerrado)" : "Hoje",
+              },
               { id: "semana", label: "Seg a Sex" },
               { id: "sabado", label: "Sábado" },
               { id: "domingo", label: "Domingo" },
@@ -531,43 +658,106 @@ export default function HomeContent() {
       {/* 📋 Quadro de Saídas */}
       <section className="space-y-4">
         {origem && destino ? (
-          horariosFiltrados.length > 0 ? (
+          (proximaSaidaInfo && proximaSaidaInfo.proximoHorario) || horariosFiltrados.length > 0 ? (
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-3 duration-400">
               
               {/* Header do Quadro */}
               <div className="flex items-center justify-between px-1">
                 <h2 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 flex items-center gap-2">
                   <Clock size={20} weight="bold" className="text-[#0038A8]" />
-                  Saídas encontradas
+                  {proximaSaidaInfo?.isEncerradoHoje
+                    ? `Saídas para ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome})`
+                    : "Saídas encontradas"}
                 </h2>
                 <span className="text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">
-                  {horariosFiltrados.length} {horariosFiltrados.length === 1 ? "Horário" : "Horários"}
+                  {proximaSaidaInfo?.totalHorarios || horariosFiltrados.length}{" "}
+                  {(proximaSaidaInfo?.totalHorarios || horariosFiltrados.length) === 1 ? "Horário" : "Horários"}
                 </span>
               </div>
 
+              {/* 🌙 Alerta em Destaque quando as viagens de HOJE já encerraram */}
+              {proximaSaidaInfo?.isEncerradoHoje && (
+                <div className="rounded-2xl border-2 border-amber-300 dark:border-amber-700/80 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/20 p-4 sm:p-5 shadow-sm space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-700/50 flex items-center justify-center shrink-0 text-amber-700 dark:text-amber-300 shadow-xs">
+                      <MoonStars size={22} weight="fill" />
+                    </div>
+                    <div className="grow space-y-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-200 dark:bg-amber-900/80 text-amber-950 dark:text-amber-200">
+                          Viagens de Hoje Encerradas
+                        </span>
+                        <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
+                          {diaHojeNome}
+                        </span>
+                      </div>
+                      <h3 className="font-extrabold text-sm sm:text-base text-amber-950 dark:text-amber-100">
+                        Não há mais vans saindo hoje de {origem} para {destino}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 font-medium leading-relaxed">
+                        {proximaSaidaInfo.alertaEncerramento}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* 🌟 Next Departure Featured Card (Inspirado no Card Dynamic do Uilora) */}
               {proximoHorario && (
-                <article className="bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-[0_8px_30px_rgba(214,40,40,0.12)] border-2 border-[#D62828]/60 dark:border-[#D62828]/40 overflow-hidden relative group">
-                  {/* Subtle Top Red Accent Line */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D62828] via-[#FF4D4D] to-[#D62828]" />
+                <article
+                  className={cn(
+                    "bg-white dark:bg-slate-900 rounded-2xl md:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden relative group transition-all",
+                    proximaSaidaInfo?.isEncerradoHoje
+                      ? "border-2 border-amber-400/80 dark:border-amber-600/60 shadow-[0_8px_30px_rgba(245,158,11,0.12)]"
+                      : "border-2 border-[#D62828]/60 dark:border-[#D62828]/40 shadow-[0_8px_30px_rgba(214,40,40,0.12)]"
+                  )}
+                >
+                  {/* Subtle Top Accent Line */}
+                  <div
+                    className={cn(
+                      "absolute top-0 left-0 right-0 h-1.5",
+                      proximaSaidaInfo?.isEncerradoHoje
+                        ? "bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500"
+                        : "bg-gradient-to-r from-[#D62828] via-[#FF4D4D] to-[#D62828]"
+                    )}
+                  />
 
                   <div className="p-5 sm:p-6 space-y-4">
-                    {/* Top Row: Live Radar Indicator & Monospaced Time */}
+                    {/* Top Row: Live Radar / Tomorrow Indicator & Monospaced Time */}
                     <div className="flex justify-between items-start gap-4">
-                      <div className="flex items-center gap-2 bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 border border-red-200 dark:border-red-900/70 px-3 py-1.5 rounded-full shadow-xs">
-                        <span className="relative flex h-2.5 w-2.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D62828] opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D62828]" />
-                        </span>
-                        <span className="text-xs font-extrabold uppercase tracking-wide">Próxima Saída</span>
-                      </div>
+                      {proximaSaidaInfo?.isEncerradoHoje ? (
+                        <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 px-3.5 py-1.5 rounded-full shadow-xs">
+                          <MoonStars size={16} weight="fill" className="text-amber-600 dark:text-amber-400" />
+                          <span className="text-xs font-extrabold uppercase tracking-wide">
+                            {proximaSaidaInfo.diaBadge}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 bg-red-50 dark:bg-red-950/60 text-[#D62828] dark:text-red-400 border border-red-200 dark:border-red-900/70 px-3.5 py-1.5 rounded-full shadow-xs">
+                          <span className="relative flex h-2.5 w-2.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D62828] opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D62828]" />
+                          </span>
+                          <span className="text-xs font-extrabold uppercase tracking-wide">
+                            {proximaSaidaInfo?.diaBadge || "Próxima Saída"}
+                          </span>
+                        </div>
+                      )}
 
                       <div className="text-right">
                         <div className="tabular-nums text-4xl sm:text-5xl font-black text-slate-900 dark:text-slate-50 tracking-normal leading-none">
                           {proximoHorario.horario}
                         </div>
-                        <div className="text-xs sm:text-sm font-extrabold text-[#D62828] dark:text-red-400 mt-1.5">
-                          {getMinutosRestantes(proximoHorario.horario)}
+                        <div
+                          className={cn(
+                            "text-xs sm:text-sm font-extrabold mt-1.5 flex items-center justify-end gap-1",
+                            proximaSaidaInfo?.isEncerradoHoje
+                              ? "text-amber-800 dark:text-amber-300"
+                              : "text-[#D62828] dark:text-red-400"
+                          )}
+                        >
+                          <Clock size={13} weight="bold" />
+                          <span>{proximaSaidaInfo?.diaSubtitulo || "Partida programada"}</span>
                         </div>
                       </div>
                     </div>
@@ -600,7 +790,11 @@ export default function HomeContent() {
                       <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                         <CalendarBlank size={16} />
                         <span>
-                          {proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}
+                          {proximaSaidaInfo?.isEncerradoHoje
+                            ? `Partida de ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome}) • ${proximoHorario.dias.length === 7 ? "Circula Diariamente" : proximoHorario.dias.join(", ")}`
+                            : proximoHorario.dias.length === 7
+                            ? "Circula Diariamente"
+                            : proximoHorario.dias.join(", ")}
                         </span>
                       </div>
                     </div>
@@ -659,9 +853,17 @@ export default function HomeContent() {
               {/* 📋 Subsequent Departure Cards List */}
               {horariosSubsequentes.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h3 className="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider px-1">
-                    Próximas Saídas
-                  </h3>
+                  <div className="flex items-center justify-between px-1">
+                    <h3 className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <Clock size={15} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                      {proximaSaidaInfo?.isEncerradoHoje
+                        ? `Outras Saídas de ${proximaSaidaInfo.diaNome} (${proximaSaidaInfo.diaSemanaNome})`
+                        : "Próximas Saídas"}
+                    </h3>
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
+                      {horariosSubsequentes.length} {horariosSubsequentes.length === 1 ? "saída" : "saídas"}
+                    </span>
+                  </div>
 
                   <div className="grid grid-cols-1 gap-2.5">
                     {horariosSubsequentes.map((item) => {
@@ -678,8 +880,15 @@ export default function HomeContent() {
                               <div className="tabular-nums text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-normal">
                                 {item.horario}
                               </div>
-                              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
-                                Partida
+                              <div
+                                className={cn(
+                                  "text-xs font-bold uppercase tracking-wider mt-0.5",
+                                  proximaSaidaInfo?.isEncerradoHoje
+                                    ? "text-amber-700 dark:text-amber-400 font-extrabold"
+                                    : "text-slate-500 dark:text-slate-400"
+                                )}
+                              >
+                                {proximaSaidaInfo?.isEncerradoHoje ? proximaSaidaInfo.diaNome : "Partida"}
                               </div>
                             </div>
 
@@ -691,7 +900,12 @@ export default function HomeContent() {
                               <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 truncate mt-0.5 font-medium">
                                 {item.via ? `Via ${item.via}` : `${item.origem} para ${item.destino}`}
                               </div>
-                              <div className="flex items-center gap-1.5 mt-1.5">
+                              <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                                {proximaSaidaInfo?.isEncerradoHoje && (
+                                  <span className="px-2.5 py-0.5 bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/60 rounded text-xs font-bold">
+                                    {proximaSaidaInfo.diaNome} ({proximaSaidaInfo.diaSemanaNome})
+                                  </span>
+                                )}
                                 <span className="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded text-xs font-semibold">
                                   {item.dias.length === 7 ? "Diariamente" : item.dias.slice(0, 3).join(", ")}
                                 </span>
@@ -730,6 +944,53 @@ export default function HomeContent() {
                       )
                     })}
                   </div>
+                </div>
+              )}
+
+              {/* 🕒 Seção de Viagens de Hoje já realizadas */}
+              {proximaSaidaInfo?.isEncerradoHoje && horariosFiltrados.length > 0 && (
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+                  <button
+                    type="button"
+                    onClick={() => setMostrarViagensPassadas((v) => !v)}
+                    className="w-full py-3 px-4 rounded-xl bg-slate-100 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold flex items-center justify-between transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Clock size={16} className="text-slate-500" />
+                      {mostrarViagensPassadas
+                        ? `Ocultar viagens de hoje (${diaHojeNome}) já finalizadas`
+                        : `Ver viagens de hoje (${diaHojeNome}) que já encerraram (${horariosFiltrados.length})`}
+                    </span>
+                    {mostrarViagensPassadas ? <CaretUp size={16} /> : <CaretDown size={16} />}
+                  </button>
+
+                  {mostrarViagensPassadas && (
+                    <div className="mt-3 space-y-2 animate-in fade-in duration-200">
+                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-1">
+                        Estes horários operaram mais cedo hoje ({diaHojeNome}) e já foram finalizados:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 opacity-75">
+                        {horariosFiltrados.map((passado) => (
+                          <div
+                            key={`passado-${passado.id}`}
+                            className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
+                          >
+                            <div className="flex items-center gap-2.5">
+                              <span className="tabular-nums font-extrabold text-sm text-slate-600 dark:text-slate-300">
+                                {passado.horario}
+                              </span>
+                              <span className="text-slate-500 dark:text-slate-400 truncate max-w-[150px]">
+                                Linha {passado.codigoLinha} • {passado.nomeLinha}
+                              </span>
+                            </div>
+                            <span className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 font-bold text-[10px] uppercase">
+                              Encerrado
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

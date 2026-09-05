@@ -60,11 +60,20 @@ export const dataset = rawData as {
 
 export const todasAsLinhas: LinhaVan[] = dataset.linhas || []
 
+export const DIAS_SEMANA = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] as const
+export type DiaSemana = (typeof DIAS_SEMANA)[number]
+
 // Retorna o dia da semana atual no padrão do dataset
-export function getDiaSemanaHoje(): "Segunda" | "Terça" | "Quarta" | "Quinta" | "Sexta" | "Sábado" | "Domingo" {
-  const dias = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] as const
+export function getDiaSemanaHoje(): DiaSemana {
   const diaIndex = new Date().getDay()
-  return dias[diaIndex]
+  return DIAS_SEMANA[diaIndex]
+}
+
+// Retorna o dia da semana relativo com deslocamento de dias (+1 = amanhã, +2 = depois de amanhã...)
+export function getDiaSemanaOffset(offsetDays: number = 0): DiaSemana {
+  const target = new Date()
+  target.setDate(target.getDate() + offsetDays)
+  return DIAS_SEMANA[target.getDay()]
 }
 
 // Normaliza strings para comparação (sem acento, maiúsculo, sem espaços extras)
