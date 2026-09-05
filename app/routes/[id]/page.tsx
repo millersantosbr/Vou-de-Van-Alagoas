@@ -1,11 +1,10 @@
 import Link from "next/link"
-import { notFound } from "next/navigation"
-import { ArrowLeft, Clock, MapPin, Shield, Route as RouteIcon, Info, Calendar, ArrowRight } from "lucide-react"
+import { ArrowLeft, MapPin, Shield, Route as RouteIcon, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TimetableHeader } from "@/components/timetable-header"
 import { todasAsLinhas, type LinhaVan } from "@/lib/bus-data"
+import { Footer } from "@/components/footer"
 
 interface RoutePageProps {
   params: Promise<{ id: string }> | { id: string }
@@ -35,7 +34,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
           </div>
           <h1 className="text-2xl font-black text-foreground mb-2">Linha não encontrada</h1>
           <p className="text-muted-foreground text-sm max-w-md mb-6">
-            Não encontramos a linha ARSAL especificada ({id}). Verifique o código e tente novamente.
+            Não encontramos a linha informada ({id}). Verifique o código e tente novamente.
           </p>
           <Button asChild className="rounded-xl font-bold">
             <Link href="/">
@@ -44,14 +43,16 @@ export default async function RoutePage({ params }: RoutePageProps) {
             </Link>
           </Button>
         </main>
+        <Footer />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <TimetableHeader />
-      <main className="container mx-auto px-4 py-8">
+
+      <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Top Bar */}
           <div className="flex items-center justify-between">
@@ -61,12 +62,6 @@ export default async function RoutePage({ params }: RoutePageProps) {
                 <span>Voltar à busca</span>
               </Link>
             </Button>
-            <div className="flex items-center gap-2 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] font-black text-green-600 uppercase tracking-widest">
-                ARSAL Oficial
-              </span>
-            </div>
           </div>
 
           {/* Hero Banner da Linha */}
@@ -171,7 +166,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
                 {/* Saídas do Destino (Volta) */}
                 <div className="bg-card border border-border/60 p-6 rounded-[2rem] shadow-sm space-y-4">
                   <div className="flex items-center gap-2 pb-3 border-b border-border/20">
-                    <MapPin className="text-blue-500 rotate-180" size={18} />
+                    <MapPin className="text-[#D62828] dark:text-red-400 rotate-180" size={18} />
                     <div>
                       <h3 className="font-black text-base text-foreground">Saídas de {linha.destino}</h3>
                       <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Sentido {linha.origem}</p>
@@ -185,12 +180,12 @@ export default async function RoutePage({ params }: RoutePageProps) {
                           key={index}
                           className="flex items-center justify-between p-3.5 rounded-xl bg-muted/30 border border-border/30 hover:bg-muted/60 transition-colors"
                         >
-                          <span className="text-2xl font-black text-blue-500 tracking-tight">
+                          <span className="text-2xl font-black text-[#D62828] dark:text-red-400 tracking-tight">
                             {saida.horario}
                           </span>
                           <div className="flex flex-wrap gap-1 justify-end max-w-[150px]">
                             {saida.dias.length === 7 ? (
-                              <span className="text-[10px] font-bold bg-green-500/10 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-md">
+                              <span className="text-[10px] font-bold bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded-md">
                                 Diariamente
                               </span>
                             ) : (
@@ -211,7 +206,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
               </div>
             </TabsContent>
 
-            {/* TAB ITINERÁRIO & REGULAMENTAÇÃO */}
+            {/* TAB ITINERÁRIO */}
             <TabsContent value="itinerario" className="space-y-6">
               <div className="bg-card border border-border/60 p-6 md:p-8 rounded-[2rem] shadow-sm space-y-6">
                 {linha.itinerario?.ida && (
@@ -227,9 +222,9 @@ export default async function RoutePage({ params }: RoutePageProps) {
                 )}
 
                 {linha.itinerario?.volta && (
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 pt-4 border-t border-border/20">
                     <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
-                      <RouteIcon size={14} className="text-blue-500" />
+                      <RouteIcon size={14} className="text-[#D62828] dark:text-red-400" />
                       Itinerário de Volta
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed pl-6">
@@ -239,25 +234,13 @@ export default async function RoutePage({ params }: RoutePageProps) {
                 )}
 
                 {linha.itinerario?.seccionamentos && (
-                  <div className="space-y-1.5 pt-3 border-t border-border/20">
+                  <div className="space-y-1.5 pt-4 border-t border-border/20">
                     <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
-                      <MapPin size={14} className="text-amber-500" />
-                      Seccionamentos / Paradas Autorizadas
+                      <MapPin size={14} className="text-[#0038A8] dark:text-blue-400" />
+                      Seccionamentos / Paradas
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed pl-6">
                       {linha.itinerario.seccionamentos}
-                    </p>
-                  </div>
-                )}
-
-                {linha.itinerario?.observacoes && (
-                  <div className="space-y-1.5 pt-3 border-t border-border/20">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-foreground flex items-center gap-2">
-                      <Info size={14} className="text-primary" />
-                      Observações & Portarias ARSAL
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed pl-6">
-                      {linha.itinerario.observacoes}
                     </p>
                   </div>
                 )}
@@ -266,6 +249,8 @@ export default async function RoutePage({ params }: RoutePageProps) {
           </Tabs>
         </div>
       </main>
+
+      <Footer />
     </div>
   )
 }

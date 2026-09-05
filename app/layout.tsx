@@ -1,18 +1,24 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import { Outfit, Source_Sans_3 } from "next/font/google"
+import { Bricolage_Grotesque, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
 import { Providers } from "./providers"
 
-const outfit = Outfit({
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-display",
   display: "swap",
 })
 
-const sourceSans3 = Source_Sans_3({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-source-sans-3",
+  variable: "--font-sans",
+  display: "swap",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 })
 
@@ -36,7 +42,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${outfit.variable} ${sourceSans3.variable}`}>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${bricolageGrotesque.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <link rel="icon" href="/logoicon.webp" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -44,7 +54,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Vou de Van" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={sourceSans3.className}>
+      <body className={plusJakartaSans.className}>
         <Providers>{children}</Providers>
       </body>
     </html>

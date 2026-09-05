@@ -13,8 +13,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 100% 33%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
@@ -22,47 +22,47 @@
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96%;
+    --accent: 214 32% 91%;
     --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 356 75% 50%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --ring: 220 100% 33%;
 
     --radius: 1rem;
   }
 
   .dark {
-    --background: 222 47% 4%;
+    --background: 222 47% 5%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 6%;
+    --card: 222 47% 7%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 4%;
+    --popover: 222 47% 6%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 217 91% 60%;
     --primary-foreground: 222 47% 11%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 217 33% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 217 33% 15%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 217 33% 17%;
+    --accent: 217 33% 15%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 356 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 224 76% 48%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -77,11 +77,15 @@
   }
 
   body {
-    @apply bg-background text-foreground font-outfit antialiased selection:bg-primary/20;
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20;
     min-height: 100vh;
     min-height: -webkit-fill-available;
     background-image: radial-gradient(at 0% 0%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%),
       radial-gradient(at 100% 100%, hsla(221, 83%, 53%, 0.05) 0, transparent 50%);
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
   }
 }
 
@@ -108,4 +112,82 @@
     radial-gradient(at 80% 0%, hsla(217, 91%, 60%, 0.1) 0, transparent 50%);
 }
 
-/* Existing Leaflet and custom styles... */
+/* Scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar,
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Micro-animations */
+.live-indicator {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.pin-pulse {
+  animation: pulse-pin 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Leaflet Customizations */
+.leaflet-popup-content-wrapper {
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: hsl(var(--card)) !important;
+}
+
+.leaflet-container {
+  font-family: inherit !important;
+  border-radius: 1.5rem !important;
+}
+
+/* Tropical Wave Keyframe Animations */
+@keyframes waveMotion1 {
+  0% { transform: translate3d(-90px, 0, 0); }
+  100% { transform: translate3d(85px, 0, 0); }
+}
+@keyframes waveMotion2 {
+  0% { transform: translate3d(-60px, 0, 0); }
+  100% { transform: translate3d(90px, 0, 0); }
+}
+@keyframes waveMotion3 {
+  0% { transform: translate3d(-40px, 0, 0); }
+  100% { transform: translate3d(70px, 0, 0); }
+}
+@keyframes waveMotion4 {
+  0% { transform: translate3d(-20px, 0, 0); }
+  100% { transform: translate3d(50px, 0, 0); }
+}
+
+.wave-layer-1 {
+  animation: waveMotion1 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.wave-layer-2 {
+  animation: waveMotion2 15s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.wave-layer-3 {
+  animation: waveMotion3 11s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.wave-layer-4 {
+  animation: waveMotion4 7s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-layer-1,
+  .wave-layer-2,
+  .wave-layer-3,
+  .wave-layer-4 {
+    animation: none !important;
+  }
+}
+

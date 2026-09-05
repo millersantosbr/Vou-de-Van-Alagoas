@@ -11,3 +11,6 @@ out/
 firebase-debug.log
 .env*.local
 .DS_Store
+apikeyuilora.txt
+*.bak
+stitch_data/
