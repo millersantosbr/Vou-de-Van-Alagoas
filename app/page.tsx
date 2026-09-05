@@ -96,7 +96,7 @@ export default function Home() {
           </section>
 
           {/* Map Section (Explorar Região) */}
-          <section id="explorar-regiao" className="space-y-4 scroll-mt-20">
+          <section id="explorar-regiao" className="space-y-4 scroll-mt-20 px-2 sm:px-0">
             <div className="flex flex-col items-center space-y-2 text-center">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 text-xs font-semibold text-[#0038A8] dark:text-blue-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#0038A8] dark:bg-blue-400" />

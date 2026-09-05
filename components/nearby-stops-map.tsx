@@ -15,6 +15,8 @@ import {
   Path,
   WarningCircle,
   CheckCircle,
+  LockSimple,
+  LockSimpleOpen,
 } from "@phosphor-icons/react"
 import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
@@ -49,6 +51,7 @@ export function NearbyStopsMap() {
   const [selectedStop, setSelectedStop] = useState<MapStop | null>(null)
   const [isLocating, setIsLocating] = useState(false)
   const [geoError, setGeoError] = useState<string | null>(null)
+  const [isMapLocked, setIsMapLocked] = useState(true)
 
   // Filtro de rota ativo disparado pela busca ou pelo botão "Ponto Mais Próximo"
   const [routeFilter, setRouteFilter] = useState<{ origem: string; destino: string } | null>(null)
@@ -57,6 +60,7 @@ export function NearbyStopsMap() {
   useEffect(() => {
     return subscribeFocusClosestStop((detail) => {
       setRouteFilter({ origem: detail.origem, destino: detail.destino })
+      setIsMapLocked(true)
       
       const coords = detail.userCoords || userLocation
       if (detail.userCoords) {
@@ -169,8 +173,21 @@ export function NearbyStopsMap() {
     return result
   }, [stopsWithDistances, searchQuery, activeFilter, userLocation, routeFilter])
 
-  // Link de rota para o Google Maps
-  const getGoogleMapsRouteUrl = (stop: MapStop) => {
+  // Link universal para abrir navegação no aplicativo de mapas padrão (Apple Maps no iOS / Google Maps no Android e Desktop)
+  const getDirectionsMapUrl = (stop: MapStop) => {
+    if (typeof window !== "undefined") {
+      const isApple =
+        /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+
+      if (isApple) {
+        if (userLocation) {
+          return `https://maps.apple.com/?saddr=${userLocation[0]},${userLocation[1]}&daddr=${stop.lat},${stop.lng}&dirflg=d`
+        }
+        return `https://maps.apple.com/?daddr=${stop.lat},${stop.lng}&q=${encodeURIComponent(stop.name)}`
+      }
+    }
+
     if (userLocation) {
       return `https://www.google.com/maps/dir/?api=1&origin=${userLocation[0]},${userLocation[1]}&destination=${stop.lat},${stop.lng}&travelmode=driving`
     }
@@ -371,11 +388,32 @@ export function NearbyStopsMap() {
 
         {/* Mapa Interativo */}
         <div className="h-[380px] sm:h-[440px] w-full relative z-0">
+          {/* Botão Flutuante de Trava / Destrava do Mapa */}
+          <button
+            type="button"
+            onClick={() => setIsMapLocked((prev) => !prev)}
+            className="absolute top-3 left-3 z-10 px-2.5 py-1.5 rounded-xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 text-[11px] font-bold shadow-xs flex items-center gap-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            title={isMapLocked ? "Mapa fixado para você rolar a página sem travar o toque. Toque para movimentar o mapa." : "Mapa liberado para arrastar. Toque para fixar."}
+          >
+            {isMapLocked ? (
+              <>
+                <LockSimple size={14} weight="bold" className="text-[#0038A8] dark:text-blue-400" />
+                <span>Mapa Fixo</span>
+              </>
+            ) : (
+              <>
+                <LockSimpleOpen size={14} weight="bold" className="text-emerald-600 dark:text-emerald-400" />
+                <span>Mover Mapa</span>
+              </>
+            )}
+          </button>
+
           <MapComponent
             userLocation={userLocation}
             stops={filteredStops}
             selectedStop={selectedStop}
             onMarkerClick={(stop) => setSelectedStop(stop)}
+            isLocked={isMapLocked}
           />
         </div>
 
@@ -481,20 +519,20 @@ export function NearbyStopsMap() {
               </div>
             )}
 
-            {/* Ação Direta: Traçar Rota */}
+            {/* Ação Direta: Traçar Rota no App de Mapas (Universal iOS / Android / Desktop) */}
             <Button
               asChild
-              className="w-full bg-[#0038A8] hover:bg-[#002b80] text-white font-bold rounded-xl text-xs sm:text-sm h-10 shadow-xs"
+              className="w-full bg-[#0038A8] hover:bg-[#002b80] text-white font-extrabold rounded-xl text-xs sm:text-sm h-12 shadow-md shadow-[#0038A8]/20 transition-all active:scale-[0.98]"
             >
               <a
-                href={getGoogleMapsRouteUrl(selectedStop)}
+                href={getDirectionsMapUrl(selectedStop)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2"
               >
-                <Path size={16} weight="bold" />
-                <span>{userLocation ? "Traçar Rota no Google Maps" : "Abrir Localização no Mapa"}</span>
-                <ArrowSquareOut size={14} />
+                <NavigationArrow size={18} weight="bold" />
+                <span>{userLocation ? "Traçar Rota no App de Mapas" : "Abrir Localização no App de Mapas"}</span>
+                <ArrowSquareOut size={16} />
               </a>
             </Button>
           </div>

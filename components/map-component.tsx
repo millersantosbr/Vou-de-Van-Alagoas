@@ -13,6 +13,7 @@ interface MapComponentProps {
   stops: MapStop[]
   selectedStop: MapStop | null
   onMarkerClick?: (stop: MapStop) => void
+  isLocked?: boolean
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({
@@ -20,6 +21,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   stops,
   selectedStop,
   onMarkerClick,
+  isLocked = true,
 }) => {
   const mapRef = useRef<L.Map | null>(null)
   const markersRef = useRef<{ [key: string]: L.Marker }>({})
@@ -31,6 +33,10 @@ const MapComponent: React.FC<MapComponentProps> = ({
       const initialCenter: [number, number] = userLocation || [-9.6456, -35.7265] // Maceió coordinates
       const map = L.map("map-container", {
         zoomControl: false,
+        dragging: !isLocked,
+        touchZoom: !isLocked,
+        scrollWheelZoom: !isLocked,
+        doubleClickZoom: !isLocked,
       }).setView(initialCenter, 11)
 
       L.control.zoom({ position: "topright" }).addTo(map)
@@ -44,6 +50,19 @@ const MapComponent: React.FC<MapComponentProps> = ({
     }
 
     const map = mapRef.current
+
+    // Update lock state on existing map instance
+    if (isLocked) {
+      map.dragging.disable()
+      map.touchZoom.disable()
+      map.scrollWheelZoom.disable()
+      map.doubleClickZoom.disable()
+    } else {
+      map.dragging.enable()
+      map.touchZoom.enable()
+      map.scrollWheelZoom.enable()
+      map.doubleClickZoom.enable()
+    }
 
     // Clear previous markers
     Object.values(markersRef.current).forEach((marker) => marker.remove())
